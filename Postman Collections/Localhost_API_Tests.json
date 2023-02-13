@@ -13,8 +13,7 @@
 					"script": {
 						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
 						"exec": [
-							"var time = pm.response.responseTime;\r",
-							"console.log(\"Response time: \" + time + \" ms\");"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -24,19 +23,6 @@
 					"script": {
 						"id": "0fc167b9-bc0d-418f-9538-f3c0c537db90",
 						"exec": [
-							"\r",
-							"//pm.globals.get(\"CSRFToken\");\r",
-							"//console.log(\"CSRF Token for POST Request: \" + pm.globals.get(\"CSRFToken\"))\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -1533,23 +1519,23 @@
 	],
 	"variable": [
 		{
-			"id": "fe7a335b-55bb-4e12-9c87-4a2caeecc3a5",
+			"id": "2b961f35-3bd1-4872-b5e7-c668f969a152",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string"
 		},
 		{
-			"id": "aae63c0c-19fb-4ea3-86bb-5841825bd447",
+			"id": "1b18c21c-5a4f-4da5-af88-8fdf3698c6b8",
 			"key": "formCategories",
 			"value": ""
 		},
 		{
-			"id": "38d22378-58fd-4f55-a0b2-fb556be0a2fc",
+			"id": "b7a8c48f-b474-4c4f-984f-eab14e10d426",
 			"key": "CategoryID",
 			"value": ""
 		},
 		{
-			"id": "68d5f081-c856-443c-b6ec-f23f1046a224",
+			"id": "ac21857b-b905-42e3-9c49-d1c545f0e1a4",
 			"key": "categoryID",
 			"value": ""
 		}
