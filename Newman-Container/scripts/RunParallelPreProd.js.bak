@@ -6,7 +6,7 @@ const parametersForTestRun = {
 	collection: path.join('/var/newman/scripts', 'sample-collection.json'), // your collection
     //collection: path.join('/var/newman/scripts', 'PreProd-LOAD-TESTS.json'), // your collection
     //environment: path.join(__dirname, 'postman/localhost.postman_environment.json'), //your env
-    reporters: 'cli'	
+    //reporters: 'cli'	
 };
 
 parallelCollectionRun = function (done) {

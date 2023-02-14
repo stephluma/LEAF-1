@@ -13,7 +13,8 @@ var path = require('path'), // ensures that the path is consistent, regardless o
      * @type {Object}
      */
     options = {
-        collection: path.join(__dirname, 'sample-collection.json')
+        //collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json')
+		collection: path.join(__dirname, 'sample-collection.json')
     },
 
     /**
@@ -41,7 +42,6 @@ async.parallel([
  */
 function (err, results) {
     err && console.error(err);
-
     results.forEach(function (result) {
         var failures = result.run.failures;
 

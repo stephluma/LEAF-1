@@ -2,7 +2,6 @@
  * @fileOverview A sample script to demonstrate parallel collection runs using async.
  */
 var path = require('path'), // ensures that the path is consistent, regardless of where the script is run from
-
     async = require('async'), // https://npmjs.org/package/async
     newman = require('../'), // change to require('newman'), if using outside this repository
 
@@ -14,7 +13,8 @@ var path = require('path'), // ensures that the path is consistent, regardless o
      * @type {Object}
      */
     options = {
-        collection: path.join(__dirname, 'sample-collection.json')
+        collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json')
+		//collection: path.join(__dirname, 'sample-collection.json')
     },
 
     /**
@@ -42,7 +42,6 @@ async.parallel([
  */
 function (err, results) {
     err && console.error(err);
-
     results.forEach(function (result) {
         var failures = result.run.failures;
 
