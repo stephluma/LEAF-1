@@ -13,8 +13,7 @@
 					"script": {
 						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
 						"exec": [
-							"var time = pm.response.responseTime;\r",
-							"console.log(\"Response time: \" + time + \" ms\");"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -24,19 +23,6 @@
 					"script": {
 						"id": "0fc167b9-bc0d-418f-9538-f3c0c537db90",
 						"exec": [
-							"\r",
-							"//pm.globals.get(\"CSRFToken\");\r",
-							"//console.log(\"CSRF Token for POST Request: \" + pm.globals.get(\"CSRFToken\"))\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -120,9 +106,10 @@
 					]
 				},
 				"url": {
-					"raw": "http://leaf-preprod.va.gov/Academy/Demo1/api/form/new",
+					"raw": "http://autoloader.leaf-preprod.va.gov/Academy/Demo1/api/form/new",
 					"protocol": "http",
 					"host": [
+						"autoloader",
 						"leaf-preprod",
 						"va",
 						"gov"
@@ -1533,23 +1520,23 @@
 	],
 	"variable": [
 		{
-			"id": "fe7a335b-55bb-4e12-9c87-4a2caeecc3a5",
+			"id": "52aadb6c-75f4-4bc3-8b91-12e1ea64c196",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string"
 		},
 		{
-			"id": "aae63c0c-19fb-4ea3-86bb-5841825bd447",
+			"id": "fafc25bd-b125-4fee-a786-c40823e0494b",
 			"key": "formCategories",
 			"value": ""
 		},
 		{
-			"id": "38d22378-58fd-4f55-a0b2-fb556be0a2fc",
+			"id": "2f9f2116-0345-4cb0-92da-a8b2bd88e3af",
 			"key": "CategoryID",
 			"value": ""
 		},
 		{
-			"id": "68d5f081-c856-443c-b6ec-f23f1046a224",
+			"id": "9de26c8a-0cc8-4d96-b7ba-a98818f008fe",
 			"key": "categoryID",
 			"value": ""
 		}
