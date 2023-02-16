@@ -26,7 +26,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "https://autoloader.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+				"url": "https://noauth.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
 			},
 			"response": []
 		}
