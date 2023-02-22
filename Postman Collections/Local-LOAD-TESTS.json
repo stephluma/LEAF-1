@@ -19,7 +19,6 @@
 							"    //const response = pm.response.json();    // response is stored js object\r",
 							"\tvar response = pm.response.text();\r",
 							"\tstr1 = response.slice(1);\r",
-							"\t//str1 = response.slice(0, -1);\r",
 							"\tstr2 = str1.slice(0, -1);\r",
 							"\ttoken = str2;\r",
 							"\tconsole.log(token);\r",
