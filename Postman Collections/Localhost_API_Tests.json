@@ -668,7 +668,7 @@
 			"response": []
 		},
 		{
-			"name": "Local - FIX Create Request",
+			"name": "Local - Create Request",
 			"event": [
 				{
 					"listen": "test",
@@ -1546,23 +1546,23 @@
 	],
 	"variable": [
 		{
-			"id": "bad17845-c3e0-43e6-ac99-554e1c62ca26",
+			"id": "70b9e7a5-3d48-4751-8f4b-3e2f0d61a7f6",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string"
 		},
 		{
-			"id": "f8d57acd-5444-4734-bc3f-66f593fc883c",
+			"id": "48c1158c-f756-41e3-a96c-8d59ff9b0a12",
 			"key": "formCategories",
 			"value": ""
 		},
 		{
-			"id": "125279d9-400c-4511-9973-4284325d274f",
+			"id": "0f49d349-ee46-42f2-9b74-ca967ce99392",
 			"key": "CategoryID",
 			"value": ""
 		},
 		{
-			"id": "6cfcd380-de7f-441b-8bac-c577b8053355",
+			"id": "313c7836-6488-48c6-857f-315f4a7cc5e4",
 			"key": "categoryID",
 			"value": ""
 		}
