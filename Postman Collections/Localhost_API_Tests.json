@@ -872,211 +872,7 @@
 			"response": []
 		},
 		{
-			"name": "Local - Pre-request-script",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
-						"exec": [
-							"\r",
-							"//console.log(postman);\r",
-							"\r",
-							"//var xsrfCookie = pm.getRequestCookie(\"XSRF-TOKEN\");\r",
-							"//var xsrfCookie = pm.getRequestCookie(\"XSRF-TOKEN\");\r",
-							"//pm.setEnvironmentVariable(\"xsrf-token\", xsrfCookie.value);\r",
-							"\t//console.log(xsrfCookie.value);\r",
-							"\r",
-							"\r",
-							"pm.globals.set(\"variable_key\", \"variable_value\");\r",
-							"pm.test(\"Form-Categories.  Status = 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"var time = pm.response.responseTime;\r",
-							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
-							"\r",
-							"pm.test(\"JSON Contains expected value\", function () {\r",
-							"    const response = pm.response.json();\r",
-							"        //  create an array only with this ID\r",
-							"    const catIDs = response.map(catID => catID.categoryID);         //catIDs is the array containing IDs\r",
-							"    console.log(catIDs);\r",
-							"    pm.variables.set('catIDs', catIDs); //2nd catIDs is the var defined on line 3 - Only works in collection runner\r",
-							"\r",
-							"    let currentCatID = catIDs.shift();\r",
-							"    console.log(currentCatID);\r",
-							"    pm.expect(currentCatID).to.eql(\"form_b7c34\");  //    //form_d203e \r",
-							"});\r",
-							"\r",
-							"pm.test(\"Successful POST request\", function () {\r",
-							"\tpm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-							"});\r",
-							"\r",
-							"// CONST RANDOM = MATH.RANDOM().TOSTRING(36).SUBSTRING(2);\r",
-							"\r",
-							"// CONST FORMCATEGORIES = \"FORMCATEGORIES \" + RANDOM;\r",
-							"// PM.COLLECTIONVARIABLES.SET(\"FORMCATEGORIES\", FORMCATEGORIES);\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "0fc167b9-bc0d-418f-9538-f3c0c537db90",
-						"exec": [
-							"console.log('Pre-request Script from Request start');\r",
-							"\r",
-							"// We don't need to do anything if it's GET or x-csrf-token header is explicitly presented\r",
-							"if (pm.request.method !== 'GET' && !(pm.request.headers.has('x-csrf-token'))) {\r",
-							"\r",
-							"  var csrfRequest = pm.request.clone();\r",
-							"  console.log(csrfRequest);\r",
-							"  csrfRequest.method = 'GET';\r",
-							"  if (pm.request.method === 'POST') {\r",
-							"    // for POST method usually it is ....<something>Collection in the URL\r",
-							"    // so we add $top=1 just to quickly get csrf token; \r",
-							"    // for PUT, PATCH or DELETE the same URL would be enough,\r",
-							"    // because it points to the actual entity\r",
-							"    csrfRequest.url = pm.request.url + '?$top=1';\r",
-							"  }\r",
-							"\r",
-							"  csrfRequest.upsertHeader({\r",
-							"    key: 'xsrf-token', \t\t\t\t//'x-csrf-token',\r",
-							"    value: 'fetch'\r",
-							"  });\r",
-							"\r",
-							"  pm.sendRequest(csrfRequest, function(err, res) {\r",
-							"    console.log('pm.sendRequest start: ', err, res);\r",
-							"    if (err) {\r",
-							"      console.log(err);\r",
-							"    } else {\r",
-							"      //var csrfToken = res.headers.get('x-csrf-token');\r",
-							"      var csrfToken = res.headers.get('xsrf-token');\r",
-							"\t\r",
-							"\t  if (csrfToken) {\r",
-							"        console.log('csrfToken fetched:' + csrfToken);\r",
-							"        pm.request.headers.upsert({\r",
-							"          key: 'x-csrf-token',\r",
-							"          value: csrfToken\r",
-							"        });\r",
-							"      } else {\r",
-							"        console.log('No csrf token fetched');\r",
-							"      }\r",
-							"    }\r",
-							"    console.log('pm.sendRequest end');\r",
-							"  });\r",
-							"}\r",
-							"\r",
-							"console.log('Pre-request Script from Request end');\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"////For POST requests\r",
-							"////Probably need to use the 'POST' address as listed in the LEAF API Documentation\r",
-							"////THIS ONLY WORKS by Executing TestCollection as a COLLECTION\r",
-							"  \r",
-							"/*   Lines 6 through 10 are valid (in different context)   */\r",
-							"\r",
-							"//const catIDs = pm.variables.get('catIDs');      //same array of categoryIDs created in GET request test\r",
-							"//console.log('Pre-request for POST request ' + catIDs);\r",
-							"//catIDs.shift();    //get first element/Id in array and return it. _(shift function by itself)\r",
-							"    \r",
-							"//pm.variables.set('currentCatID', catIDs.shift());    //array or modify original array (catIDs)  //Set variable currenCatID\r",
-							"\r",
-							"//// if(Array.isArray(catIDs) && catIDs.length > 0) {  //array item must have length > 0  (a valid Cat ID)\r",
-							"////     postman.setNextRequest('POST Category');      //iterate through all members of array   USE Test Name VID: 7:08-9:16\r",
-							"////     console.log('POST CATEGORY');                 //Can also use in Test section\r",
-							"//// } else {\r",
-							"////     postman.setNextRequest(null);\r",
-							"//// }\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"id": "bda2cb79-7ad1-4727-8874-80f2d5e2a821",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true,
-				"disabledSystemHeaders": {},
-				"followOriginalHttpMethod": true
-			},
-			"request": {
-				"auth": {
-					"type": "ntlm",
-					"ntlm": {
-						"password": "",
-						"username": ""
-					}
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-XSRF-TOKEN",
-						"value": "{{xsrf-token}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "service",
-							"value": "Acute Care",
-							"type": "text"
-						},
-						{
-							"key": "title",
-							"value": "form_load",
-							"type": "text"
-						},
-						{
-							"key": "priority",
-							"value": "",
-							"type": "text"
-						},
-						{
-							"key": "numform_b7c34",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "CSRFToken",
-							"value": "{{CSRFToken}}",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost/LEAF_Request_Portal/api/form/new",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"LEAF_Request_Portal",
-						"api",
-						"form",
-						"new"
-					],
-					"query": [
-						{
-							"key": "XSRF-TOKEN",
-							"value": "token",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Local - Create Request Copy 2",
+			"name": "Local - POST Template",
 			"event": [
 				{
 					"listen": "test",
@@ -1954,23 +1750,23 @@
 	],
 	"variable": [
 		{
-			"id": "dea95222-6e77-4199-ad70-5dbf488e5f04",
+			"id": "2a79b5a4-cc4f-48b2-9477-bafe8c742f77",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string"
 		},
 		{
-			"id": "ea5bb7e2-9d62-406f-8155-bbdcf45b74dc",
+			"id": "19c58283-e2d6-4407-82be-12ff9dfd89b0",
 			"key": "formCategories",
 			"value": ""
 		},
 		{
-			"id": "904214fa-55dc-40dc-99bf-490dabc8322d",
+			"id": "5024dad6-b61a-4ca8-be75-16d6e8f41a8c",
 			"key": "CategoryID",
 			"value": ""
 		},
 		{
-			"id": "2b85d212-6812-4b16-ae0f-ad55fdd322cd",
+			"id": "a1313756-6793-4f8d-a5c0-d69b9f2d96ee",
 			"key": "categoryID",
 			"value": ""
 		}
