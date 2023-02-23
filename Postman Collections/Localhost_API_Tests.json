@@ -872,7 +872,7 @@
 			"response": []
 		},
 		{
-			"name": "Local - POST Template",
+			"name": "Local - POST TEMPLATE",
 			"event": [
 				{
 					"listen": "test",
@@ -1750,23 +1750,23 @@
 	],
 	"variable": [
 		{
-			"id": "c3978572-e41e-4280-9c3a-48e3bd41734a",
+			"id": "3a2b8511-2ce5-4e55-a77a-c491c62156aa",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string"
 		},
 		{
-			"id": "a6ef8529-9cb2-4b60-94bf-9b623e44e219",
+			"id": "40926b6e-5ee2-4044-ba05-f6d53a6e7534",
 			"key": "formCategories",
 			"value": ""
 		},
 		{
-			"id": "0116db21-3765-4359-b188-ad079286367a",
+			"id": "6b37f844-3a42-4e63-8016-ca50bb2e4f5e",
 			"key": "CategoryID",
 			"value": ""
 		},
 		{
-			"id": "53017561-e35e-44ff-bdd9-8890a813101b",
+			"id": "fdb50570-a70c-43f3-94f7-223214aaf886",
 			"key": "categoryID",
 			"value": ""
 		}
