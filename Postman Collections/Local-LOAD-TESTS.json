@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Local - getCSRFTokenMR",
+			"name": "Local - getCSRFToken-LOAD",
 			"event": [
 				{
 					"listen": "test",
