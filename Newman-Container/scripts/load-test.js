@@ -15,8 +15,8 @@ var path = require('path'), // ensures that the path is consistent, regardless o
      */
     options = {
         collection: path.join(__dirname, 'sample-collection.json'),
-		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json')
-		//collection: path.join('var/newman/scripts', 'PreProd-LOAD-TESTS.json')
+		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
+		//collection: path.join('var/newman/scripts', 'PreProd-LOAD-TESTS.json'),
 		reporters: 'cli'
     },   
     /**
