@@ -17,7 +17,7 @@
 				},
 				"method": "GET",
 				"header": [],
-				"url": "https://leaf-preprod.va.gov/Academy/Demo1/api/"
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/"
 			},
 			"response": []
 		},
@@ -807,7 +807,7 @@
 	],
 	"variable": [
 		{
-			"id": "ffcabd19-2300-4cfa-a40e-75d04cf075f6",
+			"id": "57256f7a-79fb-4636-9927-7380b860acd6",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
