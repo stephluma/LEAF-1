@@ -578,70 +578,6 @@
 			"response": []
 		},
 		{
-			"name": "FIX Local - Set Token for POST requests",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
-						"exec": [
-							"\r",
-							"\r",
-							"// CONST RANDOM = MATH.RANDOM().TOSTRING(36).SUBSTRING(2);\r",
-							"\r",
-							"// CONST FORMCATEGORIES = \"FORMCATEGORIES \" + RANDOM;\r",
-							"// PM.COLLECTIONVARIABLES.SET(\"FORMCATEGORIES\", FORMCATEGORIES);\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "0fc167b9-bc0d-418f-9538-f3c0c537db90",
-						"exec": [
-							"//const catIDs = pm.variables.get('catIDs');      //same array of categoryIDs created in GET request test\r",
-							"//console.log('Pre-request from POST request ' + catIDs);\r",
-							"////catIDs.shift();    //get first element/Id in array and return it. _(shift function by itself)\r",
-							"    \r",
-							"//pm.variables.set('currentCatID', catIDs.shift());    //array or modify original array (catIDs)  //Set variable currenCatID\r",
-							"\r",
-							"// if(Array.isArray(catIDs) && catIDs.length > 0) {   //array item must have length > 0  (a valid Cat ID)\r",
-							"//     postman.setNextRequest('POST Category');       //iterate through all members of array   USE Test Name       VID: 7:08 - 9:16\r",
-							"//     console.log('POST CATEGORY');                  //Can also use in Test section\r",
-							"// } else {\r",
-							"//     postman.setNextRequest(null);\r",
-							"// }"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"id": "b84a4372-9731-496e-adfd-35cf80715880",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": {
-						"password": "@Adaptive44",
-						"username": "max.richard@adaptivestack.com"
-					}
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n     \"categoryID\": \"form_b7c34\",\r\n     \"categoryName\": \"TestForm\",\r\n     \"categoryDescription\": \"Postman categoryDescription\"\r\n}"
-				},
-				"url": "{{Local_URL}}/form/new"
-			},
-			"response": []
-		},
-		{
 			"name": "Local - GET all Categories",
 			"event": [
 				{
@@ -1557,7 +1493,7 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"var time = pm.response.responseTime\r",
+							"var time = pm.response.responseTime    //update?\r",
 							"\r",
 							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200))\r",
 							"\r",
@@ -1756,23 +1692,23 @@
 	],
 	"variable": [
 		{
-			"id": "3e8403c2-47e4-4b31-8c78-78a25bd2fb5d",
+			"id": "ff23aaa4-083d-4366-a62d-fcdc5f51f49b",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string"
 		},
 		{
-			"id": "c4c4b52a-f689-4cd7-9e12-0f93eac5d3bf",
+			"id": "36ed2f02-bf46-4ccc-b8d6-ed157232e694",
 			"key": "formCategories",
 			"value": ""
 		},
 		{
-			"id": "f780497f-0402-4766-9bfc-8e4b71ffccfa",
+			"id": "a5875831-3cd7-4db3-b0fb-53ea9f27a1bc",
 			"key": "CategoryID",
 			"value": ""
 		},
 		{
-			"id": "f1e65c68-2660-4ccf-8255-169664e6ad94",
+			"id": "34ad22f1-057f-4d3b-9069-1cc587c8555f",
 			"key": "categoryID",
 			"value": ""
 		}
