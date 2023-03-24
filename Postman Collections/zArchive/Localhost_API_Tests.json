@@ -13,8 +13,7 @@
 					"script": {
 						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
 						"exec": [
-							"var time = pm.response.responseTime;\r",
-							"console.log(\"Response time: \" + time + \" ms\");"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -24,19 +23,6 @@
 					"script": {
 						"id": "0fc167b9-bc0d-418f-9538-f3c0c537db90",
 						"exec": [
-							"\r",
-							"//pm.globals.get(\"CSRFToken\");\r",
-							"//console.log(\"CSRF Token for POST Request: \" + pm.globals.get(\"CSRFToken\"))\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -120,9 +106,10 @@
 					]
 				},
 				"url": {
-					"raw": "http://leaf-preprod.va.gov/Academy/Demo1/api/form/new",
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/new",
 					"protocol": "http",
 					"host": [
+						"nologin",
 						"leaf-preprod",
 						"va",
 						"gov"
@@ -676,12 +663,85 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{Local_URL}}/form/categories"
+				"url": "{{Local_URL}}/api/form/categories"
 			},
 			"response": []
 		},
 		{
-			"name": "Local - FIX Create Request",
+			"name": "Local - getCSRFToken Pre-Post Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c57ea32b-2a69-4e4a-a2c3-644fa0144d1d",
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"getCSRFToken\", function () {\r",
+							"    //const response = pm.response.json();    // response is stored js object\r",
+							"\tvar response = pm.response.text();\r",
+							"\tstr1 = response.slice(1);\r",
+							"\tstr2 = str1.slice(0, -1);\r",
+							"\ttoken = str2;\r",
+							"\tconsole.log(token);\r",
+							"\t\r",
+							"\tpm.globals.set(\"CSRFToken\", token);\r",
+							"\tconsole.log(\"CSRFToken Retreived from GET request: \" + pm.globals.get(\"CSRFToken\"));\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "94ef5633-60b5-466e-a324-38ce91df8460",
+						"exec": [
+							"\r",
+							"\r",
+							"\r",
+							"/* const random = Math.random().toString(36).substring(2);\r",
+							"const formCategories = \"formCategories \" + random;\r",
+							"pm.collectionVariables.set(\"formCategories\", formCategories);\r",
+							"*/\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "3134be78-fb5e-4116-8e22-c3c3bf3547de",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost/LEAF_Request_Portal/api/formWorkflow/getCSRFToken"
+			},
+			"response": []
+		},
+		{
+			"name": "Local - Create Request",
 			"event": [
 				{
 					"listen": "test",
@@ -832,8 +892,34 @@
 					}
 				],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"TestForm\",\r\n    \"description\": \"TestDescription\",\r\n\tCSRFToken: xsrf-token\r\n}"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "service",
+							"value": "Acute Care",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "form_load",
+							"type": "text"
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "numform_b7c34",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "CSRFToken",
+							"value": "{{CSRFToken}}",
+							"type": "text"
+						}
+					]
 				},
 				"url": {
 					"raw": "http://localhost/LEAF_Request_Portal/api/form/new",
@@ -859,7 +945,144 @@
 			"response": []
 		},
 		{
-			"name": "Local - TEMPLATE",
+			"name": "Local - POST TEMPLATE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
+						"exec": [
+							"\r",
+							"//console.log(postman);\r",
+							"\r",
+							"//var xsrfCookie = pm.getRequestCookie(\"XSRF-TOKEN\");\r",
+							"//var xsrfCookie = pm.getRequestCookie(\"XSRF-TOKEN\");\r",
+							"//pm.setEnvironmentVariable(\"xsrf-token\", xsrfCookie.value);\r",
+							"\t//console.log(xsrfCookie.value);\r",
+							"\r",
+							"\r",
+							"pm.globals.set(\"variable_key\", \"variable_value\");\r",
+							"pm.test(\"Form-Categories.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"pm.test(\"JSON Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"        //  create an array only with this ID\r",
+							"    const catIDs = response.map(catID => catID.categoryID);         //catIDs is the array containing IDs\r",
+							"    console.log(catIDs);\r",
+							"    pm.variables.set('catIDs', catIDs); //2nd catIDs is the var defined on line 3 - Only works in collection runner\r",
+							"\r",
+							"    let currentCatID = catIDs.shift();\r",
+							"    console.log(currentCatID);\r",
+							"    pm.expect(currentCatID).to.eql(\"form_b7c34\");  //    //form_d203e \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"\tpm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"// CONST RANDOM = MATH.RANDOM().TOSTRING(36).SUBSTRING(2);\r",
+							"\r",
+							"// CONST FORMCATEGORIES = \"FORMCATEGORIES \" + RANDOM;\r",
+							"// PM.COLLECTIONVARIABLES.SET(\"FORMCATEGORIES\", FORMCATEGORIES);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0fc167b9-bc0d-418f-9538-f3c0c537db90",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "a34d44c7-3832-4cc4-9392-552ab81ae46d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {},
+				"followOriginalHttpMethod": true
+			},
+			"request": {
+				"auth": {
+					"type": "ntlm",
+					"ntlm": {
+						"password": "",
+						"username": ""
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{xsrf-token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "service",
+							"value": "Copper Electronics & Sports",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "form_load",
+							"type": "text"
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "numform_b7c34",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "CSRFToken",
+							"value": "{{CSRFToken}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/LEAF_Request_Portal/api/form/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"LEAF_Request_Portal",
+						"api",
+						"form",
+						"new"
+					],
+					"query": [
+						{
+							"key": "XSRF-TOKEN",
+							"value": "token",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local - GET TEMPLATE",
 			"event": [
 				{
 					"listen": "test",
@@ -1533,23 +1756,23 @@
 	],
 	"variable": [
 		{
-			"id": "fe7a335b-55bb-4e12-9c87-4a2caeecc3a5",
+			"id": "3e8403c2-47e4-4b31-8c78-78a25bd2fb5d",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string"
 		},
 		{
-			"id": "aae63c0c-19fb-4ea3-86bb-5841825bd447",
+			"id": "c4c4b52a-f689-4cd7-9e12-0f93eac5d3bf",
 			"key": "formCategories",
 			"value": ""
 		},
 		{
-			"id": "38d22378-58fd-4f55-a0b2-fb556be0a2fc",
+			"id": "f780497f-0402-4766-9bfc-8e4b71ffccfa",
 			"key": "CategoryID",
 			"value": ""
 		},
 		{
-			"id": "68d5f081-c856-443c-b6ec-f23f1046a224",
+			"id": "f1e65c68-2660-4ccf-8255-169664e6ad94",
 			"key": "categoryID",
 			"value": ""
 		}

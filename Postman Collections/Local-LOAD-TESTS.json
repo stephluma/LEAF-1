@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Local - getCSRFTokenMR",
+			"name": "Local - getCSRFToken-LOAD",
 			"event": [
 				{
 					"listen": "test",
@@ -18,7 +18,7 @@
 							"pm.test(\"getCSRFToken\", function () {\r",
 							"    //const response = pm.response.json();    // response is stored js object\r",
 							"\tvar response = pm.response.text();\r",
-							"\tstr1 = response.slice(0, -1);\r",
+							"\tstr1 = response.slice(1);\r",
 							"\tstr2 = str1.slice(0, -1);\r",
 							"\ttoken = str2;\r",
 							"\tconsole.log(token);\r",
@@ -211,7 +211,7 @@
 					"formdata": [
 						{
 							"key": "service",
-							"value": "",
+							"value": "Acute Care",
 							"type": "text"
 						},
 						{
