@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "PP Portal - Form Categories Load",
+			"name": "PP-LOAD-FormCategories",
 			"event": [
 				{
 					"listen": "test",
