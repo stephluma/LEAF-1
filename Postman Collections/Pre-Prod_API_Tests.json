@@ -441,6 +441,56 @@
 			"response": []
 		},
 		{
+			"name": "PP Portal - GET-TEMPLATE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "39d0b4a7-53fd-40ed-907d-47053931f466",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
 			"name": "PP - Form Indicators",
 			"event": [
 				{
@@ -938,7 +988,7 @@
 	],
 	"variable": [
 		{
-			"id": "776a9aef-4c6d-4b6b-8ba8-a2cf4b7c6f7f",
+			"id": "0faab2c1-619c-4884-9987-8613df3027c2",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
