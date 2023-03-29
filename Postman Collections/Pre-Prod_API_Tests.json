@@ -888,7 +888,7 @@
 			"response": []
 		},
 		{
-			"name": "PP Portal-FormWorkflow-",
+			"name": "PP Portal-FormWorkflow-CurrentStep",
 			"event": [
 				{
 					"listen": "test",
@@ -1585,7 +1585,7 @@
 	],
 	"variable": [
 		{
-			"id": "86f4b8a1-0a58-4f16-a3b3-5c1428d78906",
+			"id": "5f3b3e9c-09b2-4dcb-9a1d-1434bf7084dd",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
