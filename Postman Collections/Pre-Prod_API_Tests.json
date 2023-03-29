@@ -609,6 +609,55 @@
 					"cookie": [],
 					"responseTime": null,
 					"body": "1"
+				},
+				{
+					"id": "df7017ec-0a11-4594-87a5-d4973e28f798",
+					"name": "PP Portal - GET-TEMPLATE",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/formWorkflow/[1780]/currentStep"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 29 Mar 2023 18:08:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "PHPSESSID=9dg9ev406a3iobsea62i5dbuk1; expires=Fri, 28-Apr-2023 18:08:49 GMT; Max-Age=2592000; path=/; secure; HttpOnly"
+						},
+						{
+							"key": "ETag",
+							"value": "\"1c734582afe93313f6dea92ce56f9426\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "must-revalidate, private"
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "\"Controller is undefined.\""
 				}
 			]
 		},
@@ -1093,59 +1142,9 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/formWorkflow/[1780]/currentStep"
 			},
-			"response": [
-				{
-					"id": "df7017ec-0a11-4594-87a5-d4973e28f798",
-					"name": "PP Portal - GET-TEMPLATE",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/formWorkflow/[1780]/currentStep"
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Server",
-							"value": "nginx"
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 29 Mar 2023 18:08:49 GMT"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "Transfer-Encoding",
-							"value": "chunked"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Set-Cookie",
-							"value": "PHPSESSID=9dg9ev406a3iobsea62i5dbuk1; expires=Fri, 28-Apr-2023 18:08:49 GMT; Max-Age=2592000; path=/; secure; HttpOnly"
-						},
-						{
-							"key": "ETag",
-							"value": "\"1c734582afe93313f6dea92ce56f9426\""
-						},
-						{
-							"key": "Cache-Control",
-							"value": "must-revalidate, private"
-						}
-					],
-					"cookie": [],
-					"responseTime": null,
-					"body": "\"Controller is undefined.\""
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "PP Portal - GET-TEMPLATE Copy",
@@ -1795,7 +1794,7 @@
 	],
 	"variable": [
 		{
-			"id": "202e6bdf-16e7-48c9-8f3a-f48cf245bc20",
+			"id": "8c6e452f-86d4-469f-8ade-d8d0d48c024c",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
