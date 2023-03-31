@@ -127,7 +127,7 @@
 			"response": []
 		},
 		{
-			"name": "PP-Create Request Copy",
+			"name": "PP-Create Request",
 			"event": [
 				{
 					"listen": "test",
@@ -1712,7 +1712,7 @@
 	],
 	"variable": [
 		{
-			"id": "c3be5aa3-8769-4002-a39a-a5b465a95dbc",
+			"id": "415c9751-2ab6-4b4f-8a96-319089143b2a",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
