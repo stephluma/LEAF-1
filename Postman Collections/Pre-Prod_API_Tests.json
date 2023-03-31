@@ -206,7 +206,7 @@
 						},
 						{
 							"key": "title",
-							"value": "Load Testing MR",
+							"value": "Load Testing MR - Create New Request",
 							"type": "text"
 						},
 						{
@@ -1552,7 +1552,7 @@
 	],
 	"variable": [
 		{
-			"id": "35e87c8c-a9d8-401a-8759-8f17b96f68e1",
+			"id": "8bfa78d8-946f-4bef-9f42-bdb391211ecb",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
