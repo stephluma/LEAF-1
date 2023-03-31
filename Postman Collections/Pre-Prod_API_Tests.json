@@ -382,7 +382,7 @@
 					"formdata": [
 						{
 							"key": "label",
-							"value": "Long string of text to serve as text label",
+							"value": "Test Label",
 							"type": "text"
 						},
 						{
@@ -1797,7 +1797,7 @@
 	],
 	"variable": [
 		{
-			"id": "4d3f3faa-9082-4d9b-8f26-33c69bf10b75",
+			"id": "69863835-05e4-4635-9b71-0a1b24b82e20",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
