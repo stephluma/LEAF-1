@@ -85,7 +85,7 @@
 						},
 						{
 							"key": "title",
-							"value": "Load Testing MR",
+							"value": "Load Testing MR - Create New Request",
 							"type": "text"
 						},
 						{
@@ -1692,23 +1692,23 @@
 	],
 	"variable": [
 		{
-			"id": "868ef869-7f6c-4685-b513-bb4ec3e5fe1c",
+			"id": "a256db46-ab4f-43d9-bab3-f71665320eac",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string"
 		},
 		{
-			"id": "a558381c-b749-4625-b959-14030fc26610",
+			"id": "15bd6637-ebcd-43a8-9951-ba14ee82f7f3",
 			"key": "formCategories",
 			"value": ""
 		},
 		{
-			"id": "f780acca-d110-4210-ab1a-7863a124de7c",
+			"id": "d47320d3-09bb-46ff-b72b-ec1f3b55a98c",
 			"key": "CategoryID",
 			"value": ""
 		},
 		{
-			"id": "7b95f6b6-28de-4236-9664-1a11b4c19401",
+			"id": "956b5ccc-e567-494d-8678-4d1b6c21115e",
 			"key": "categoryID",
 			"value": ""
 		}
