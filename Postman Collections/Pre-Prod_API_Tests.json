@@ -612,55 +612,6 @@
 					"cookie": [],
 					"responseTime": null,
 					"body": "1"
-				},
-				{
-					"id": "df7017ec-0a11-4594-87a5-d4973e28f798",
-					"name": "PP Portal - GET-TEMPLATE",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/formWorkflow/[1780]/currentStep"
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Server",
-							"value": "nginx"
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 29 Mar 2023 18:08:49 GMT"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "Transfer-Encoding",
-							"value": "chunked"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Set-Cookie",
-							"value": "PHPSESSID=9dg9ev406a3iobsea62i5dbuk1; expires=Fri, 28-Apr-2023 18:08:49 GMT; Max-Age=2592000; path=/; secure; HttpOnly"
-						},
-						{
-							"key": "ETag",
-							"value": "\"1c734582afe93313f6dea92ce56f9426\""
-						},
-						{
-							"key": "Cache-Control",
-							"value": "must-revalidate, private"
-						}
-					],
-					"cookie": [],
-					"responseTime": null,
-					"body": "\"Controller is undefined.\""
 				}
 			]
 		},
@@ -1797,7 +1748,7 @@
 	],
 	"variable": [
 		{
-			"id": "3c236e75-772f-4b64-89e5-fa444ce35e7a",
+			"id": "6fdec9e5-729c-41da-b12a-b168eec81da5",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
