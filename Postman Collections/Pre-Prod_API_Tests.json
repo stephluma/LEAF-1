@@ -382,14 +382,13 @@
 					"formdata": [
 						{
 							"key": "label",
-							"value": "Long string of text",
+							"value": "Long string of text to serve as text label",
 							"type": "text"
 						},
 						{
-							"key": "title",
+							"key": "identifier",
 							"value": "Load Testing MR",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						},
 						{
 							"key": "priority",
@@ -406,7 +405,8 @@
 						{
 							"key": "CSRFToken",
 							"value": "ru",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -1797,7 +1797,7 @@
 	],
 	"variable": [
 		{
-			"id": "ad8dca3b-261b-43a5-8e54-15086d63114c",
+			"id": "4d3f3faa-9082-4d9b-8f26-33c69bf10b75",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
