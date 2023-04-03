@@ -645,27 +645,32 @@
 						{
 							"key": "service",
 							"value": "Office of the Associate Director of Patient Services",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "title",
 							"value": "Load Testing MR",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "priority",
 							"value": "Normal",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "numform_b7c34",
 							"value": "1",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "CSRFToken",
 							"value": "ru",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -1557,7 +1562,7 @@
 	],
 	"variable": [
 		{
-			"id": "91f836f6-5203-4a99-b7f2-e7e6708b41b3",
+			"id": "960ddfa0-9a0e-4861-826e-9000fcbc73f7",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
