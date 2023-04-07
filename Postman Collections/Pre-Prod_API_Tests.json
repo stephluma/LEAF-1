@@ -673,8 +673,7 @@
 						{
 							"key": "CSRFToken",
 							"value": "ru",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						},
 						{
 							"key": "service",
@@ -684,7 +683,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/service?recordID=1801&serviceID=1",
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/service?recordID=1801&serviceID=75",
 					"protocol": "http",
 					"host": [
 						"nologin",
@@ -726,13 +725,11 @@
 						},
 						{
 							"key": "recordID",
-							"value": "1801",
-							"type": "text"
+							"value": "1801"
 						},
 						{
 							"key": "serviceID",
-							"value": "1",
-							"type": "text"
+							"value": "75"
 						}
 					]
 				}
@@ -2037,7 +2034,7 @@
 	],
 	"variable": [
 		{
-			"id": "905d7e6b-e011-44d8-8ff0-372b47df692e",
+			"id": "90714654-f347-471e-9492-2067446c9196",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
