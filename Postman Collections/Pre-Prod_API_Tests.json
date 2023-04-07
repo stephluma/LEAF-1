@@ -520,6 +520,11 @@
 							"value": "ru",
 							"type": "text",
 							"disabled": true
+						},
+						{
+							"key": "service",
+							"value": "1",
+							"type": "text"
 						}
 					]
 				},
@@ -1867,7 +1872,7 @@
 	],
 	"variable": [
 		{
-			"id": "b0a46ca6-eb01-40de-a1d1-92dbb78133b1",
+			"id": "0e4c1c8d-1ede-482d-89eb-f2eae9c585c1",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
