@@ -347,11 +347,12 @@
 						{
 							"key": "recordID",
 							"value": "1801",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "title",
-							"value": "This should be updated to a new title",
+							"value": "Load Testing MR - Title Changed",
 							"type": "text"
 						},
 						{
@@ -2016,7 +2017,7 @@
 	],
 	"variable": [
 		{
-			"id": "91dd5b59-b8d5-4df9-9bba-12ba525a3436",
+			"id": "55c5b815-197e-40c6-848a-ab02070bb818",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
