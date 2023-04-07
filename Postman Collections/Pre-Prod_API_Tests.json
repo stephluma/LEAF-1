@@ -651,13 +651,18 @@
 							"disabled": true
 						},
 						{
+							"key": "serviceID",
+							"value": "75",
+							"type": "text"
+						},
+						{
 							"key": "CSRFToken",
 							"value": "ru",
 							"type": "text"
 						},
 						{
-							"key": "serviceID",
-							"value": "75",
+							"key": "userID",
+							"value": "",
 							"type": "text"
 						}
 					]
@@ -2164,7 +2169,7 @@
 	],
 	"variable": [
 		{
-			"id": "cc096444-8fed-457f-8284-5d259c6b5b65",
+			"id": "ba99f3d7-4d94-4723-9a10-df9ff6070ba1",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
