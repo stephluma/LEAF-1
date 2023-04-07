@@ -657,8 +657,8 @@
 						},
 						{
 							"key": "userID",
-							"value": "262 - OITBIRRichaM1",
-							"description": "Richard, Max L.",
+							"value": "OITBIRRichaM1",
+							"description": "Richard, Max L. OR 262 - OITBIRRichaM1",
 							"type": "text"
 						},
 						{
@@ -2176,7 +2176,7 @@
 	],
 	"variable": [
 		{
-			"id": "1895493b-9421-4015-894d-f13452e6b2e6",
+			"id": "8808529a-5aaa-47f3-9e5e-7bf239b9b992",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
