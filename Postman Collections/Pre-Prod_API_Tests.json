@@ -656,7 +656,8 @@
 						{
 							"key": "title",
 							"value": "This should be updated to a new title",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "priority",
@@ -676,8 +677,8 @@
 							"type": "text"
 						},
 						{
-							"key": "service",
-							"value": "1",
+							"key": "serviceID",
+							"value": "75",
 							"type": "text"
 						}
 					]
@@ -2034,7 +2035,7 @@
 	],
 	"variable": [
 		{
-			"id": "90714654-f347-471e-9492-2067446c9196",
+			"id": "dbb5922d-d9f3-4de1-8b3d-c0e9ba622eed",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
