@@ -329,7 +329,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/service?recordID=1801&serviceID=75",
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/service",
 					"protocol": "http",
 					"host": [
 						"nologin",
@@ -371,11 +371,13 @@
 						},
 						{
 							"key": "recordID",
-							"value": "1801"
+							"value": "1801",
+							"disabled": true
 						},
 						{
 							"key": "serviceID",
-							"value": "75"
+							"value": "75",
+							"disabled": true
 						}
 					]
 				}
