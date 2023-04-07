@@ -518,13 +518,13 @@
 						{
 							"key": "CSRFToken",
 							"value": "ru",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						},
 						{
-							"key": "service",
-							"value": "1",
-							"type": "text"
+							"key": "recordID",
+							"value": "1801",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -2027,7 +2027,7 @@
 	],
 	"variable": [
 		{
-			"id": "747f9545-2c79-41b1-b5c2-487d452ecafe",
+			"id": "ccbaacf8-d859-4ec8-8eda-f4d3534d174e",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
