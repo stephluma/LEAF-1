@@ -345,15 +345,20 @@
 					"mode": "formdata",
 					"formdata": [
 						{
+							"key": "title",
+							"value": "Load Testing MR - Title Changed",
+							"type": "text"
+						},
+						{
+							"key": "CSRFToken",
+							"value": "ru",
+							"type": "text"
+						},
+						{
 							"key": "recordID",
 							"value": "1801",
 							"type": "text",
 							"disabled": true
-						},
-						{
-							"key": "title",
-							"value": "Load Testing MR - Title Changed",
-							"type": "text"
 						},
 						{
 							"key": "priority",
@@ -366,11 +371,6 @@
 							"value": "1",
 							"type": "text",
 							"disabled": true
-						},
-						{
-							"key": "CSRFToken",
-							"value": "ru",
-							"type": "text"
 						},
 						{
 							"key": "recordID",
@@ -2017,7 +2017,7 @@
 	],
 	"variable": [
 		{
-			"id": "55c5b815-197e-40c6-848a-ab02070bb818",
+			"id": "a8610d36-9551-4c7c-a916-3457fa6b085e",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
