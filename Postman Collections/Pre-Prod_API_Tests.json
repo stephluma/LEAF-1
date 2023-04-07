@@ -657,13 +657,19 @@
 						},
 						{
 							"key": "userID",
-							"value": "",
+							"value": "262 - OITBIRRichaM1",
 							"description": "Richard, Max L.",
 							"type": "text"
 						},
 						{
 							"key": "CSRFToken",
 							"value": "ru",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"description": "<td class=\"employeeSelectorName\" title=\"262 - OITBIRRichaM1\">Richard, Max&nbsp;L.<br><span class=\"employeeSelectorTitle\">Pentad Group</span></td>",
 							"type": "text"
 						}
 					]
@@ -2170,7 +2176,7 @@
 	],
 	"variable": [
 		{
-			"id": "30b7f796-38b3-4f9f-8cee-aa042c2fb5fe",
+			"id": "1895493b-9421-4015-894d-f13452e6b2e6",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
