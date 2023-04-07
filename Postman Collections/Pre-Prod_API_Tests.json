@@ -656,13 +656,13 @@
 							"type": "text"
 						},
 						{
-							"key": "CSRFToken",
-							"value": "ru",
+							"key": "userID",
+							"value": "",
 							"type": "text"
 						},
 						{
-							"key": "userID",
-							"value": "",
+							"key": "CSRFToken",
+							"value": "ru",
 							"type": "text"
 						}
 					]
@@ -2169,7 +2169,7 @@
 	],
 	"variable": [
 		{
-			"id": "ba99f3d7-4d94-4723-9a10-df9ff6070ba1",
+			"id": "f49abc03-70b4-42d0-a11d-b6d3708399d7",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
