@@ -686,12 +686,6 @@
 							"disabled": true
 						},
 						{
-							"key": "service",
-							"value": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
 							"key": "title",
 							"value": "",
 							"type": "text",
@@ -2162,7 +2156,7 @@
 	],
 	"variable": [
 		{
-			"id": "68caf138-869a-4720-80d6-8ec9cb820cd8",
+			"id": "e68681ee-33a9-41d6-9cb3-94f5646579e0",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
