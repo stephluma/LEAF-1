@@ -658,6 +658,7 @@
 						{
 							"key": "userID",
 							"value": "",
+							"description": "Richard, Max L.",
 							"type": "text"
 						},
 						{
@@ -2169,7 +2170,7 @@
 	],
 	"variable": [
 		{
-			"id": "1b061e33-f317-4d57-9f89-75004cb6e8b1",
+			"id": "30b7f796-38b3-4f9f-8cee-aa042c2fb5fe",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
