@@ -538,6 +538,166 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "PP-Set-Request-Initiator Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0fc167b9-bc0d-418f-9538-f3c0c537db90",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "9f316f48-be59-4ca2-8173-3188e6b5ba9c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {},
+				"followOriginalHttpMethod": true,
+				"insecureHTTPParser": true,
+				"disableUrlEncoding": false,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSRFToken",
+						"value": "{{CSRFToken}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "service",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "title",
+						"value": "Test Title",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "priority",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "numform_c79f6",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "numform_94f77",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "initiator",
+							"value": "OITBIRRichaM1",
+							"type": "text"
+						},
+						{
+							"key": "userID",
+							"value": "OITBIRRichaM1",
+							"description": "Richard, Max L. OR 262 - OITBIRRichaM1",
+							"type": "text"
+						},
+						{
+							"key": "CSRFToken",
+							"value": "ru",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"description": "<td class=\"employeeSelectorName\" title=\"262 - OITBIRRichaM1\">Richard, Max&nbsp;L.<br><span class=\"employeeSelectorTitle\">Pentad Group</span></td>",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/initiator",
+					"protocol": "http",
+					"host": [
+						"nologin",
+						"leaf-preprod",
+						"va",
+						"gov"
+					],
+					"path": [
+						"Academy",
+						"Demo1",
+						"api",
+						"form",
+						"1801",
+						"initiator"
+					],
+					"query": [
+						{
+							"key": "XSRF-TOKEN",
+							"value": "token",
+							"disabled": true
+						},
+						{
+							"key": "service",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "recordID",
+							"value": "1801",
+							"disabled": true
+						},
+						{
+							"key": "serviceID",
+							"value": "75",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
