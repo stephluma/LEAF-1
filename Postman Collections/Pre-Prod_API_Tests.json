@@ -842,7 +842,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/reminder/[digit]",
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/reminder/1",
 					"protocol": "http",
 					"host": [
 						"nologin",
@@ -857,7 +857,7 @@
 						"form",
 						"1801",
 						"reminder",
-						"[digit]"
+						"1"
 					],
 					"query": [
 						{
@@ -2532,7 +2532,7 @@
 	],
 	"variable": [
 		{
-			"id": "4b725de2-42d6-4b50-9f59-502224a4c7cd",
+			"id": "f9139965-b7a1-4962-87f1-e1d779bbc9b9",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
