@@ -514,6 +514,12 @@
 							"key": "serviceID",
 							"value": "28",
 							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -2178,7 +2184,7 @@
 	],
 	"variable": [
 		{
-			"id": "90f57a71-1983-4a44-93c1-3fcb8aa8e027",
+			"id": "1519f1b0-db97-42d5-bd68-55466fe32f22",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
