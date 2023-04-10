@@ -738,7 +738,7 @@
 			"response": []
 		},
 		{
-			"name": "PP-POST-TEMPLATE Copy 2",
+			"name": "PP-Send-Reminder-Email",
 			"event": [
 				{
 					"listen": "test",
@@ -2034,7 +2034,7 @@
 	],
 	"variable": [
 		{
-			"id": "e5f1cdc6-275f-48bc-883c-8a4f9e8456a2",
+			"id": "132fe4e7-a410-4426-adf3-beb73c2b3c22",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
