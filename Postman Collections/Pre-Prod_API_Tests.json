@@ -1521,7 +1521,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/new",
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form",
 					"protocol": "http",
 					"host": [
 						"nologin",
@@ -1533,8 +1533,7 @@
 						"Academy",
 						"Demo1",
 						"api",
-						"form",
-						"new"
+						"form"
 					],
 					"query": [
 						{
@@ -2535,7 +2534,7 @@
 	],
 	"variable": [
 		{
-			"id": "fe7acf60-b5f5-46ec-8255-0a09f51d5243",
+			"id": "2841a8ee-309c-45e4-93a5-43539477a3c4",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
