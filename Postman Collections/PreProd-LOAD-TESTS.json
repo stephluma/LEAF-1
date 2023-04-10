@@ -540,7 +540,7 @@
 			"response": []
 		},
 		{
-			"name": "PP-Set-Request-Initiator Copy",
+			"name": "PP-LOAD-Set-Request-Initiator",
 			"event": [
 				{
 					"listen": "test",
