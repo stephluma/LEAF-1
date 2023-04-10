@@ -657,10 +657,9 @@
 							"disabled": true
 						},
 						{
-							"key": "serviceID",
-							"value": "75",
-							"type": "text",
-							"disabled": true
+							"key": "initiator",
+							"value": "OITBIRRichaM1",
+							"type": "text"
 						},
 						{
 							"key": "userID",
@@ -2184,7 +2183,7 @@
 	],
 	"variable": [
 		{
-			"id": "1519f1b0-db97-42d5-bd68-55466fe32f22",
+			"id": "9f9d2311-f699-493e-869d-933b6ebc867d",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
