@@ -837,8 +837,7 @@
 						{
 							"key": "CSRFToken",
 							"value": "ru",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						}
 					]
 				},
@@ -2035,7 +2034,7 @@
 	],
 	"variable": [
 		{
-			"id": "92d33959-6535-4b2a-8f35-7ecbbc440919",
+			"id": "e5f1cdc6-275f-48bc-883c-8a4f9e8456a2",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
