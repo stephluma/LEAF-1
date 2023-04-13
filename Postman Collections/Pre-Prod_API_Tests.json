@@ -171,6 +171,17 @@
 							"var time = pm.response.responseTime;\r",
 							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
 							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const catIDs = response.map(catID => catID.categoryID);    //catIDs is array containing IDs  goes through each element of the array\r",
+							"    pm.variables.set('catIDs', catIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd catIDs is the var defined on line 3 - Only works in collection runner\r",
+							"    console.log(catIDs);  //\r",
+							"\r",
+							"    let currentCatID = catIDs.shift();\r",
+							"    console.log(currentCatID);\r",
+							"    pm.expect(currentCatID).to.eql(\"form_373c0\");  //  PP: form_373c0  Local:  form_b7c34\r",
+							"});\r",
 							""
 						],
 						"type": "text/javascript"
@@ -2705,7 +2716,7 @@
 	],
 	"variable": [
 		{
-			"id": "96391654-fde4-46bc-9e12-1834bc5dd747",
+			"id": "249c35ec-f0bf-46f8-bd6d-90025673bf29",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
