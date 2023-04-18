@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "PP Portal - Form Categories Load",
+			"name": "PP-LOAD-FormCategories",
 			"event": [
 				{
 					"listen": "test",
@@ -37,6 +37,657 @@
 						"api",
 						"form",
 						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PP-LOAD-All Forms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});  //\r",
+							"\r",
+							"var time = pm.response.responseTime;\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							" \r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const catIDs = response.map(catID => catID.categoryID);    //catIDs is array containing IDs  goes through each element of the array\r",
+							"    pm.variables.set('catIDs', catIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd catIDs is the var defined on line 3 - Only works in collection runner\r",
+							"    console.log(catIDs);  //\r",
+							"\r",
+							"    let currentCatID = catIDs.shift();\r",
+							"    console.log(currentCatID);\r",
+							"    pm.expect(currentCatID).to.eql(\"form_373c0\");  //  PP: form_373c0  Local:  form_b7c34\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories",
+					"protocol": "https",
+					"host": [
+						"nologin",
+						"leaf-preprod",
+						"va",
+						"gov"
+					],
+					"path": [
+						"Academy",
+						"Demo1",
+						"api",
+						"form",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PP-LOAD-CreateRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"followOriginalHttpMethod": true,
+				"insecureHTTPParser": true,
+				"disableUrlEncoding": false,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSRFToken",
+						"value": "{{CSRFToken}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "service",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "title",
+						"value": "Test Title",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "priority",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "numform_c79f6",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "service",
+							"value": "'Office of the Associate Director of Patient Services'",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Load Testing MR - Create New Request  Container",
+							"type": "text"
+						},
+						{
+							"key": "priority",
+							"value": "Normal",
+							"type": "text"
+						},
+						{
+							"key": "numform_94f77",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "CSRFToken",
+							"value": "ru",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/new",
+					"protocol": "http",
+					"host": [
+						"nologin",
+						"leaf-preprod",
+						"va",
+						"gov"
+					],
+					"path": [
+						"Academy",
+						"Demo1",
+						"api",
+						"form",
+						"new"
+					],
+					"query": [
+						{
+							"key": "XSRF-TOKEN",
+							"value": "token",
+							"disabled": true
+						},
+						{
+							"key": "service",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PP-LOAD-Set-Request-Title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"followOriginalHttpMethod": true,
+				"insecureHTTPParser": true,
+				"disableUrlEncoding": false,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSRFToken",
+						"value": "{{CSRFToken}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "service",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "title",
+						"value": "Test Title",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "priority",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "numform_c79f6",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "******* MR Load Testing - Title Changed DO NOT DELETE THIS REQUEST ******",
+							"type": "text"
+						},
+						{
+							"key": "CSRFToken",
+							"value": "ru",
+							"type": "text"
+						},
+						{
+							"key": "recordID",
+							"value": "1801",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "Normal",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "numform_94f77",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "recordID",
+							"value": "1801",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/title",
+					"protocol": "http",
+					"host": [
+						"nologin",
+						"leaf-preprod",
+						"va",
+						"gov"
+					],
+					"path": [
+						"Academy",
+						"Demo1",
+						"api",
+						"form",
+						"1801",
+						"title"
+					],
+					"query": [
+						{
+							"key": "XSRF-TOKEN",
+							"value": "token",
+							"disabled": true
+						},
+						{
+							"key": "service",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PP-LOAD-Set-Request-Service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"followOriginalHttpMethod": true,
+				"insecureHTTPParser": true,
+				"disableUrlEncoding": false,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSRFToken",
+						"value": "{{CSRFToken}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "service",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "title",
+						"value": "Test Title",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "priority",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "numform_c79f6",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "numform_94f77",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "CSRFToken",
+							"value": "ru",
+							"type": "text"
+						},
+						{
+							"key": "serviceID",
+							"value": "28",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/service",
+					"protocol": "http",
+					"host": [
+						"nologin",
+						"leaf-preprod",
+						"va",
+						"gov"
+					],
+					"path": [
+						"Academy",
+						"Demo1",
+						"api",
+						"form",
+						"1801",
+						"service"
+					],
+					"query": [
+						{
+							"key": "XSRF-TOKEN",
+							"value": "token",
+							"disabled": true
+						},
+						{
+							"key": "service",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "recordID",
+							"value": "1801",
+							"disabled": true
+						},
+						{
+							"key": "serviceID",
+							"value": "75",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PP-LOAD-Set-Request-Initiator",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"followOriginalHttpMethod": true,
+				"insecureHTTPParser": true,
+				"disableUrlEncoding": false,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSRFToken",
+						"value": "{{CSRFToken}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "service",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "title",
+						"value": "Test Title",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "priority",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "numform_c79f6",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "numform_94f77",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "initiator",
+							"value": "OITBIRRichaM1",
+							"type": "text"
+						},
+						{
+							"key": "userID",
+							"value": "OITBIRRichaM1",
+							"description": "Richard, Max L. OR 262 - OITBIRRichaM1",
+							"type": "text"
+						},
+						{
+							"key": "CSRFToken",
+							"value": "ru",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"description": "<td class=\"employeeSelectorName\" title=\"262 - OITBIRRichaM1\">Richard, Max&nbsp;L.<br><span class=\"employeeSelectorTitle\">Pentad Group</span></td>",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/1801/initiator",
+					"protocol": "http",
+					"host": [
+						"nologin",
+						"leaf-preprod",
+						"va",
+						"gov"
+					],
+					"path": [
+						"Academy",
+						"Demo1",
+						"api",
+						"form",
+						"1801",
+						"initiator"
+					],
+					"query": [
+						{
+							"key": "XSRF-TOKEN",
+							"value": "token",
+							"disabled": true
+						},
+						{
+							"key": "service",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "recordID",
+							"value": "1801",
+							"disabled": true
+						},
+						{
+							"key": "serviceID",
+							"value": "75",
+							"disabled": true
+						}
 					]
 				}
 			},

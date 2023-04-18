@@ -14,7 +14,14 @@ var path = require('path'), // ensures that the path is consistent, regardless o
      * @type {Object}
      */
     options = {
+<<<<<<< Updated upstream
         collection: path.join(__dirname, 'sample-collection.json')
+=======
+        collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
+		//collection: path.join(__dirname, 'sample-collection.json'),
+		reporters: 'cli',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
+		insecure: true
+>>>>>>> Stashed changes
     },
 
     /**
@@ -25,6 +32,10 @@ var path = require('path'), // ensures that the path is consistent, regardless o
     parallelCollectionRun = function (done) {
         newman.run(options, done);
     };
+	
+	// Runs the Postman sample collection the # of times in the ary, in parallel.
+	const runs = Array(4).fill(parallelCollectionRun);
+	async.parallel(runs,
 
 // Runs the Postman sample collection thrice, in parallel.
 async.parallel([
