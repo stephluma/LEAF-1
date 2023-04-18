@@ -6,33 +6,36 @@
 * @fileOverview A script to execute parallel collection runs using async.
 */
 
-var path = require('path'), // ensures that the path is consistent, regardless of where the script is run from
+var path = require('path'), 
     async = require('async'), // https://npmjs.org/package/async 
-    newman = require('newman'), // change to require('newman') if using outside this repository, otherwise replace newman = require('../'),
+    newman = require('newman'), 
 	
-    /**
+	/**
      * @type {Object}
      */
+<<<<<<< Updated upstream
     options = {
         collection: path.join(__dirname, 'sample-collection.json'),
 		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
 		//collection: path.join('var/newman/scripts', 'PreProd-LOAD-TESTS.json'),
 		reporters: 'cli'
+=======
+        options = {
+        collection: path.join(__dirname, 'sample-collection.json'),
+		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
+		//environment: require('filename.json'),
+		reporters: 'cli',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
+		insecure: true
+>>>>>>> Stashed changes
     },   
-    /**
+    
+	/**
      * A collection runner function that runs a collection for a pre-determined options object.
      * @param {Function} done - A callback function that marks the end of the current collection run, when called.
      */
     parallelCollectionRun = function (done) {
         newman.run(options, done);
     };
-
-	// DEPRECATED: Runs the Postman sample collection thrice, in parallel.
-	//async.parallel([
-	//	parallelCollectionRun,
-	//	parallelCollectionRun,
-	//	parallelCollectionRun
-	//],
 
 
 // Runs the Postman sample collection the # of times in the ary, in parallel.
