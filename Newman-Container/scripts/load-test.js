@@ -46,7 +46,7 @@ async.parallel(runs,
     * @param {Array} results - An array of collection run summary objects.
     */
     function (err, results) {
-        err && console.error(err);     
+        err && console.error(err);     //may need ,results param
         results.forEach(function (result) {
             var failures = result.run.failures;
             console.info(failures.length ? JSON.stringify(failures.failures, null, 2) :

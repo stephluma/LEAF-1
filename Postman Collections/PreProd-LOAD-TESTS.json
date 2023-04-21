@@ -2,72 +2,23 @@
 	"info": {
 		"_postman_id": "9143b730-2691-4136-b87f-953341db04f9",
 		"name": "PP_LOAD_TESTING",
-<<<<<<< Updated upstream
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "PP Portal - Form Categories Load",
-=======
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "14390849"
 	},
 	"item": [
 		{
 			"name": "PP-LOAD-FormCategories",
->>>>>>> Stashed changes
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-<<<<<<< Updated upstream
-						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
-						"exec": [
-							"\r",
-							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"var time = pm.response.responseTime;\r",
-							"console.log(\"Response time: \" + time + \" ms\");\r",
-							"\r",
-							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
-							"\r",
-							"\r",
-							"pm.test(\"Contains expected value\", function () {\r",
-							"    const response = pm.response.json();\r",
-							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
-							"    //console.log(jsonIDs);\r",
-							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
-							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner\r",
-							"    console.log(jsonIDs);\r",
-							"\r",
-							"    let currentJsonID = jsonIDs.shift();\r",
-							"    console.log(currentJsonID);\r",
-							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
-							"\r",
-							"});\r",
-							"\r",
-							"  "
-=======
 						"exec": [
 							""
->>>>>>> Stashed changes
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-<<<<<<< Updated upstream
-			"_postman_id": "cf6a959a-3678-449a-9572-0b7d072ff719",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "https://leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
-=======
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -739,7 +690,6 @@
 						}
 					]
 				}
->>>>>>> Stashed changes
 			},
 			"response": []
 		}

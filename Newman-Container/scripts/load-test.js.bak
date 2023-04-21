@@ -13,6 +13,7 @@ var path = require('path'),
 	/**
      * @type {Object}
      */
+
     options = {
         collection: path.join(__dirname, 'sample-collection.json'),
 		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
@@ -25,7 +26,6 @@ var path = require('path'),
 		//environment: require('filename.json'),
 		reporters: 'cli',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
 		insecure: true
-
     },   
     
 	/**
