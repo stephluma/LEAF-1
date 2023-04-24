@@ -2225,7 +2225,307 @@
 			"response": []
 		},
 		{
-			"name": "PP Portal - GET-TEMPLATE Copy 5",
+			"name": "PP-ReportBuilder-TEMPLATE Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "466d7331-087b-49f4-8939-909ae0e0ddb8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-ReportBuilder-TEMPLATE Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "5415f706-3f68-4d31-9ff9-5b334ca4f142",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-ReportBuilder-TEMPLATE Copy 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "4c508fda-e022-46fc-9d6e-932faf789c0f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-ReportBuilder-TEMPLATE Copy 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c98c60e4-098f-4e41-b710-cd25bee08448",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-ReportBuilder-TEMPLATE Copy 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "df546b6c-f20c-426f-adc9-f82d7d1efdfe",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-ReportBuilder-TEMPLATE Copy 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "586a0a6c-73f5-41f0-b9b4-e41e083a0e52",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-GET-TEMPLATE Copy 5",
 			"event": [
 				{
 					"listen": "test",
@@ -2739,7 +3039,7 @@
 	],
 	"variable": [
 		{
-			"id": "23d32bdc-743b-497e-9227-12ab3f56615b",
+			"id": "db5d0887-e1f5-424d-a941-5a9873792f33",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
