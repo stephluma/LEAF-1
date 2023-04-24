@@ -2175,7 +2175,7 @@
 			"response": []
 		},
 		{
-			"name": "PP-ReportBuilder-",
+			"name": "PP-ReportBuilder-TEMPLATE",
 			"event": [
 				{
 					"listen": "test",
@@ -2739,7 +2739,7 @@
 	],
 	"variable": [
 		{
-			"id": "38cd756f-e160-4494-8612-41b19ec787bf",
+			"id": "66a18c4e-f554-4514-9f1e-1e0ced89e47c",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
