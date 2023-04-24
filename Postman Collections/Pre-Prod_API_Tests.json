@@ -2525,7 +2525,7 @@
 			"response": []
 		},
 		{
-			"name": "PP-GET-TEMPLATE Copy 5",
+			"name": "PP-GET-TEMPLATE Copy",
 			"event": [
 				{
 					"listen": "test",
@@ -3039,7 +3039,7 @@
 	],
 	"variable": [
 		{
-			"id": "db5d0887-e1f5-424d-a941-5a9873792f33",
+			"id": "2d872928-eb1d-45a5-ba60-e0724e89504c",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
