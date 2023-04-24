@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="PP_LOAD_TESTING" tests="2" time="6.888">
-  <testsuite name="PP-LOAD-FormCategories" id="ddaf80e8-ba4d-4d1a-8da9-7cd349ab3654" timestamp="2023-04-04T19:23:03.410Z" tests="0" failures="0" errors="0" time="1.257"/>
-  <testsuite name="PP-LOAD-CreateRequest" id="3e0d5a23-b1f3-4813-b307-219b345ec4eb" timestamp="2023-04-04T19:23:03.410Z" tests="0" failures="0" errors="0" time="5.631"/>
-</testsuites>

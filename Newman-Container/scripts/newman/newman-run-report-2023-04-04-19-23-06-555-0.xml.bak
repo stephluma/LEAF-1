@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="PP_LOAD_TESTING" tests="2" time="1.762">
-  <testsuite name="PP-LOAD-FormCategories" id="b7ab92fe-cc83-41ac-8108-31f1779ab7c2" timestamp="2023-04-04T19:23:04.492Z" tests="0" failures="0" errors="0" time="1.291"/>
-  <testsuite name="PP-LOAD-CreateRequest" id="0d6bdb2c-4420-4b8a-9c49-9ed5925fc3af" timestamp="2023-04-04T19:23:04.492Z" tests="0" failures="0" errors="0" time="0.471"/>
-  <testsuite name="PP-LOAD-FormCategories" id="fbfac3f9-fdca-4619-b785-fa0a870bf286" timestamp="2023-04-04T19:23:04.205Z" tests="0" failures="0" errors="0" time="1.296"/>
-  <testsuite name="PP-LOAD-CreateRequest" id="68942828-606a-4874-a3aa-acc8605e5119" timestamp="2023-04-04T19:23:04.205Z" tests="0" failures="0" errors="0" time="0.507"/>
-</testsuites>
