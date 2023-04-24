@@ -2220,7 +2220,30 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+				"url": {
+					"raw": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/indicator/list?_=1682363040729",
+					"protocol": "https",
+					"host": [
+						"nologin",
+						"leaf-preprod",
+						"va",
+						"gov"
+					],
+					"path": [
+						"Academy",
+						"Demo1",
+						"api",
+						"form",
+						"indicator",
+						"list"
+					],
+					"query": [
+						{
+							"key": "_",
+							"value": "1682363040729"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -2564,6 +2587,256 @@
 				}
 			],
 			"id": "6df9f19d-4cee-4e3a-b420-9a247486824b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-GET-TEMPLATE Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "97214f25-df11-4f81-afe8-753beb2312e7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-GET-TEMPLATE Copy 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "3952b823-8e82-4ab1-a2a1-251f4400452b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-GET-TEMPLATE Copy 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7f78e3c0-479d-41f0-b0cc-2f9d3717cd95",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-GET-TEMPLATE Copy 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "536eddfc-bb5c-43da-b67d-c98ccd829b77",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "PP-GET-TEMPLATE Copy 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
+						"exec": [
+							"\r",
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains expected value\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    //console.log(jsonIDs);\r",
+							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"    console.log(jsonIDs);\r",
+							"\r",
+							"    let currentJsonID = jsonIDs.shift();\r",
+							"    console.log(currentJsonID);\r",
+							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"\r",
+							"});\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "5d8c5810-d127-426d-863f-33f9cb2a3b53",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -3039,7 +3312,7 @@
 	],
 	"variable": [
 		{
-			"id": "0624a6b6-9796-4971-81c2-a8ba5ef1f768",
+			"id": "0b5324fe-6a2f-4827-9f28-ef99c79f3bb8",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
