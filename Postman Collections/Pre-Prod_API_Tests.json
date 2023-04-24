@@ -2080,7 +2080,7 @@
 							"\r",
 							"    let currentJsonID = jsonIDs.shift();\r",
 							"    console.log(currentJsonID);\r",
-							"    pm.expect(currentJsonID).to.eql(\"4144\");  //    //form_854b7\r",
+							"    pm.expect(currentJsonID).to.eql(4144);  //    //form_854b7\r",
 							"\r",
 							"});\r",
 							"\r",
@@ -2739,7 +2739,7 @@
 	],
 	"variable": [
 		{
-			"id": "4be35e8e-4670-40cf-ad4b-cfb4ac2c87b0",
+			"id": "364a565b-036c-40c6-bab7-02387edf56f7",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
