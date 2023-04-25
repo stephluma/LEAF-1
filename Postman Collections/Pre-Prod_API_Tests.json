@@ -2485,26 +2485,8 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "title",
-							"value": "Load Testing MR",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "numform_b7c34",
-							"value": "1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "CSRFToken",
-							"value": "ru",
-							"type": "text"
-						}
-					]
+					"mode": "urlencoded",
+					"urlencoded": []
 				},
 				"url": {
 					"raw": "https://nologin.leaf-preprod.va.gov/rb_72874c19-c296-4b5f-86cd-a3ba91f5e8e2?type=js3&sn=v_4_srv_11_sn_F51182EDB90A08A76DFC59F45CA41200_perc_100000_ol_0_mul_1_app-3A8baeab7148f01767_1&svrid=11&flavor=post&vi=LMPAAAAHTRUUVHPMGNUHWPCRFOSUMMIM-0&modifiedSince=1682450112058&rf=https%3A%2F%2Fnologin.leaf-preprod.va.gov%2FAcademy%2FDemo1%2Fadmin%2F%3Fa%3Dform&bp=3&app=8baeab7148f01767&crc=4013536259&en=n9c99z0y&end=1",
@@ -3560,7 +3542,7 @@
 	],
 	"variable": [
 		{
-			"id": "bf2fa857-7166-4a89-9bf9-e935c5e2f62b",
+			"id": "9e1cc5f3-20b5-425b-a31f-e8cfc8f22a84",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
