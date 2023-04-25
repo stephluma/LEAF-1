@@ -1056,7 +1056,7 @@
 			"response": []
 		},
 		{
-			"name": "PP-POST-TEMPLATE Copy 3",
+			"name": "PP-POST-Testing",
 			"event": [
 				{
 					"listen": "test",
@@ -3467,7 +3467,7 @@
 	],
 	"variable": [
 		{
-			"id": "9af94132-6891-4e1e-a529-6bf01a10b88f",
+			"id": "40bbb072-30ed-46f2-94f4-7fb2bb758879",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
