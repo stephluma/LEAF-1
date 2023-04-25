@@ -2524,7 +2524,29 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/categories"
+				"url": {
+					"raw": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/query?q={%22terms%22:[{%22id%22:%22categoryID%22,%22operator%22:%22=%22,%22match%22:%22leaf_secure%22,%22gate%22:%22AND%22},{%22id%22:%22stepID%22,%22operator%22:%22=%22,%22match%22:%22resolved%22,%22gate%22:%22AND%22}],%22joins%22:[%22recordResolutionData%22],%22sort%22:{},%22limit%22:500,%22limitOffset%22:0}",
+					"protocol": "https",
+					"host": [
+						"nologin",
+						"leaf-preprod",
+						"va",
+						"gov"
+					],
+					"path": [
+						"Academy",
+						"Demo1",
+						"api",
+						"form",
+						"query"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{%22terms%22:[{%22id%22:%22categoryID%22,%22operator%22:%22=%22,%22match%22:%22leaf_secure%22,%22gate%22:%22AND%22},{%22id%22:%22stepID%22,%22operator%22:%22=%22,%22match%22:%22resolved%22,%22gate%22:%22AND%22}],%22joins%22:[%22recordResolutionData%22],%22sort%22:{},%22limit%22:500,%22limitOffset%22:0}"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -3493,7 +3515,7 @@
 	],
 	"variable": [
 		{
-			"id": "e22224a7-b41c-4c89-b8be-fa9b472d125f",
+			"id": "4d929810-0d5b-4c81-aeb4-5d924d88f2cd",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
