@@ -3,15 +3,15 @@ const path = require('path');
 const fs = require('fs');
 const { stringify } = require("csv-stringify");
 
+// what will be our final name for the file.
 const filename = "report.csv";
+// file stream to write our file
 const writableStream = fs.createWriteStream(filename);
-
 
 //joining path of directory 
 const directoryPath = path.join(__dirname, './newman');
 
-const finalContent = [];
-
+// set up our final row so we do not have to do this in a specific order like we do for each row.
 var finalRow =  {   
     file: 'Final',
     responseAverage: 0,
@@ -29,16 +29,20 @@ var finalRow =  {
     started: 0,
     completed: 0,
     testsTotal: 0,
-    testsFailed: 0
+    testsFailed: 0,
+    responseTime: 0,
+    responseSize: 0,
 };
 
+// setup our file output for headers and such
 const stringifier = stringify({ header: true, columns: Object.keys(finalRow) });
 
-
+// number of files, was not able to get a proper number for something off length, I may have been being dumb there. This is used for averages
 let totalCount = 0;
 
 //passsing directoryPath and callback function
 fs.readdir(directoryPath, function (err, files) {
+
     //handling error
     if (err) {
         return console.log('Unable to scan directory: ' + err);
@@ -46,16 +50,29 @@ fs.readdir(directoryPath, function (err, files) {
     else{
         //listing all files using forEach
         files.forEach(function (file) {
-            // Do whatever you want to do with the file
 
+            // we only want the newman report files just incase we get another json file.
             var regex = new RegExp('newman-run-report-(.*).json');
         
             if(regex.test(file) === true){
                 totalCount++;
                 
+                // output the file name so if we run into errors we have a starting point of what file we were working on.
                 console.log(path.join(directoryPath,file)); 
 
+                // grab our data, there is a bit here we should probably check, though if we have a filename here it should exist.
                 let data = JSON.parse(fs.readFileSync(path.join(directoryPath,file),'utf-8'));
+
+                // lets get our totals for response time and sizes, we may need to break this out with GETs and POSTs
+                let responseTime = 0;
+                let responseSize = 0;
+                
+                data.run.executions?.forEach(function(element){
+                    responseTime += parseInt(element.response.responseTime);
+                    responseSize += parseInt(element.response.responseSize);
+                });
+
+                // get our data together
                 let temp = {};
                 temp.file = file;
                 temp.responseAverage = data.run.timings.responseAverage;
@@ -74,14 +91,22 @@ fs.readdir(directoryPath, function (err, files) {
                 temp.completed = timeConverter(data.run.timings.completed);
                 temp.testsTotal = data.run.stats.tests.total;
                 temp.testsFailed = data.run.stats.tests.failed;
+                temp.responseTime = responseTime;
+                temp.responseSize = responseSize;
+
+                // write the temp object to file
                 stringifier.write(temp);
 
+                // process our running totals and gather mins and maxs
                 finalRow.responseAverage += parseFloat(data.run.timings.responseAverage);
                 finalRow.dnsAverage += parseFloat(data.run.timings.dnsAverage);
                 finalRow.firstByteAverage += parseFloat(data.run.timings.firstByteAverage);
                 finalRow.testsTotal += parseInt(data.run.stats.tests.total);
                 finalRow.testsFailed += parseInt(data.run.stats.tests.failed);
+                finalRow.responseTime += parseInt(responseTime);
+                finalRow.responseSize += parseInt(responseSize);
 
+                // mins and maxs I have a feeling the way I am doing the mins may have an issue.
                 if ( data.run.timings.responseMin < finalRow.responseMin || finalRow.responseMin == 0){
                     finalRow.responseMin = data.run.timings.responseMin
                 }
@@ -114,10 +139,7 @@ fs.readdir(directoryPath, function (err, files) {
                     finalRow.completed = data.run.timings.completed
                 }
 
-                //return console.log(data.run);
-
             }
-
 
         });
     }
@@ -129,21 +151,22 @@ fs.readdir(directoryPath, function (err, files) {
         finalRow.firstByteAverage  /= totalCount;
     }
     
+    // get the absolute start and finish
     finalRow.started = timeConverter(finalRow.started);
     finalRow.completed = timeConverter(finalRow.completed);
-    finalContent.push(finalRow);
-    //console.log(finalRow,totalCount);
-    console.log(finalContent);
-    //console.log(totalCount);
+    
+    // put the final data in the row
     stringifier.write(finalRow);
 
-    
+    // write to file
     stringifier.pipe(writableStream);
+
+    return console.log('Finished processing files');
 
 });
 
 /**
- * 
+ * This will take our timestampswe are getting out of newman into a human readable entry in our export.
  * @param {int} UNIX_timestamp 
  * @returns 
  */
