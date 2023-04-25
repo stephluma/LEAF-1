@@ -1092,7 +1092,7 @@
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "HTTPS://NOLOGIN.LEAF-PREPROD.VA.GOV/ACADEMY/DEMO1/API/SYSTEM/SET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "CSRFToken",
@@ -1128,12 +1128,6 @@
 				"body": {
 					"mode": "formdata",
 					"formdata": [
-						{
-							"key": "numform_b7c34",
-							"value": "1",
-							"type": "text",
-							"disabled": true
-						},
 						{
 							"key": "CSRFToken",
 							"value": "ru",
@@ -3542,7 +3536,7 @@
 	],
 	"variable": [
 		{
-			"id": "9e1cc5f3-20b5-425b-a31f-e8cfc8f22a84",
+			"id": "2307abce-fe68-406c-b4b2-5ac7507b9bf5",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
