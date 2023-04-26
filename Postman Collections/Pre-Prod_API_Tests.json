@@ -2479,8 +2479,8 @@
 					}
 				],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "name",
 							"value": "Max API Test - Create New Form",
@@ -2493,19 +2493,18 @@
 						},
 						{
 							"key": "parentID",
-							"value": "0",
-							"description": "form_f233b OR form_68691 ???",
+							"value": "",
 							"type": "text"
 						},
 						{
 							"key": "CSRFToken",
-							"value": "ru",
+							"value": "",
 							"type": "text"
 						},
 						{
 							"key": "",
 							"value": "",
-							"description": "form_5d9b3",
+							"description": "Returns form_f233b OR form_68691 ???",
 							"type": "text",
 							"disabled": true
 						}
@@ -3521,7 +3520,7 @@
 	],
 	"variable": [
 		{
-			"id": "f0258905-08be-4d8c-8c28-5524849901dd",
+			"id": "bac7ea66-131b-49f5-a8b8-9b2b9285e71c",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
