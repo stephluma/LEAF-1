@@ -2495,6 +2495,13 @@
 							"key": "CSRFToken",
 							"value": "ru",
 							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"description": "form_f233b OR form_68691 ???",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -3508,7 +3515,7 @@
 	],
 	"variable": [
 		{
-			"id": "b45ba9ed-1e0d-4ad3-b3e9-fc84a0ab042b",
+			"id": "608754fe-6d12-4112-a60a-729d5be40732",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
