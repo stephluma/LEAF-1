@@ -2490,6 +2490,11 @@
 							"key": "description",
 							"value": "Desc of API - Create Form",
 							"type": "text"
+						},
+						{
+							"key": "CSRFToken",
+							"value": "ru",
+							"type": "text"
 						}
 					]
 				},
@@ -3503,7 +3508,7 @@
 	],
 	"variable": [
 		{
-			"id": "744be749-ee5a-445c-938f-48a25eabd46f",
+			"id": "b45ba9ed-1e0d-4ad3-b3e9-fc84a0ab042b",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
