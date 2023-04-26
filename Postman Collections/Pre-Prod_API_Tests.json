@@ -2492,16 +2492,15 @@
 							"type": "text"
 						},
 						{
-							"key": "CSRFToken",
-							"value": "ru",
+							"key": "parentID",
+							"value": "",
+							"description": "form_f233b OR form_68691 ???",
 							"type": "text"
 						},
 						{
-							"key": "",
-							"value": "",
-							"description": "form_f233b OR form_68691 ???",
-							"type": "text",
-							"disabled": true
+							"key": "CSRFToken",
+							"value": "ru",
+							"type": "text"
 						},
 						{
 							"key": "",
@@ -3522,7 +3521,7 @@
 	],
 	"variable": [
 		{
-			"id": "40f79294-a9de-4b34-9ae1-e2bdfc330ee4",
+			"id": "b31522aa-83d9-4c46-9fda-0818c6dbb1da",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
