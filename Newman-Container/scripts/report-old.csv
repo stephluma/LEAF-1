@@ -1,0 +1,6 @@
+file,responseAverage,responseMin,responseMax,responseSd,dnsAverage,dnsMin,dnsMax,dnsSd,firstByteAverage,firstByteMin,firstByteMax,firstByteSd,started,completed,testsTotal,testsFailed,responseTime,responseSize
+newman-run-report-2023-04-26-18-58-02-001-0.json,486,233,1104,282.8332842,0,0,0,0,0,0,0,0,4/26/2023 18:57,4/26/2023 18:58,6,0,2916,43454
+newman-run-report-2023-04-26-18-58-02-340-0.json,522.1666667,298,1184,299.304982,0,0,0,0,0,0,0,0,4/26/2023 18:57,4/26/2023 18:58,6,0,3133,43454
+newman-run-report-2023-04-26-18-58-02-383-0.json,525.5,343,1140,276.9095821,0,0,0,0,0,0,0,0,4/26/2023 18:57,4/26/2023 18:58,6,0,3153,43454
+newman-run-report-2023-04-26-18-58-07-247-0.json,1326.5,262,5389,1835.333825,0,0,0,0,0,0,0,0,4/26/2023 18:57,4/26/2023 18:58,6,0,7959,43454
+Final,715.0416667,233,5389,0,0,0,0,0,0,0,0,0,4/26/2023 18:57,4/26/2023 18:58,24,0,17161,173816
