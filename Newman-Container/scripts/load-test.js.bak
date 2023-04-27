@@ -32,7 +32,7 @@ var path = require('path'),
 
 
 // Runs the Postman sample collection the # of times in the ary, in parallel.
-const runs = Array(3).fill(parallelCollectionRun);
+const runs = Array(2).fill(parallelCollectionRun);
 async.parallel(runs,
     /**
     * @param {?Error} err - An Error instance / null that determines whether or not the parallel collection run
