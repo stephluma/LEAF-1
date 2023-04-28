@@ -3,13 +3,21 @@ const path = require('path');
 const fs = require('fs');
 const { stringify } = require("csv-stringify");
 
+const currentRun = new Date();
+
 // what will be our final name for the file.
-const filename = "report.csv";
+const filename = `../reports/report-${currentRun.toISOString().replaceAll(':','-')}.csv`;
 // file stream to write our file
 const writableStream = fs.createWriteStream(filename);
 
 //joining path of directory 
 const directoryPath = path.join(__dirname, './newman');
+
+// create our backup directory at the start.
+const backupDirectoryPath = path.join(__dirname,`../reports/backup/${currentRun.toISOString().replaceAll(':','-')}`);
+if (!fs.existsSync(backupDirectoryPath)){
+    fs.mkdirSync(backupDirectoryPath, { recursive: true });
+}
 
 // set up our final row so we do not have to do this in a specific order like we do for each row.
 var finalRow =  {   
@@ -139,6 +147,17 @@ fs.readdir(directoryPath, function (err, files) {
                     finalRow.completed = data.run.timings.completed
                 }
 
+                console.log('moving files');
+
+                try{
+                    fs.copyFile(path.join(directoryPath,file), path.join(backupDirectoryPath,file), 0, function(){
+                        fs.rm(path.join(directoryPath,file),function(){});
+                    });
+                }catch(e){
+                    console.log(e);
+                }
+                
+
             }
 
         });
@@ -161,7 +180,7 @@ fs.readdir(directoryPath, function (err, files) {
     // write to file
     stringifier.pipe(writableStream);
 
-    return console.log('Finished processing files');
+    return console.log(`Finished processing ${totalCount} files`);
 
 });
 
@@ -181,4 +200,3 @@ function timeConverter(UNIX_timestamp){
     var sec = a.getSeconds();
     var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
     return time;
-}
