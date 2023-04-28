@@ -74,10 +74,14 @@ fs.readdir(directoryPath, function (err, files) {
                 // lets get our totals for response time and sizes, we may need to break this out with GETs and POSTs
                 let responseTime = 0;
                 let responseSize = 0;
-                
+
+                // sometimes responses do not exist.
+                //console.log(data.run.executions[0].request);
+                //console.log(Object.keys(data.run.executions[0]));
+
                 data.run.executions?.forEach(function(element){
-                    responseTime += parseInt(element.response.responseTime);
-                    responseSize += parseInt(element.response.responseSize);
+                    responseTime += parseInt(element.response?.responseTime);
+                    responseSize += parseInt(element.response?.responseSize);
                 });
 
                 // get our data together
