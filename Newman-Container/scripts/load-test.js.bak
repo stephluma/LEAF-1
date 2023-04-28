@@ -16,8 +16,8 @@ var path = require('path'),
 			// Path to Postman Collection Repo: https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849
     options = {
         //collection: path.join(__dirname, 'https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849'),
-		collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
-		//collection: path.join(__dirname, 'sample-collection.json'),
+		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
+		collection: path.join(__dirname, 'sample-collection.json'),
 		reporters: 'json',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
 		insecure: true
     },   
