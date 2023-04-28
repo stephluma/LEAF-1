@@ -13,9 +13,10 @@ var path = require('path'),
 	/**
      * @type {Object}
      */
-
+			// Path to Postman Collection Repo: https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849
     options = {
-        collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'), 
+        //collection: path.join(__dirname, 'https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849'),
+		collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
 		//collection: path.join(__dirname, 'sample-collection.json'),
 		reporters: 'json',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
 		insecure: true
@@ -31,7 +32,7 @@ var path = require('path'),
 
 
 // Runs the Postman sample collection the # of times in the ary, in parallel.
-const runs = Array(4).fill(parallelCollectionRun);
+const runs = Array(2).fill(parallelCollectionRun);
 async.parallel(runs,
     /**
     * @param {?Error} err - An Error instance / null that determines whether or not the parallel collection run

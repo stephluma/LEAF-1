@@ -13,26 +13,20 @@ var path = require('path'),
 	/**
      * @type {Object}
      */
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+			// Path to Postman Collection Repo: https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849
     options = {
-        collection: path.join(__dirname, 'sample-collection.json'),
-		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
-		//collection: path.join('var/newman/scripts', 'PreProd-LOAD-TESTS.json'),
-		reporters: 'cli'
-=======
-=======
->>>>>>> Stashed changes
-        options = {
-        collection: path.join(__dirname, 'sample-collection.json'),
-		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
-		//environment: require('filename.json'),
-		reporters: 'cli',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
-		insecure: true
 <<<<<<< Updated upstream
->>>>>>> Stashed changes
+        //collection: path.join(__dirname, 'https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849'),
+		collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
+		//collection: path.join(__dirname, 'sample-collection.json'),
+		reporters: 'json',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
 =======
+		//collection: path.join(__dirname, 'https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849'),
+        collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
+		//collection: path.join(__dirname, 'sample-collection.json'),
+		reporters: 'json',   //  cli  junit  json  progress  htmlextra   newman-reporter-csv
 >>>>>>> Stashed changes
+		insecure: true
     },   
     
 	/**
@@ -45,7 +39,7 @@ var path = require('path'),
 
 
 // Runs the Postman sample collection the # of times in the ary, in parallel.
-const runs = Array(4).fill(parallelCollectionRun);
+const runs = Array(2).fill(parallelCollectionRun);
 async.parallel(runs,
     /**
     * @param {?Error} err - An Error instance / null that determines whether or not the parallel collection run
@@ -53,7 +47,7 @@ async.parallel(runs,
     * @param {Array} results - An array of collection run summary objects.
     */
     function (err, results) {
-        err && console.error(err);     
+        err && console.error(err);     //may need ,results param
         results.forEach(function (result) {
             var failures = result.run.failures;
             console.info(failures.length ? JSON.stringify(failures.failures, null, 2) :
