@@ -2188,82 +2188,6 @@
 			"response": []
 		},
 		{
-			"name": "PP-ReportBuilder-Complex-Query-Report",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f1e2e9ba-99d9-445d-810d-1c288935aa2c",
-						"exec": [
-							"\r",
-							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"var time = pm.response.responseTime;        //\r",
-							"console.log(\"Response time: \" + time + \" ms\");\r",
-							"\r",
-							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
-							"\r",
-							"\r",
-							"pm.test(\"Contains expected value\", function () {\r",
-							"    const response = pm.response.json();\r",
-							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
-							"    //console.log(jsonIDs);\r",
-							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
-							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
-							"    console.log(jsonIDs);\r",
-							"\r",
-							"    let currentJsonID = jsonIDs.shift();\r",
-							"    console.log(currentJsonID);\r",
-							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
-							"\r",
-							"});\r",
-							"\r",
-							"  "
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"id": "466d7331-087b-49f4-8939-909ae0e0ddb8",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://nologin.leaf-preprod.va.gov/Academy/Demo1/api/form/query?q={%22terms%22:[{%22id%22:%22title%22,%22operator%22:%22LIKE%22,%22match%22:%22*test*%22,%22gate%22:%22AND%22},{%22id%22:%22title%22,%22operator%22:%22LIKE%22,%22match%22:%22*preprod*%22,%22gate%22:%22OR%22},{%22id%22:%22title%22,%22operator%22:%22LIKE%22,%22match%22:%22*as*%22,%22gate%22:%22OR%22},{%22id%22:%22userID%22,%22operator%22:%22=%22,%22match%22:%22VHAJITTurneA%22,%22gate%22:%22AND%22},{%22id%22:%22serviceID%22,%22operator%22:%22=%22,%22match%22:%22131%22,%22gate%22:%22AND%22},{%22id%22:%22stepID%22,%22operator%22:%22=%22,%22match%22:%22submitted%22,%22gate%22:%22AND%22},{%22id%22:%22deleted%22,%22operator%22:%22=%22,%22match%22:0,%22gate%22:%22AND%22}],%22joins%22:[%22service%22,%22categoryName%22,%22status%22,%22initiatorName%22,%22action_history%22,%22stepFulfillmentOnly%22],%22sort%22:{},%22getData%22:[%224368%22,%224369%22,%224371%22,%224370%22,%224372%22,%224373%22,%224374%22,%224375%22,%224376%22,%224377%22,%224378%22,%224379%22,%224380%22],%22limit%22:1000,%22limitOffset%22:0}&x-filterData=recordID,title,service,categoryNames,stepTitle,lastStatus,lastName,firstName,action_history.time,action_history.comment,action_history.description,action_history.actionTextPasttense,action_history.approverName,action_history.stepID,action_history.actionType,stepFulfillmentOnly",
-					"protocol": "https",
-					"host": [
-						"nologin",
-						"leaf-preprod",
-						"va",
-						"gov"
-					],
-					"path": [
-						"Academy",
-						"Demo1",
-						"api",
-						"form",
-						"query"
-					],
-					"query": [
-						{
-							"key": "q",
-							"value": "{%22terms%22:[{%22id%22:%22title%22,%22operator%22:%22LIKE%22,%22match%22:%22*test*%22,%22gate%22:%22AND%22},{%22id%22:%22title%22,%22operator%22:%22LIKE%22,%22match%22:%22*preprod*%22,%22gate%22:%22OR%22},{%22id%22:%22title%22,%22operator%22:%22LIKE%22,%22match%22:%22*as*%22,%22gate%22:%22OR%22},{%22id%22:%22userID%22,%22operator%22:%22=%22,%22match%22:%22VHAJITTurneA%22,%22gate%22:%22AND%22},{%22id%22:%22serviceID%22,%22operator%22:%22=%22,%22match%22:%22131%22,%22gate%22:%22AND%22},{%22id%22:%22stepID%22,%22operator%22:%22=%22,%22match%22:%22submitted%22,%22gate%22:%22AND%22},{%22id%22:%22deleted%22,%22operator%22:%22=%22,%22match%22:0,%22gate%22:%22AND%22}],%22joins%22:[%22service%22,%22categoryName%22,%22status%22,%22initiatorName%22,%22action_history%22,%22stepFulfillmentOnly%22],%22sort%22:{},%22getData%22:[%224368%22,%224369%22,%224371%22,%224370%22,%224372%22,%224373%22,%224374%22,%224375%22,%224376%22,%224377%22,%224378%22,%224379%22,%224380%22],%22limit%22:1000,%22limitOffset%22:0}"
-						},
-						{
-							"key": "x-filterData",
-							"value": "recordID,title,service,categoryNames,stepTitle,lastStatus,lastName,firstName,action_history.time,action_history.comment,action_history.description,action_history.actionTextPasttense,action_history.approverName,action_history.stepID,action_history.actionType,stepFulfillmentOnly"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "PP-Forms-Main-Page-Detail",
 			"event": [
 				{
@@ -2416,7 +2340,14 @@
 					"script": {
 						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
 						"exec": [
-							""
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));"
 						],
 						"type": "text/javascript"
 					}
@@ -3520,7 +3451,7 @@
 	],
 	"variable": [
 		{
-			"id": "d17addb5-c969-4427-ac68-88962950650a",
+			"id": "8030f344-9e1a-4968-9546-2fd55a202f01",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
