@@ -1762,7 +1762,14 @@
 					"script": {
 						"id": "1e6bef6d-a600-48a8-b2b8-09d084aed38b",
 						"exec": [
-							""
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));"
 						],
 						"type": "text/javascript"
 					}
@@ -3479,7 +3486,7 @@
 	],
 	"variable": [
 		{
-			"id": "38131813-e1e9-45be-be4c-a497232cb6a6",
+			"id": "377a9b41-1204-4c37-b026-c301359973ad",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
