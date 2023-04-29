@@ -3486,7 +3486,7 @@
 	],
 	"variable": [
 		{
-			"id": "377a9b41-1204-4c37-b026-c301359973ad",
+			"id": "163872cd-12ab-4614-9ee9-5df49436e310",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
