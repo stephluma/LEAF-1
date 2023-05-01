@@ -527,7 +527,7 @@
 					"formdata": [
 						{
 							"key": "title",
-							"value": "******* MR Load Testing - Title Changed DO NOT DELETE THIS REQUEST ******",
+							"value": "******* MR Load Testing - Title Changed THIS REQUEST CAN BE DELETED ******",
 							"type": "text"
 						},
 						{
@@ -3507,7 +3507,7 @@
 	],
 	"variable": [
 		{
-			"id": "04595fb2-7fa5-47ba-af1d-c5963e994326",
+			"id": "98f14bd1-12e3-4b3c-8ed2-4095d5c8b988",
 			"key": "CSFRToken",
 			"value": "Input CSFR Token",
 			"type": "string",
