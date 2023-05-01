@@ -19,10 +19,10 @@ var path = require('path'),
         collection: 'https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Newman-Container/scripts/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOESN33STXQHMW2X4C6ZCQAG3Q',
 		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
 		//collection: path.join(__dirname, 'sample-collection.json'),
-		//reporters: 'cli',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
 		reporters: ['cli','json'],   // From: https://github.com/ravivamsi/postmanframework/blob/master/parallel.js
+		//reporters: 'cli',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
 		insecure: true
-		//Other options as needed
+		// ***** Other options as needed *****  (add comma after 'insecure: true'
 		//iterationCount: 2,
 		//environment: require(fileName),
 		//timeout: 180000  // set time out,
