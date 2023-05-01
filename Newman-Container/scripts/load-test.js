@@ -13,15 +13,16 @@ var path = require('path'),
 	/**
      * @type {Object}
      */
-			// GitHub 'raw': https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Newman-Container/scripts/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOERWET273MBZFE6VCAZCMIK6Q
+			// GitHub 'raw': https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Newman-Container/scripts/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOE6A4WEXSSUIC4N3UGZCP2VQQ
 			// Postman Collection Repo: https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849
     options = {
-        //collection: 'https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849'),
-		collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
+        collection: 'https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Newman-Container/scripts/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOE6A4WEXSSUIC4N3UGZCP2VQQ',
+		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
 		//collection: path.join(__dirname, 'sample-collection.json'),
-		reporters: 'json',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
+		//reporters: 'cli',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
 		reporters: ['cli','json'],   // From: https://github.com/ravivamsi/postmanframework/blob/master/parallel.js
 		insecure: true
+		//Other options as needed
 		//iterationCount: 2,
 		//environment: require(fileName),
 		//timeout: 180000  // set time out,
@@ -48,6 +49,7 @@ async.parallel(runs,
     function (err, results) {
         err && console.error(err);     //may need ,results param
         results.forEach(function (result) {
+			//console.info(result);
             var failures = result.run.failures;
             console.info(failures.length ? JSON.stringify(failures.failures, null, 2) :
                 `${result.collection.name} ran successfully.`);

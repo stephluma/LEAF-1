@@ -286,7 +286,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));"
 						],
 						"type": "text/javascript"
 					}
@@ -424,7 +431,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));"
 						],
 						"type": "text/javascript"
 					}
@@ -488,7 +502,7 @@
 					"formdata": [
 						{
 							"key": "title",
-							"value": "******* MR Load Testing - Title Changed DO NOT DELETE THIS REQUEST ******",
+							"value": "******* MR Load Testing - Title Changed THIS REQUEST CAN BE DELETED ******",
 							"type": "text"
 						},
 						{
@@ -572,7 +586,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));"
 						],
 						"type": "text/javascript"
 					}
@@ -712,7 +733,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Form-getAPI-URL.  Status = 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var time = pm.response.responseTime;        //\r",
+							"console.log(\"Response time: \" + time + \" ms\");\r",
+							"\r",
+							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));"
 						],
 						"type": "text/javascript"
 					}
@@ -946,7 +974,7 @@
 							"\r",
 							"pm.test(\"Contains expected value\", function () {\r",
 							"    const response = pm.response.json();\r",
-							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.stepTitle);      //jsonIDs is the array containing IDs\r",
 							"    //console.log(jsonIDs);\r",
 							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
 							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
@@ -954,7 +982,7 @@
 							"\r",
 							"    let currentJsonID = jsonIDs.shift();\r",
 							"    console.log(currentJsonID);\r",
-							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"    pm.expect(currentJsonID).to.eql(\"MAX\");  //    \r",
 							"\r",
 							"});\r",
 							"\r",
@@ -1007,7 +1035,7 @@
 							"\r",
 							"pm.test(\"Contains expected value\", function () {\r",
 							"    const response = pm.response.json();\r",
-							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"    const jsonIDs = response.map(jsonID => jsonID.dependencyID);      //jsonIDs is the array containing IDs\r",
 							"    //console.log(jsonIDs);\r",
 							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
 							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
@@ -1015,7 +1043,7 @@
 							"\r",
 							"    let currentJsonID = jsonIDs.shift();\r",
 							"    console.log(currentJsonID);\r",
-							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"    pm.expect(currentJsonID).to.eql(87);  //    //form_854b7\r",
 							"\r",
 							"});\r",
 							"\r",
@@ -1066,19 +1094,19 @@
 							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
 							"\r",
 							"\r",
-							"pm.test(\"Contains expected value\", function () {\r",
-							"    const response = pm.response.json();\r",
-							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
-							"    //console.log(jsonIDs);\r",
-							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"//pm.test(\"Contains expected value\", function () {\r",
+							"//    const response = pm.response.json();\r",
+							"//    const jsonIDs = response.map(jsonID => jsonID.recordID);      //jsonIDs is the array containing IDs\r",
+							"//    //console.log(jsonIDs);\r",
+							"//    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
 							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
-							"    console.log(jsonIDs);\r",
-							"\r",
-							"    let currentJsonID = jsonIDs.shift();\r",
-							"    console.log(currentJsonID);\r",
-							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
-							"\r",
-							"});\r",
+							"//    console.log(jsonIDs);\r",
+							"//\r",
+							"//    let currentJsonID = jsonIDs.shift();\r",
+							"//    console.log(currentJsonID);\r",
+							"//    pm.expect(currentJsonID).to.eql(184);  //    //form_854b7\r",
+							"//\r",
+							"//});\r",
 							"\r",
 							"  "
 						],
@@ -1137,19 +1165,19 @@
 							"pm.test('Response time: ' + time + ' ms', () => pm.response.to.have.status(200));\r",
 							"\r",
 							"\r",
-							"pm.test(\"Contains expected value\", function () {\r",
-							"    const response = pm.response.json();\r",
-							"    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
-							"    //console.log(jsonIDs);\r",
-							"    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
-							"                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
-							"    console.log(jsonIDs);\r",
-							"\r",
-							"    let currentJsonID = jsonIDs.shift();\r",
-							"    console.log(currentJsonID);\r",
-							"    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
-							"\r",
-							"});\r",
+							"//pm.test(\"Contains expected value\", function () {\r",
+							"//    const response = pm.response.json();\r",
+							"//    const jsonIDs = response.map(jsonID => jsonID.categoryID);      //jsonIDs is the array containing IDs\r",
+							"//    //console.log(jsonIDs);\r",
+							"//    pm.variables.set('jsonIDs', jsonIDs); //Creates a variable or updates an existing one.\r",
+							"//                                        //2nd jsonIDs is the var defined on line 3 - Only works in collection runner or nologin.pre-prod...\r",
+							"//    console.log(jsonIDs);\r",
+							"//\r",
+							"//    let currentJsonID = jsonIDs.shift();\r",
+							"//    console.log(currentJsonID);\r",
+							"//    pm.expect(currentJsonID).to.eql(\"form_c79f6\");  //    //form_854b7\r",
+							"//\r",
+							"//});\r",
 							"\r",
 							"  "
 						],
