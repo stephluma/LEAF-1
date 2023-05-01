@@ -13,10 +13,10 @@ var path = require('path'),
 	/**
      * @type {Object}
      */
-			// GitHub 'raw': https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Newman-Container/scripts/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOE6A4WEXSSUIC4N3UGZCP2VQQ
+			// GitHub 'raw': https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Newman-Container/scripts/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOESN33STXQHMW2X4C6ZCQAG3Q
 			// Postman Collection Repo: https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849
     options = {
-        collection: 'https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Newman-Container/scripts/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOE6A4WEXSSUIC4N3UGZCP2VQQ',
+        collection: 'https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Newman-Container/scripts/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOESN33STXQHMW2X4C6ZCQAG3Q',
 		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
 		//collection: path.join(__dirname, 'sample-collection.json'),
 		//reporters: 'cli',			//  cli  junit  json  progress  htmlextra   newman-reporter-csv
