@@ -1,0 +1,221 @@
+
+Option Explicit
+
+
+
+Sub FormatLoadTestReport()
+'
+' FormatLoadTestReport - Max Richard
+'
+' Keyboard Shortcut: Ctrl+l
+'
+    Range("B1").Select
+    ActiveCell.FormulaR1C1 = "responseAverage (s)"
+    
+    Range("C1").Select
+    ActiveCell.FormulaR1C1 = "responseMin (s)"
+    
+    Range("D1").Select
+    ActiveCell.FormulaR1C1 = "responseMax (s)"
+    
+    Range("E1").Select
+    ActiveCell.FormulaR1C1 = "responseSd (s)"
+    
+    Range("R1").Select
+    ActiveCell.FormulaR1C1 = "responseTime (s)"
+    
+    Range("S1").Select
+    ActiveCell.FormulaR1C1 = "responseSize (s)"
+    
+    Range("U2").Select
+    ActiveCell.FormulaR1C1 = "=RC[-19]/1000"
+    
+    Range("U2").Select
+    Selection.AutoFill Destination:=Range("U2:U12"), Type:=xlFillDefault
+    
+    Range("U2:U12").Select
+    Selection.Copy
+    
+    Range("B2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    Range("U2").Select
+    Application.CutCopyMode = False
+    ActiveCell.FormulaR1C1 = "=RC[-18]/1000"
+    
+    Range("U2").Select
+    Selection.AutoFill Destination:=Range("U2:U12"), Type:=xlFillDefault
+    Range("U2:U12").Select
+    Selection.Copy
+    
+    Range("C2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    Range("U2").Select
+    Application.CutCopyMode = False
+    ActiveCell.FormulaR1C1 = "=RC[-17]/1000"
+    
+    Range("U2").Select
+    Selection.AutoFill Destination:=Range("U2:U12"), Type:=xlFillDefault
+    
+    Range("U2:U12").Select
+    Selection.Copy
+    
+    Range("D2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    Range("U2").Select
+    Application.CutCopyMode = False
+    ActiveCell.FormulaR1C1 = "=RC[-16]/1000"
+    
+    Range("U2").Select
+    Selection.AutoFill Destination:=Range("U2:U12"), Type:=xlFillDefault
+    
+    Range("U2:U12").Select
+    Selection.Copy
+    
+    Range("E2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    Range("E12").Select
+    Application.CutCopyMode = False
+    Selection.ClearContents
+    
+    Range("U2").Select
+    ActiveCell.FormulaR1C1 = "=RC[-3]/1000"
+    
+    Range("U2").Select
+    Selection.AutoFill Destination:=Range("U2:U12"), Type:=xlFillDefault
+    
+    Range("U2:U12").Select
+    Selection.Copy
+    
+    Range("R2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    Columns("B:E").Select
+    Application.CutCopyMode = False
+    Selection.NumberFormat = "0.00"
+    
+    Columns("R:S").Select
+    Selection.NumberFormat = "0.00"
+    
+    Columns("S:S").Select
+    Selection.NumberFormat = "#,##0"
+    
+    Columns("U:U").Select
+    Selection.Delete Shift:=xlToLeft
+    
+    Columns("B:B").Select
+    Selection.Cut
+    
+    Columns("S:S").Select
+    Selection.Insert Shift:=xlToRight
+    Cells.Select
+    Cells.EntireColumn.AutoFit
+    
+
+    
+'    Columns("E:K").Select
+'    Selection.EntireColumn.Hidden = True
+    
+    Range("B2").Select
+    ActiveWindow.FreezePanes = True
+    
+    Range("A1:S1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight2
+        .TintAndShade = 0.399975585192419
+        .PatternTintAndShade = 0
+    End With
+ 
+ Range("A12:S12").Select
+    Selection.Font.Bold = True
+    Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+    Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+    Selection.Borders(xlEdgeLeft).LineStyle = xlNone
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .Weight = xlMedium
+    End With
+    
+    Selection.Borders(xlEdgeBottom).LineStyle = xlNone
+    Selection.Borders(xlEdgeRight).LineStyle = xlNone
+    Selection.Borders(xlInsideVertical).LineStyle = xlNone
+    Selection.Borders(xlInsideHorizontal).LineStyle = xlNone
+    
+    Range("N1").Select
+    ActiveCell.FormulaR1C1 = "elapsedTime (ms)"
+    
+    Columns("L:L").Select
+    Selection.EntireColumn.Hidden = True
+    
+        Columns("N:N").Select
+    Selection.NumberFormat = "0.0000"
+    
+    Range("N2:N12").Select
+    Selection.ClearContents
+    
+    Range("U2").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]/100"
+    
+    Range("U2").Select
+    Selection.AutoFill Destination:=Range("U2:U11"), Type:=xlFillDefault
+    
+    Range("U2:U11").Select
+    Selection.Copy
+    
+    Range("N2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    Range("N12").Select
+    Application.CutCopyMode = False
+    Application.CutCopyMode = False
+    ActiveCell.FormulaR1C1 = "=SUM(R[-10]C:R[-1]C)"
+    
+    Range("Q12").Select
+    Application.CutCopyMode = False
+    ActiveCell.FormulaR1C1 = "=SUM(R[-10]C:R[-1]C)"
+    
+    Range("R12").Select
+    Application.CutCopyMode = False
+    ActiveCell.FormulaR1C1 = "=AVERAGE(R[-10]C:R[-1]C)"
+    
+    Columns("U:U").Select
+    Selection.Delete Shift:=xlToLeft
+    
+    Range("A1:S1").Select
+    Selection.Font.Bold = True
+    
+    Cells.Select
+    Cells.EntireColumn.AutoFit
+    
+    Columns("E:L").Select
+    Selection.EntireColumn.Hidden = True
+    
+    
+
+    
+    
+    
+'    ChDir _
+'        "C:\Users\OITBIRRichaM1\Documents\GitHub\LEAF-API-Testing\Newman-Container\reports"
+'    ActiveWorkbook.SaveAs Filename:= _
+'        "C:\Users\OITBIRRichaM1\Documents\GitHub\LEAF-API-Testing\Newman-Container\reports\Load-Test-Report.xlsx" _
+'        , FileFormat:=xlOpenXMLWorkbook, CreateBackup:=False
+End Sub
+
+
+=========================================================================================
+
+

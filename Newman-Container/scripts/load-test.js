@@ -13,10 +13,10 @@ var path = require('path'),
 	/**
      * @type {Object}
      */		//				 
-			// GitHub 'raw': https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Postman%20Collections/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOFENEG2KWOT657BKYMZCR2KNQ
+			// GitHub 'raw': https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Postman%20Collections/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOFDEOSGX4ZWQOEECF6ZCUCTGA
 			// Postman Collection Repo: https://va-leaf-api.postman.co/workspace/LEAF-API-Testing~3173db71-59fd-4765-a790-cfbd653c3705/collection/14390849-9143b730-2691-4136-b87f-953341db04f9?action=share&creator=14390849
-    options = {
-        collection: 'https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Postman%20Collections/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACBNLOOFENEG2KWOT657BKYMZCR2KNQ',
+    options = {		 
+        collection: 'https://raw.githubusercontent.com/department-of-veterans-affairs/LEAF-API-Testing/newman/Postman%20Collections/PreProd-LOAD-TESTS.json?token=GHSAT0AAAAAACCHQRCMEHF2CSX33ZQC4QROZCZGL5Q',
 		//collection: path.join(__dirname, 'PreProd-LOAD-TESTS.json'),
 		//collection: path.join(__dirname, 'sample-collection.json'),
 		reporters: ['cli','json'],   // From: https://github.com/ravivamsi/postmanframework/blob/master/parallel.js
@@ -39,7 +39,7 @@ var path = require('path'),
 
 
 // Runs the Postman sample collection the # of times in the ary, in parallel.
-const runs = Array(200).fill(parallelCollectionRun);
+const runs = Array(10).fill(parallelCollectionRun);
 async.parallel(runs,
     /**
     * @param {?Error} err - An Error instance / null that determines whether or not the parallel collection run
