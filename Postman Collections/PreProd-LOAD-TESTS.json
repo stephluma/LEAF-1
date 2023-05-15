@@ -351,8 +351,7 @@
 						{
 							"key": "CSRFToken",
 							"value": "ru",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						}
 					]
 				},
