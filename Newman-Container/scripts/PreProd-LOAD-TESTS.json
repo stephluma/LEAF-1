@@ -362,7 +362,7 @@
 						},
 						{
 							"key": "title",
-							"value": "Load Testing MR - Create New Request  Container",
+							"value": "Load Testing MR - Create New Request  Container - PM",
 							"type": "text"
 						},
 						{
@@ -502,7 +502,7 @@
 					"formdata": [
 						{
 							"key": "title",
-							"value": "******* MR Load Testing - Title Changed THIS REQUEST CAN BE DELETED ******",
+							"value": "******* MR Load Testing TEMPLATE - Title Changed DO NOT DELETE THIS REQUEST  ******",
 							"type": "text"
 						},
 						{
