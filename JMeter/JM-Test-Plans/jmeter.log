@@ -1,0 +1,63 @@
+2023-05-22 18:44:12,100 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2023-05-22 18:44:12,127 INFO o.a.j.JMeter: Loading user properties from: /opt/apache-jmeter-5.5/bin/user.properties
+2023-05-22 18:44:12,134 INFO o.a.j.JMeter: Loading system properties from: /opt/apache-jmeter-5.5/bin/system.properties
+2023-05-22 18:44:12,150 INFO o.a.j.JMeter: Copyright (c) 1998-2022 The Apache Software Foundation
+2023-05-22 18:44:12,153 INFO o.a.j.JMeter: Version 5.5
+2023-05-22 18:44:12,156 INFO o.a.j.JMeter: java.version=1.8.0_275
+2023-05-22 18:44:12,158 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2023-05-22 18:44:12,161 INFO o.a.j.JMeter: os.name=Linux
+2023-05-22 18:44:12,164 INFO o.a.j.JMeter: os.arch=amd64
+2023-05-22 18:44:12,167 INFO o.a.j.JMeter: os.version=5.15.90.1-microsoft-standard-WSL2
+2023-05-22 18:44:12,169 INFO o.a.j.JMeter: file.encoding=UTF-8
+2023-05-22 18:44:12,172 INFO o.a.j.JMeter: java.awt.headless=true
+2023-05-22 18:44:12,175 INFO o.a.j.JMeter: Max memory     =1073741824
+2023-05-22 18:44:12,178 INFO o.a.j.JMeter: Available Processors =8
+2023-05-22 18:44:12,192 INFO o.a.j.JMeter: Default Locale=English (EN)
+2023-05-22 18:44:12,195 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2023-05-22 18:44:12,198 INFO o.a.j.JMeter: JMeterHome=/opt/apache-jmeter-5.5
+2023-05-22 18:44:12,201 INFO o.a.j.JMeter: user.dir  =/var/jmeter/JM-Test-Plans
+2023-05-22 18:44:12,210 INFO o.a.j.JMeter: PWD       =/var/jmeter/JM-Test-Plans
+2023-05-22 18:44:12,213 INFO o.a.j.JMeter: IP: 172.18.0.2 Name: 3840dc7ce2c2 FullName: 3840dc7ce2c2
+2023-05-22 18:44:12,276 INFO o.a.j.s.FileServer: Default base='/var/jmeter/JM-Test-Plans'
+2023-05-22 18:44:12,281 INFO o.a.j.s.FileServer: Set new base='/var/jmeter/JM-Test-Plans'
+2023-05-22 18:44:12,515 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2023-05-22 18:44:12,550 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2023-05-22 18:44:12,561 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2023-05-22 18:44:12,574 INFO o.a.j.s.SaveService: Loading file: /var/jmeter/JM-Test-Plans/PreProd-Load-Testing-Project.jmx
+2023-05-22 18:44:12,684 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
+2023-05-22 18:44:12,715 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-05-22 18:44:12,717 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-05-22 18:44:12,721 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-05-22 18:44:12,723 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-05-22 18:44:12,725 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2023-05-22 18:44:12,727 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2023-05-22 18:44:13,370 INFO o.a.j.JMeter: Creating summariser <summary>
+2023-05-22 18:44:13,390 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2023-05-22 18:44:13,394 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-05-22 18:44:13,397 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-05-22 18:44:13,408 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2023-05-22 18:44:13,411 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2023-05-22 18:44:14,046 INFO o.a.j.JMeter: Running test (1684773854045)
+2023-05-22 18:44:14,126 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Http URL/API Test
+2023-05-22 18:44:14,129 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Http URL/API Test.
+2023-05-22 18:44:14,132 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2023-05-22 18:44:14,135 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2023-05-22 18:44:14,151 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2023-05-22 18:44:14,153 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2023-05-22 18:44:14,156 INFO o.a.j.t.JMeterThread: Thread started: Http URL/API Test 1-1
+2023-05-22 18:44:14,241 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = 3840dc7ce2c2
+2023-05-22 18:44:14,263 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2023-05-22 18:44:14,271 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2023-05-22 18:44:14,273 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2023-05-22 18:44:14,276 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2023-05-22 18:44:14,281 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2023-05-22 18:44:14,784 INFO o.a.j.p.h.s.h.LazyLayeredConnectionSocketFactory: Setting up HTTPS TrustAll Socket Factory
+2023-05-22 18:44:14,803 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
+2023-05-22 18:44:14,806 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
+2023-05-22 18:44:14,958 INFO o.a.j.u.SSLManager: JmeterKeyStore Location:  type JKS
+2023-05-22 18:44:14,970 INFO o.a.j.u.SSLManager: KeyStore created OK
+2023-05-22 18:44:14,973 WARN o.a.j.u.SSLManager: Keystore file not found, loading empty keystore
+2023-05-22 18:44:18,727 INFO o.a.j.t.JMeterThread: Thread is done: Http URL/API Test 1-1
+2023-05-22 18:44:18,730 INFO o.a.j.t.JMeterThread: Thread finished: Http URL/API Test 1-1
+2023-05-22 18:44:18,737 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2023-05-22 18:44:18,750 INFO o.a.j.r.Summariser: summary =     11 in 00:00:05 =    2.3/s Avg:   387 Min:   130 Max:  1676 Err:     0 (0.00%)
