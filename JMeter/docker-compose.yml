@@ -11,3 +11,5 @@ services:
       - ./JM-LoadTest-Collections:/var/jmeter/JM-LoadTest-Collections
       - ./JM-LoadTest-Reports:/var/jmeter/JM-LoadTest-Reports
       - ./JM-Test-Plans:/var/jmeter/JM-Test-Plans
+      - ./JM-LoadTest-Reports-Storage:/var/jmeter/JM-LoadTest-Reports-Storage
+      - ./JM-LoadTest-Logfiles:/var/jmeter/JM-LoadTest-Logfiles

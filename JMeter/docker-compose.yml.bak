@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  jmeters:
+    image: buddy/jmeter-cli
+    container_name: jmeter-max
+    tty: true
+    #build:
+    #  dockerfile: ./docker/newman.dockerfile
+    volumes:
+      - ./JM-LoadTest-Collections:/var/jmeter/JM-LoadTest-Collections
+      - ./JM-LoadTest-Reports:/var/jmeter/JM-LoadTest-Reports
+      - ./JM-Test-Plans:/var/jmeter/JM-Test-Plans
