@@ -3,7 +3,7 @@
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="PreProd-Load-Testing" enabled="true">
       <boolProp name="TestPlan.functional_mode">false</boolProp>
-      <stringProp name="TestPlan.comments">Updated 5/25</stringProp>
+      <stringProp name="TestPlan.comments">Test: Authentication 6/2</stringProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
@@ -25,24 +25,9 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PP-LOAD-Form-Categories" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Nologin-LOAD-Form-Categories" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="UserName" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">tester</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">UserName</stringProp>
-              </elementProp>
-              <elementProp name="PWD" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">tester</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">PWD</stringProp>
-              </elementProp>
-            </collectionProp>
+            <collectionProp name="Arguments.arguments"/>
           </elementProp>
           <stringProp name="HTTPSampler.domain">nologin.leaf-preprod.va.gov</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
@@ -83,22 +68,7 @@
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PP-LOAD-Form-Categories" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="UserName" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">tester</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">UserName</stringProp>
-              </elementProp>
-              <elementProp name="PWD" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">tester</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">PWD</stringProp>
-              </elementProp>
-            </collectionProp>
+            <collectionProp name="Arguments.arguments"/>
           </elementProp>
           <stringProp name="HTTPSampler.domain">leaf-preprod.va.gov</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
@@ -635,10 +605,16 @@
           <stringProp name="TestPlan.comments">https://blazedemo.com/login</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
         <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
           <collectionProp name="AuthManager.auth_list">
             <elementProp name="" elementType="Authorization">
-              <stringProp name="Authorization.url">https://leaf-preprod.va.gov</stringProp>
+              <stringProp name="Authorization.url">https://leaf-preprod.va.gov/Academy/Demo1/</stringProp>
               <stringProp name="Authorization.username">tester</stringProp>
               <stringProp name="Authorization.password">tester</stringProp>
               <stringProp name="Authorization.domain"></stringProp>
@@ -705,6 +681,14 @@
         <stringProp name="HTTPSampler.connect_timeout"></stringProp>
         <stringProp name="HTTPSampler.response_timeout"></stringProp>
       </ConfigTestElement>
+      <hashTree/>
+      <KeystoreConfig guiclass="TestBeanGUI" testclass="KeystoreConfig" testname="Keystore Configuration" enabled="true">
+        <stringProp name="TestPlan.comments">Storage for Certificates</stringProp>
+        <stringProp name="clientCertAliasVarName">certAlias</stringProp>
+        <stringProp name="endIndex">-1</stringProp>
+        <stringProp name="preload">True</stringProp>
+        <stringProp name="startIndex">0</stringProp>
+      </KeystoreConfig>
       <hashTree/>
     </hashTree>
   </hashTree>
