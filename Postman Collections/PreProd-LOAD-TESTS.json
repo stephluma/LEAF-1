@@ -350,7 +350,7 @@
 						},
 						{
 							"key": "CSRFToken",
-							"value": "ru",
+							"value": "{{CSRFToken}}",
 							"type": "text"
 						}
 					]
