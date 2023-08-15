@@ -1,6 +1,0 @@
-
-node_modules
-package-lock.json  
-Newman-Container/reports/*.csv
-Newman-Container/scripts/newman/newman-run-report-*.json
-Newman-Container/reports/backup/
