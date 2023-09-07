@@ -147,7 +147,7 @@ public class homePageTest extends setupFramework {
     		char c = name.charAt(i);
     		String s = new StringBuilder().append(c).toString();
     		ele.sendKeys(s);
-    		waitMethods.waiter(waitMethods.w20);
+    		waitMethods.waiter(waitMethods.w10);
     	}
     	
     	waitMethods.waiter(waitMethods.w500);
@@ -172,7 +172,7 @@ public class homePageTest extends setupFramework {
     		String s = new StringBuilder().append(c).toString();
     		//ele.sendKeys(Keys.chord(name));
     		ele.sendKeys(s);
-    		waitMethods.waiter(waitMethods.w20);
+    		waitMethods.waiter(waitMethods.w10);
     	}
 		
 		highlightElement.highLightElement(driver, ele);

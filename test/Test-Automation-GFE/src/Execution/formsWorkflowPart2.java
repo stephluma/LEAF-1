@@ -97,8 +97,9 @@ public class formsWorkflowPart2 extends setupFramework {
 			waitMethods.waiter(waitMethods.w1k);  //      
 			String url = driver.getCurrentUrl();
 			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) { 
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div[1]/div[1]"));
-		    	highlightElement.highLightElement(driver, ele);
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div[2]/div[2]/div[1]/div[2]"));
+				//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div[1]/div[1]"));
+				highlightElement.highLightElement(driver, ele);
 		    	ele.click();
 		   		waitMethods.waiter(waitMethods.w300);
 			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {	  													   
@@ -200,7 +201,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: input Default Answer Q2");			
@@ -237,7 +238,7 @@ public class formsWorkflowPart2 extends setupFramework {
 			WebElement ele = driver.findElement(By.id("sort"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.sendKeys("5");
-			waitMethods.waiter(waitMethods.w300);
+			//waitMethods.waiter(waitMethods.w300);
 	    	System.out.println("Test Question: Sort Priority");
 		}
 		
@@ -366,7 +367,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-question 1: Input Field Name)");			
@@ -386,7 +387,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Sub-question Q2S01: Date)");			
@@ -425,7 +426,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-Question 1: Default Answer");			
@@ -517,7 +518,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-question 2: Input Field Name)");			
@@ -537,7 +538,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Sub-question Q2S02: Radio)");			
@@ -596,7 +597,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-Question 2: Default Answer");			
@@ -693,7 +694,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-question 3: Input Field Name)");			
@@ -713,7 +714,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Sub-question Q2S03: Checkbox)");			
@@ -765,7 +766,7 @@ public class formsWorkflowPart2 extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-Question 3: Default Answer");			
@@ -859,7 +860,7 @@ public class formsWorkflowPart2 extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q2S04: Input Field Name)");			
@@ -879,7 +880,7 @@ public class formsWorkflowPart2 extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q2S04: Checkboxes)");			
@@ -935,7 +936,7 @@ public class formsWorkflowPart2 extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q2S04: Default Answer");			
@@ -1030,7 +1031,7 @@ public class formsWorkflowPart2 extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3: Input Field Name)");			
@@ -1050,7 +1051,7 @@ public class formsWorkflowPart2 extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3: Multiselect)");			
@@ -1106,7 +1107,7 @@ public class formsWorkflowPart2 extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3: Default Answer");			

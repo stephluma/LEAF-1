@@ -98,7 +98,7 @@ public class formsWorkflow extends setupFramework {
 	    		String s = new StringBuilder().append(c).toString();
 	    		//ele.sendKeys(Keys.chord(name));
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	//driver.findElement(By.id("search")).clear();
@@ -118,7 +118,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Populate Form Description");			
@@ -187,7 +187,7 @@ public class formsWorkflow extends setupFramework {
 	    		String s = new StringBuilder().append(c).toString();
 	    		//ele.sendKeys(Keys.chord(name));
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	//driver.findElement(By.id("search")).clear();
@@ -207,7 +207,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Populate Form Description");			
@@ -584,7 +584,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: Single line text)");			
@@ -604,7 +604,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: Short Label)");			
@@ -677,7 +677,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: input Default Answer");			
@@ -756,7 +756,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: Edit Default Answer");			
@@ -1132,7 +1132,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Sub-question: Multi line text)");			
@@ -1152,7 +1152,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Sub-question Q1S01: Short Label)");			
@@ -1191,7 +1191,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: input Default Answer");			
@@ -1287,7 +1287,7 @@ public class formsWorkflow extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question: Grid)");			
@@ -1307,7 +1307,7 @@ public class formsWorkflow extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q1S02: Short Label)");			
@@ -1350,7 +1350,7 @@ public class formsWorkflow extends setupFramework {
 			    		char c = name.charAt(i);
 			    		String s = new StringBuilder().append(c).toString();
 			    		ele.sendKeys(s);
-			    		waitMethods.waiter(waitMethods.w20);
+			    		waitMethods.waiter(waitMethods.w10);
 			    	}
 					
 				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) { //  
@@ -1367,7 +1367,7 @@ public class formsWorkflow extends setupFramework {
 			    		char c = name.charAt(i);
 			    		String s = new StringBuilder().append(c).toString();
 			    		ele.sendKeys(s);
-			    		waitMethods.waiter(waitMethods.w20);
+			    		waitMethods.waiter(waitMethods.w10);
 			    	}
 				}
 				
@@ -1425,7 +1425,7 @@ public class formsWorkflow extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Question: input Default Answer");			
@@ -1528,7 +1528,7 @@ public class formsWorkflow extends setupFramework {
 			    		char c = name.charAt(i);
 			    		String s = new StringBuilder().append(c).toString();
 			    		ele.sendKeys(s);
-			    		waitMethods.waiter(waitMethods.w20);
+			    		waitMethods.waiter(waitMethods.w10);
 			    	}
 				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {					
 					WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/input"));
@@ -1541,7 +1541,7 @@ public class formsWorkflow extends setupFramework {
 			    		char c = name.charAt(i);
 			    		String s = new StringBuilder().append(c).toString();
 			    		ele.sendKeys(s);
-			    		waitMethods.waiter(waitMethods.w20);
+			    		waitMethods.waiter(waitMethods.w10);
 			    	}
 				}
 		    	
@@ -1621,7 +1621,7 @@ public class formsWorkflow extends setupFramework {
 			    		char c = name.charAt(i);
 			    		String s = new StringBuilder().append(c).toString();
 			    		ele.sendKeys(s);
-			    		waitMethods.waiter(waitMethods.w20);
+			    		waitMethods.waiter(waitMethods.w10);
 			    	}
 				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
 					WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[3]/input"));
@@ -1634,7 +1634,7 @@ public class formsWorkflow extends setupFramework {
 			    		char c = name.charAt(i);
 			    		String s = new StringBuilder().append(c).toString();
 			    		ele.sendKeys(s);
-			    		waitMethods.waiter(waitMethods.w20);
+			    		waitMethods.waiter(waitMethods.w10);
 			    	}
 				}
 				
@@ -1742,7 +1742,7 @@ public class formsWorkflow extends setupFramework {
 				    		char c = name.charAt(i);
 				    		String s = new StringBuilder().append(c).toString();
 				    		ele.sendKeys(s);
-				    		waitMethods.waiter(waitMethods.w20);
+				    		waitMethods.waiter(waitMethods.w10);
 				    	}
 					} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
 						WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[4]/input"));
@@ -1755,7 +1755,7 @@ public class formsWorkflow extends setupFramework {
 				    		char c = name.charAt(i);
 				    		String s = new StringBuilder().append(c).toString();
 				    		ele.sendKeys(s);
-				    		waitMethods.waiter(waitMethods.w20);
+				    		waitMethods.waiter(waitMethods.w10);
 				    	}
 					}
 	
@@ -1970,7 +1970,7 @@ public class formsWorkflow extends setupFramework {
 				    		char c = name.charAt(i);
 				    		String s = new StringBuilder().append(c).toString();
 				    		ele.sendKeys(s);
-				    		waitMethods.waiter(waitMethods.w20);
+				    		waitMethods.waiter(waitMethods.w10);
 				    	}
 					} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
 						WebElement ele = driver.findElement(By.id("name"));
@@ -1982,7 +1982,7 @@ public class formsWorkflow extends setupFramework {
 				    		char c = name.charAt(i);
 				    		String s = new StringBuilder().append(c).toString();
 				    		ele.sendKeys(s);
-				    		waitMethods.waiter(waitMethods.w20);
+				    		waitMethods.waiter(waitMethods.w10);
 				    	}
 					}
 	
@@ -2005,7 +2005,7 @@ public class formsWorkflow extends setupFramework {
 				    		char c = name.charAt(i);
 				    		String s = new StringBuilder().append(c).toString();
 				    		ele.sendKeys(s);
-				    		waitMethods.waiter(waitMethods.w20);
+				    		waitMethods.waiter(waitMethods.w10);
 				    	}
 					} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
 						WebElement ele = driver.findElement(By.id("description"));
@@ -2017,7 +2017,7 @@ public class formsWorkflow extends setupFramework {
 				    		char c = name.charAt(i);
 				    		String s = new StringBuilder().append(c).toString();
 				    		ele.sendKeys(s);
-				    		waitMethods.waiter(waitMethods.w20);
+				    		waitMethods.waiter(waitMethods.w10);
 				    	}
 					}
 		    	
@@ -2072,7 +2072,7 @@ public class formsWorkflow extends setupFramework {
 		    	//	char c = name.charAt(i);
 		    	//	String s = new StringBuilder().append(c).toString();
 		    	//	ele.sendKeys(s);
-		    	//	waitMethods.waiter(waitMethods.w20);
+		    	//	waitMethods.waiter(waitMethods.w10);
 		    	//}
 		    	
 		    	System.out.println("Test Question: Default Not Input");			
@@ -2192,7 +2192,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	   	    	System.out.println("Changed Form Name to AUT");			
@@ -2212,7 +2212,7 @@ public class formsWorkflow extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	   	    	System.out.println("Changed Description to Form Description + getDate()");			
