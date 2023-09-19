@@ -26,7 +26,7 @@ import Framework.waitMethods;
 import Framework.highlightElement;
 
 
-public class userAccessGroupsPart3 extends setupFramework {
+public class leafRecords extends setupFramework {
 
 	
 	public String sRand;
@@ -183,47 +183,47 @@ public class userAccessGroupsPart3 extends setupFramework {
  
 	
 	
-	@Test(priority = 4040) //
-	private void openAccessGroup() {
-		//System.out.println("Before opening Group\ngroupNum = " + groupNum);
-		waitMethods.waiter(waitMethods.w2k);    //  "Test User Access Group " + groupNum
-		WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/main/div[4]/div/div/div[1]"));		
-		highlightElement.highLightElement(driver, ele); 
-	    ele.click();
-	    System.out.println("Opened Test User Group ");
-	} 
-	
-
-	 
-	
-	
-	@Test(priority = 4060) //			
-	private void deleteUserGroup() {
-		waitMethods.waiter(waitMethods.w1k);
-		//WebElement ele = driver.findElement(By.xpath("//*[contains(text(),'Delete Group')]"));
-		WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[1]/div[2]/button"));	
-	    highlightElement.highLightElement(driver, ele);
-	    ele.click();
-	    System.out.println("Delete User Group");
-	} 
-	
-	
-	@Test(priority = 4080) //				
-	private void confirmYes() {			
-		waitMethods.waiter(waitMethods.w500);
-		WebElement ele = driver.findElement(By.id("confirm_button_save"));
-        highlightElement.highLightElement(driver, ele);  
-        ele.click();		
-        waitMethods.waiter(waitMethods.w100);
-        System.out.println("Confirmed action");
-	} 
-	
-	
-	
-//	@Test(priority = 4100)
-//	public void closeDownMainPortal2() {
-//		closeDownMainPortal();
-//	}
+//	@Test(priority = 4040) //
+//	private void openAccessGroup() {
+//		//System.out.println("Before opening Group\ngroupNum = " + groupNum);
+//		waitMethods.waiter(waitMethods.w2k);    //  "Test User Access Group " + groupNum
+//		WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/main/div[4]/div/div/div[1]"));		
+//		highlightElement.highLightElement(driver, ele); 
+//	    ele.click();
+//	    System.out.println("Opened Test User Group ");
+//	} 
+//	
+//
+//	 
+//	
+//	
+//	@Test(priority = 4060) //			
+//	private void deleteUserGroup() {
+//		waitMethods.waiter(waitMethods.w1k);
+//		//WebElement ele = driver.findElement(By.xpath("//*[contains(text(),'Delete Group')]"));
+//		WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[1]/div[2]/button"));	
+//	    highlightElement.highLightElement(driver, ele);
+//	    ele.click();
+//	    System.out.println("Delete User Group");
+//	} 
+//	
+//	
+//	@Test(priority = 4080) //			
+//	private void confirmYes() {			
+//		waitMethods.waiter(waitMethods.w500);
+//		WebElement ele = driver.findElement(By.id("confirm_button_save"));
+//        highlightElement.highLightElement(driver, ele);  
+//        ele.click();		
+//        waitMethods.waiter(waitMethods.w100);
+//        System.out.println("Confirmed action");
+//	} 
+//	
+//	
+//	
+////	@Test(priority = 4100)
+////	public void closeDownMainPortal2() {
+////		closeDownMainPortal();
+////	}
 	
 
 
