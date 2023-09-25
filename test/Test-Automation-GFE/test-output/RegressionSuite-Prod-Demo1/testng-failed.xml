@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [RegressionSuite-Prod-Demo1]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Forms Workflow(failed)">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="https://leaf.va.gov/Academy/Demo1/admin/?a=form#"/>
+    <classes>
+      <class name="Execution.formsWorkflow">
+        <methods>
+          <include name="moveCol2_1PositionsR"/>
+          <include name="moveCol1_3PositionsR"/>
+          <include name="initializeFramework"/>
+          <include name="moveCol2_1PositionsL"/>
+          <include name="closeDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- Execution.formsWorkflow -->
+    </classes>
+  </test> <!-- Forms Workflow(failed) -->
+</suite> <!-- Failed suite [RegressionSuite-Prod-Demo1] -->

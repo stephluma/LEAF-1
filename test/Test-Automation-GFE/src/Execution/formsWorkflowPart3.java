@@ -106,8 +106,9 @@ public class formsWorkflowPart3 extends setupFramework {
 
 		@Test(priority = 405) //  			 															ERR PP
 		private void viewHistory() {			//
-			waitMethods.waiter(waitMethods.w300);       
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div[6]"));
+			waitMethods.waiter(waitMethods.w300);    
+			WebElement ele = driver.findElement(By.xpath("//div[contains(text(), ' View History')]"));
+			//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div[6]"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
 			waitMethods.waiter(waitMethods.w300);
@@ -180,8 +181,8 @@ public class formsWorkflowPart3 extends setupFramework {
 
 		@Test(priority = 430) // 																		ERR PP
 		private void selectFormToMergeButton() {
-			waitMethods.waiter(waitMethods.w300);     //      						
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/main/div/span"));
+			waitMethods.waiter(waitMethods.w1k);     //      						
+			WebElement ele = driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/main/div/span"));
 			//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Select a form to merge')]"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
@@ -224,9 +225,9 @@ public class formsWorkflowPart3 extends setupFramework {
 		
 		
 		@Test(priority = 445) //  																		ERR PP
-		private void closeStapleFormDialogue() {	//    /html/body/div[5]/div[1]/button/span[1]
+		private void closeStapleFormDialogue() {	//    
 			waitMethods.waiter(waitMethods.w300);       
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[1]/button/span[1]"));
+			WebElement ele = driver.findElement(By.xpath("/html/body/div[6]/div[1]/button/span[1]"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
 			waitMethods.waiter(waitMethods.w300);
