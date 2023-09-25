@@ -19,8 +19,8 @@
    		
  -->	  		
    		
-	<test name="User Access Groups">
-		<parameter name="env" value="https://localhost/LEAF_Request_Portal/admin/?a=mod_groups">
+	<test name="User Access Groups">    
+		<parameter name="env" value="https://leaf-preprod.va.gov/Academy/Demo1/admin/?a=mod_groups">
 		<parameter name="browser" value="chrome"/>
 			<classes>
 				<class name="Execution.userAccessGroups"/>
@@ -33,7 +33,7 @@
  
 
 	<test name="User Access Groups Part 2">
-		<parameter name="env" value="https://localhost/LEAF_Request_Portal/admin/">
+		<parameter name="env" value="https://leaf-preprod.va.gov/Academy/Demo1/admin/">
 		<parameter name="browser" value="chrome"/>
 			<classes>
 				<class name="Execution.userAccessGroupsPart2"/>
@@ -44,7 +44,7 @@
 
 
 	<test name="User Access Groups Part 3">
-		<parameter name="env" value="https://localhost/LEAF_Request_Portal/admin/?a=mod_groups">
+		<parameter name="env" value="https://leaf-preprod.va.gov/Academy/Demo1/admin/?a=mod_groups">
 		<parameter name="browser" value="chrome"/>
 			<classes>
 				<class name="Execution.userAccessGroupsPart3"/>

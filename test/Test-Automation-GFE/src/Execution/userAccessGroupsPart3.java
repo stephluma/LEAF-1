@@ -31,8 +31,8 @@ public class userAccessGroupsPart3 extends setupFramework {
 	
 	public String sRand;
 	public String groupNum;
-	public String nexusURL = "https://localhost/LEAF_Nexus/?a=view_group&groupID=";
-	public String portalURL = "https://localhost/LEAF_Request_Portal/admin/?a=mod_groups";
+	public String nexusURL = "https://leaf-preprod.va.gov/Academy/orgchart/?a=view_group&groupID=";
+	public String portalURL = "https://leaf-preprod.va.gov/Academy/Demo1/admin/?a=mod_groups";
 	public String id;		
 	public WebDriver driverNexus, driverPortal;
 

@@ -29,7 +29,7 @@ public class userAccessGroups extends setupFramework {
 	
 	public String sRand;
 	public String groupNum;
-	public String nexusURL = "https://localhost/LEAF_Nexus/?a=view_group&groupID=";
+	public String nexusURL = "https://leaf-preprod.va.gov/Academy/orgchart/?a=view_group&groupID=";
 	public String id ="";		
 	public WebDriver driverNexus;
 
