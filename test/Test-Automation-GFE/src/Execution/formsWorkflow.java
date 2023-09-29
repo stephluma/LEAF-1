@@ -140,7 +140,7 @@ public class formsWorkflow extends setupFramework {
 		@Test(priority = 98) //  Delete this form
 		private void deleteForm() {
 			waitMethods.waiter(waitMethods.w500);       
-			WebElement ele = driver.findElement(By.xpath("//*[contains(text(),' Delete this form')]"));
+			WebElement ele = driver.findElement(By.xpath("//div[contains(text(),' Delete this form')]"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
 			waitMethods.waiter(waitMethods.w300);
@@ -165,7 +165,7 @@ public class formsWorkflow extends setupFramework {
 
 		@Test(priority = 102) //
 		private void clickCreateForm02() {
-			waitMethods.waiter(waitMethods.w500);       
+			waitMethods.waiter(waitMethods.w750);       
 			WebElement ele = driver.findElement(By.id("createFormButton"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
@@ -265,16 +265,6 @@ public class formsWorkflow extends setupFramework {
 	    	System.out.println("Forms - clicked Edit Properties");
 		}
 
-		
-		/*
-		 * 
-		 * 
-		 * 		NEED TO RECREATE A WORKFLOW --
-		 * 
-		 * 
-		 * */
-		
-		
 		
 		
 		
@@ -437,7 +427,7 @@ public class formsWorkflow extends setupFramework {
 		
 		@Test(priority = 140) //  
 		private void selectAddGroup() {	
-			waitMethods.waiter(waitMethods.w500);       
+			waitMethods.waiter(waitMethods.w750);       
 			WebElement ele = driver.findElement(By.xpath("//*[text()='Add Group']"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
@@ -448,7 +438,7 @@ public class formsWorkflow extends setupFramework {
 		
 		@Test(priority = 142) //  
 		private void selectAddCollaborators() {	
-			waitMethods.waiter(waitMethods.w750);       
+			waitMethods.waiter(waitMethods.w1k);       
 			WebElement ele = driver.findElement(By.id("groupID"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
@@ -509,11 +499,12 @@ public class formsWorkflow extends setupFramework {
 		@Test(priority = 150) //  
 		private void selectRemoveCollaborators() {	
 			waitMethods.waiter(waitMethods.w500);       
-			WebElement ele = driver.findElement(By.linkText("Remove"));
+			WebElement ele = driver.findElement(By.partialLinkText("Remove"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
 			waitMethods.waiter(waitMethods.w300);
 	    	System.out.println("Forms-Selected Remove Collaborators)");
+	    	waitMethods.waiter(waitMethods.w300);
 		}
 		
 		
@@ -526,7 +517,7 @@ public class formsWorkflow extends setupFramework {
 
 		@Test(priority = 154) //  
 		private void selectAddCollaborators2() {	
-			waitMethods.waiter(waitMethods.w500);       
+			waitMethods.waiter(waitMethods.w1k);       
 			WebElement ele = driver.findElement(By.id("groupID"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
@@ -1006,11 +997,11 @@ public class formsWorkflow extends setupFramework {
 
 	
 		
-		@Test(priority = 234) //	  			// 
+		@Test(priority = 234) //	  			// 	
 		private void selectEditFieldIcon04() {		
 			//selectEditFieldIcon();
-			waitMethods.waiter(waitMethods.w500);       
-			WebElement ele = driver.findElement(By.xpath("//*[contains(text(),'Test Q1 Single line text')]"));
+			waitMethods.waiter(waitMethods.w750);       
+			WebElement ele = driver.findElement(By.xpath("//span[contains(text(),' Test Q1 Single line text')]"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
 			waitMethods.waiter(waitMethods.w500);	
@@ -1045,13 +1036,13 @@ public class formsWorkflow extends setupFramework {
 		
 
 		
-		@Test(priority = 240) //  save
-		private void selectSave04() {			//
+		@Test(priority = 240) // 
+		private void selectSave04() {	
 			selectSave();
 		}	
 		
 		
-		@Test(priority = 242) //	  			// 
+		@Test(priority = 242) //	  
 		private void selectEditFieldIcon05() {		
 			//selectEditFieldIcon();
 			waitMethods.waiter(waitMethods.w500);       
@@ -1064,16 +1055,16 @@ public class formsWorkflow extends setupFramework {
 		
 		
 		
-		@Test(priority = 244) //  Show Formatted Code			//   
-		private void showFormatedCode03() {			//
+		@Test(priority = 244) //  Show Formatted Code	
+		private void showFormatedCode03() {		
 			showFormatedCode();
 		}	
 
 		
 		
-		@Test(priority = 246) //  
-		private void validateFormatItalics() {			//   
-			waitMethods.waiter(waitMethods.w500);      //
+		@Test(priority = 246) //  		
+		private void validateFormatItalics() {			
+			waitMethods.waiter(waitMethods.w500);     
 			
 			WebElement ele = driver.findElement(By.id("name"));
 	    	highlightElement.highLightElement(driver, ele);
@@ -1101,7 +1092,7 @@ public class formsWorkflow extends setupFramework {
 			selectSave();
 		}	
 
-		
+	
 		
 		///////////////////    Add Sub-question  \\\\\\\\\\\\\\\\\\\\
 
@@ -1250,16 +1241,15 @@ public class formsWorkflow extends setupFramework {
 //		//////==============    Q1 Subquestion 02 =================================================================
 	
 	
-			@Test(priority = 269) //  add sub-question	
-			private void addSubQuestion01S02() {
+			@Test(priority = 269) //  add sub-question										//	ERR PROD	
+			private void addSubQuestion01S02() {											// Try span or even button
 				String url = driver.getCurrentUrl();    
+				waitMethods.waiter(waitMethods.w500);
 				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) { 			
-					waitMethods.waiter(waitMethods.w500);       
 					WebElement ele = driver.findElement(By.xpath("//*[contains(text(),' Add Sub-question')]"));
 			    	highlightElement.highLightElement(driver, ele);
 			   		ele.click();
-				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
-					waitMethods.waiter(waitMethods.w500);       
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {    
 					WebElement ele = driver.findElement(By.xpath("//*[contains(text(),' Add Sub-question')]"));
 			    	highlightElement.highLightElement(driver, ele);
 			   		ele.click();
@@ -1267,14 +1257,11 @@ public class formsWorkflow extends setupFramework {
 				System.out.println("Subquestion 2 for Q1");
 			}
 			
+	//debugging: good to here		
 			
 			
-			
-//			private void addSubQuestion01S02() {
-//				addSubQuestion();
-//				System.out.println("Forms-add Sub-Question 2 to Q1");
-//			}
 	
+			
 			@Test(priority = 272) //						
 			private void inputFieldName01S02() {
 				waitMethods.waiter(waitMethods.w500);       
@@ -1295,7 +1282,7 @@ public class formsWorkflow extends setupFramework {
 			
 	
 			
-			@Test(priority = 274) //							
+			@Test(priority = 274) //								
 			private void inputShortLabel01S02() {
 				waitMethods.waiter(waitMethods.w500);       
 				WebElement ele = driver.findElement(By.id("description"));
@@ -1316,7 +1303,7 @@ public class formsWorkflow extends setupFramework {
 			
 	
 			@Test(priority = 276) //01S02   						
-			public void selectGrid01S02() {         
+			public void selectGrid01S02() {         		
 				//waitMethods.implicitWait(waitMethods.w500);
 				waitMethods.waiter(waitMethods.w200);			//The below opens the DDL
 				WebElement ele = driver.findElement(By.id("indicatorType"));
@@ -1334,7 +1321,7 @@ public class formsWorkflow extends setupFramework {
 			}
 			
 	
-			@Test(priority = 278) //01S02						
+			@Test(priority = 278) //01S02							
 			private void inputColumnTitle01() {
 				String url = driver.getCurrentUrl();
 				
@@ -1376,7 +1363,7 @@ public class formsWorkflow extends setupFramework {
 			
 			
 			
-			@Test(priority = 280) //01S02    		   
+			@Test(priority = 280) //01S02    		   					
 			public void selectColumnType01() {         
 				//waitMethods.implicitWait(waitMethods.w500);
 				     
@@ -1413,8 +1400,8 @@ public class formsWorkflow extends setupFramework {
 		
 	
 			
-			@Test(priority = 282) //01S02							
-			private void inputDefaultAnswer01S02() {
+			@Test(priority = 282) //01S02										
+			private void inputDefaultAnswer01S02() {	
 				waitMethods.waiter(waitMethods.w500);       
 				WebElement ele = driver.findElement(By.id("default"));
 		    	highlightElement.highLightElement(driver, ele);
@@ -1432,7 +1419,7 @@ public class formsWorkflow extends setupFramework {
 			}
 			
 			
-			@Test(priority = 284) //  								
+			@Test(priority = 284) //  											
 			private void selectFieldRequired01S02() {			//
 				waitMethods.waiter(waitMethods.w500);       
 				WebElement ele = driver.findElement(By.id("required"));
@@ -1444,7 +1431,7 @@ public class formsWorkflow extends setupFramework {
 			}
 			
 			
-			@Test(priority = 286) //  							
+			@Test(priority = 286) //  										
 			private void selectFieldSensitiveData01S02() {			//
 				waitMethods.waiter(waitMethods.w500);       
 				WebElement ele = driver.findElement(By.id("sensitive"));
@@ -1457,7 +1444,7 @@ public class formsWorkflow extends setupFramework {
 			}
 			
 			
-			@Test(priority = 288) //  Go back to 270
+			@Test(priority = 288) //  
 			private void selectSortValue01S02() {			//
 				waitMethods.waiter(waitMethods.w500);       
 				WebElement ele = driver.findElement(By.id("sort"));
@@ -1468,7 +1455,7 @@ public class formsWorkflow extends setupFramework {
 			}
 			
 			
-			@Test(priority = 290) //  
+			@Test(priority = 290) //  				
 			private void selectQuestionSave01S02() {			//
 				waitMethods.waiter(waitMethods.w1k);       
 				WebElement ele = driver.findElement(By.id("button_save"));
@@ -1479,7 +1466,7 @@ public class formsWorkflow extends setupFramework {
 			}
 
 			
-			@Test(priority = 292) //  					
+			@Test(priority = 292) //  								
 			private void editQuestion01S02() {			//
 				waitMethods.waiter(waitMethods.w500);       
 				WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Test Q1S02 Sub-question Grid')]"));
@@ -1492,7 +1479,7 @@ public class formsWorkflow extends setupFramework {
 			
 			//		Add Column 2
 		
-			@Test(priority = 294) //  				
+			@Test(priority = 294) //  					
 			private void addNewColumn02() {			
 				waitMethods.waiter(waitMethods.w500);  //  findElement(By.xpath("//*[contains(text(), 'Test Q1S02 Sub-question Grid')]"));
 				String url = driver.getCurrentUrl();
@@ -1513,7 +1500,7 @@ public class formsWorkflow extends setupFramework {
 			
 					
 		
-			@Test(priority = 296) //													
+			@Test(priority = 296) //															
 			private void inputColumnTitle02() {
 				waitMethods.waiter(waitMethods.w500);    //           
 				String url = driver.getCurrentUrl();	
@@ -1550,7 +1537,7 @@ public class formsWorkflow extends setupFramework {
 			
 			
 			
-			@Test(priority = 298) //							
+			@Test(priority = 298) //										
 			public void selectColumnType02() {         
 				//waitMethods.implicitWait(waitMethods.w500);
 				waitMethods.waiter(waitMethods.w200);	//        
@@ -1583,7 +1570,7 @@ public class formsWorkflow extends setupFramework {
 			}
 		
 			
-			@Test(priority = 300) //  									
+			@Test(priority = 300) //  															
 			private void addNewColumn03() {	
 				waitMethods.waiter(waitMethods.w500);     //    
 				String url = driver.getCurrentUrl();
@@ -1606,7 +1593,7 @@ public class formsWorkflow extends setupFramework {
 			
 					
 		
-			@Test(priority = 302) //								
+			@Test(priority = 302) //							
 			private void inputColumnTitle03() {
 				waitMethods.waiter(waitMethods.w500);     //    
 				String url = driver.getCurrentUrl();	
@@ -1643,7 +1630,7 @@ public class formsWorkflow extends setupFramework {
 			
 			
 			
-			@Test(priority = 304) //												
+			@Test(priority = 304) //													
 			public void selectColumnType03() {         
 				waitMethods.waiter(waitMethods.w200);			//The below opens the DDL
 				String url = driver.getCurrentUrl();
@@ -1676,7 +1663,7 @@ public class formsWorkflow extends setupFramework {
 			}
 	
 	
-			@Test(priority = 306) //  								//
+			@Test(priority = 306) //  							
 			private void populateDDLOptions() {	//
 				String url = driver.getCurrentUrl();	
 				waitMethods.waiter(waitMethods.w500);
@@ -1715,7 +1702,7 @@ public class formsWorkflow extends setupFramework {
 				
 							
 				
-			@Test(priority = 308) //  								
+			@Test(priority = 308) //  											
 			private void addNewColumn04() {	//
 				waitMethods.waiter(waitMethods.w500);       
 				WebElement ele = driver.findElement(By.xpath("//button[contains(text(), 'Add column')]"));
@@ -1727,7 +1714,7 @@ public class formsWorkflow extends setupFramework {
 				
 						
 			
-				@Test(priority = 310) // 							
+				@Test(priority = 310) // 									
 				private void inputColumnTitle04() {
 					waitMethods.waiter(waitMethods.w500);         
 					String url = driver.getCurrentUrl();	
@@ -1767,7 +1754,7 @@ public class formsWorkflow extends setupFramework {
 				 * 		A NEW OPTION (DROPDOWN FILE)  WAS Added, which is causing the XPath to be invalid
 				 *          
 				 */
-				@Test(priority = 312) //										// 
+				@Test(priority = 312) //					
 				public void selectColumnType04() {         
 					//waitMethods.implicitWait(waitMethods.w500);
 					String url = driver.getCurrentUrl();	
@@ -1801,14 +1788,15 @@ public class formsWorkflow extends setupFramework {
 				}
 	
 				
+	//debugging: good to here				
+	
 				
-		//********* OK to Here for PROD & Pre-Prod  **********
 		/////// HERE: For DEBUGGing, comment here to end \\\\\\\\\\\\\\\\\\\  Grid
 				
 				
 			
 				
-				@Test(priority = 320) //
+				@Test(priority = 320) //																// ERR PROD	
 				private void selectQuestionSave01S02_02() {			//
 					waitMethods.waiter(waitMethods.w500);       
 					WebElement ele = driver.findElement(By.id("button_save"));
@@ -1820,7 +1808,7 @@ public class formsWorkflow extends setupFramework {
 				
 				
 				
-				@Test(priority = 322) //  					
+				@Test(priority = 322) //  																//	ERR PROD
 				private void editQuestion01S02_2() {	//
 					waitMethods.waiter(waitMethods.w500);  
 					WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Test Q1S02 Sub-question Grid')]"));
@@ -1848,7 +1836,7 @@ public class formsWorkflow extends setupFramework {
 				
 			*/
 				
-				@Test(priority = 324) //  						
+				@Test(priority = 324) //  																// ERR PROD						
 				private void moveCol1_3PositionsR() {			
 					waitMethods.waiter(waitMethods.w500);       
 					String url = driver.getCurrentUrl();	
@@ -1892,7 +1880,7 @@ public class formsWorkflow extends setupFramework {
 				}	
 				
 				
-				@Test(priority = 332) //  					
+				@Test(priority = 332) //  																// ERR PROD			
 				private void moveCol2_1PositionsR() {			//
 					waitMethods.waiter(waitMethods.w500);       
 					
@@ -1905,7 +1893,7 @@ public class formsWorkflow extends setupFramework {
 				}	
 				
 				
-				@Test(priority = 334) //  					
+				@Test(priority = 334) //  																// ERR PROD		
 				private void moveCol2_1PositionsL() {			//
 					waitMethods.waiter(waitMethods.w500);       
 					
@@ -1919,8 +1907,7 @@ public class formsWorkflow extends setupFramework {
 				
 						
 				
-				@Test(priority = 338) //  							
-
+				@Test(priority = 338) //  																// ERR PROD	
 				private void selectQuestionSave01S02b() {	//
 					waitMethods.waiter(waitMethods.w500);       
 					WebElement ele = driver.findElement(By.id("button_save"));

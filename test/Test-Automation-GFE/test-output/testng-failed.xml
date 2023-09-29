@@ -1,50 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [RegressionSuite-PreProd-Demo1]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Forms Workflow Part 3(failed)">
+<suite name="Failed suite [RegressionSuite-PROD]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Forms Workflow(failed)">
     <parameter name="browser" value="chrome"/>
-    <parameter name="env" value="https://leaf-preprod.va.gov/Academy/Demo1/admin/?a=form#"/>
+    <parameter name="env" value="https://leaf.va.gov/Academy/Demo1/admin/?a=form#"/>
     <classes>
-      <class name="Execution.formsWorkflowPart3">
+      <class name="Execution.formsWorkflow">
         <methods>
-          <include name="inputFormDesc02"/>
-          <include name="addInternalUseForm"/>
-          <include name="selectEditProperties02"/>
-          <include name="closeStapledFormDialogue"/>
-          <include name="changeDescription"/>
-          <include name="inputFormLabel02"/>
-          <include name="viewHistoryClose"/>
-          <include name="selectSortPriority02"/>
-          <include name="inputFormLabel"/>
-          <include name="selectViewAllForms02"/>
-          <include name="selectViewAllForms03"/>
-          <include name="addInternalUseForm02"/>
-          <include name="cancelInternalUseForm"/>
-          <include name="selectFormToMergeButton"/>
-          <include name="selectCurrentFormByXpath04"/>
-          <include name="selectCurrentFormByXpath01"/>
-          <include name="displayCompleteAlert"/>
-          <include name="closeDown"/>
-          <include name="selectNeedToKnow"/>
-          <include name="changeFormName"/>
-          <include name="verifyStapledForm"/>
           <include name="initializeFramework"/>
-          <include name="removeStapledForm"/>
-          <include name="selectCurrentFormByXpath03"/>
-          <include name="selectStapleForm"/>
-          <include name="selectExportForm"/>
-          <include name="verifyInternalUseForm"/>
-          <include name="inputFormDesc"/>
-          <include name="confirmDeleteInternalUseForm"/>
-          <include name="saveInternalUseForm"/>
-          <include name="selectInternalUseForm"/>
+          <include name="selectEditProperties"/>
           <include name="setUp"/>
-          <include name="deleteInternalUseForm"/>
-          <include name="saveStapledFormSelection"/>
-          <include name="selectFormToBeStapled"/>
-          <include name="selectSave"/>
+          <include name="selectSortPriority02"/>
+          <include name="changeDescription"/>
+          <include name="selectSave06"/>
+          <include name="selectWorkflow"/>
+          <include name="moveCol2_1PositionsR"/>
+          <include name="moveCol1_3PositionsR"/>
+          <include name="moveCol2_1PositionsL"/>
+          <include name="selectCancelChange"/>
+          <include name="selectEditProperties02"/>
+          <include name="changeFormName"/>
+          <include name="closeDown"/>
         </methods>
-      </class> <!-- Execution.formsWorkflowPart3 -->
+      </class> <!-- Execution.formsWorkflow -->
     </classes>
-  </test> <!-- Forms Workflow Part 3(failed) -->
-</suite> <!-- Failed suite [RegressionSuite-PreProd-Demo1] -->
+  </test> <!-- Forms Workflow(failed) -->
+</suite> <!-- Failed suite [RegressionSuite-PROD] -->

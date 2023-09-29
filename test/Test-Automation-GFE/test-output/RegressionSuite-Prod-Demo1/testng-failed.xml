@@ -7,14 +7,149 @@
     <classes>
       <class name="Execution.formsWorkflow">
         <methods>
-          <include name="moveCol2_1PositionsR"/>
-          <include name="moveCol1_3PositionsR"/>
+          <include name="selectColumnType03"/>
+          <include name="selectColumnType02"/>
+          <include name="addNewColumn02"/>
           <include name="initializeFramework"/>
-          <include name="moveCol2_1PositionsL"/>
-          <include name="closeDown"/>
+          <include name="populateDDLOptions"/>
+          <include name="editQuestion01S02"/>
+          <include name="addNewColumn04"/>
+          <include name="selectEditProperties"/>
+          <include name="selectQuestionSave01S02_02"/>
           <include name="setUp"/>
+          <include name="selectColumnType04"/>
+          <include name="selectWorkflow"/>
+          <include name="moveCol2_1PositionsR"/>
+          <include name="addNewColumn03"/>
+          <include name="moveCol1_3PositionsR"/>
+          <include name="inputColumnTitle02"/>
+          <include name="inputColumnTitle03"/>
+          <include name="inputColumnTitle04"/>
+          <include name="moveCol2_1PositionsL"/>
+          <include name="selectCancelChange"/>
+          <include name="closeDown"/>
         </methods>
       </class> <!-- Execution.formsWorkflow -->
     </classes>
   </test> <!-- Forms Workflow(failed) -->
+  <test thread-count="5" name="Forms Workflow Part 2(failed)">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="https://leaf.va.gov/Academy/Demo1/admin/?a=form#"/>
+    <classes>
+      <class name="Execution.formsWorkflowPart2">
+        <methods>
+          <include name="selectFieldSensitiveDataQ3S01"/>
+          <include name="selectFieldRequiredQ4S02"/>
+          <include name="selectFieldRequiredQ4S01"/>
+          <include name="selectFieldSensitiveDataQ3S03"/>
+          <include name="selectFieldSensitiveDataQ3S02"/>
+          <include name="inputFieldNameQ2S04"/>
+          <include name="selectQuestionSaveQ2S04"/>
+          <include name="inputFieldNameQ2S01"/>
+          <include name="inputFieldNameQ2S02"/>
+          <include name="inputFieldNameQ2S03"/>
+          <include name="inputShortLabelQ4S01"/>
+          <include name="inputDefaultAnswerQ3S03"/>
+          <include name="selectQuestionSaveQ2S01"/>
+          <include name="selectQuestionSaveQ2S03"/>
+          <include name="selectQuestionSaveQ2S02"/>
+          <include name="inputDefaultAnswerQ3S01"/>
+          <include name="inputShortLabelQ4S02"/>
+          <include name="inputDefaultAnswerQ3S02"/>
+          <include name="addSubQuestionQ2S04"/>
+          <include name="selectSortValueQ2S01"/>
+          <include name="selectTypeFileAttachment"/>
+          <include name="selectFieldSensitiveDataQ2S02"/>
+          <include name="selectSortValueQ2S03"/>
+          <include name="addSubQuestionQ2S03"/>
+          <include name="selectFieldSensitiveDataQ2S01"/>
+          <include name="selectSortValueQ2S02"/>
+          <include name="populateCheckboxOptions"/>
+          <include name="selectFieldSensitiveDataQ2S04"/>
+          <include name="selectFieldSensitiveDataQ2S03"/>
+          <include name="selectFieldRequiredQ3S01"/>
+          <include name="initializeFramework"/>
+          <include name="selectFieldRequiredQ3S02"/>
+          <include name="selectInputTypeQ2S02"/>
+          <include name="inputFieldNameQ3S02"/>
+          <include name="selectSortValueQ2S04"/>
+          <include name="inputFieldNameQ3S03"/>
+          <include name="inputDefaultAnswerQ2S02"/>
+          <include name="addSubQuestionQ2S02"/>
+          <include name="selectTypeCheckboxes"/>
+          <include name="populateDropdownOptions"/>
+          <include name="selectFieldRequiredQ3S03"/>
+          <include name="inputFieldNameQ3S01"/>
+          <include name="inputShortLabelQ3S03"/>
+          <include name="addSubQuestionQ2S01"/>
+          <include name="inputShortLabelQ3S02"/>
+          <include name="inputDefaultAnswerQ2S01"/>
+          <include name="inputShortLabelQ3S01"/>
+          <include name="populateRadioOptions"/>
+          <include name="inputDefaultAnswerQ2S03"/>
+          <include name="selectSortValueQ3S01"/>
+          <include name="selectSortValueQ3S02"/>
+          <include name="selectSortValueQ3S03"/>
+          <include name="inputDefaultAnswerQ2S04"/>
+          <include name="selectFieldRequiredQ2S01"/>
+          <include name="selectFieldRequiredQ2S03"/>
+          <include name="selectFieldRequiredQ2S04"/>
+          <include name="inputFieldNameQ4S01"/>
+          <include name="populateCheckboxesOptions"/>
+          <include name="addSubQuestionQ3S03"/>
+          <include name="selectQuestionSaveQ4S01"/>
+          <include name="inputFieldNameQ4S02"/>
+          <include name="selectTypeOrgChartEmployee"/>
+          <include name="selectQuestionSaveQ4S02"/>
+          <include name="selectFieldRequiredQ2S02"/>
+          <include name="inputShortLabelQ2S01"/>
+          <include name="inputShortLabelQ2S02"/>
+          <include name="inputShortLabelQ2S03"/>
+          <include name="closeDown"/>
+          <include name="inputShortLabelQ2S04"/>
+          <include name="selectTypeImageAttachment"/>
+          <include name="addSubQuestionQ3S02"/>
+          <include name="addSubQuestionQ3S01"/>
+          <include name="selectSortValueQ4S02"/>
+          <include name="selectFieldSensitiveDataQ4S02"/>
+          <include name="selectTypeOrgChartPosition"/>
+          <include name="selectSortValueQ4S01"/>
+          <include name="selectTypeDateQ2S03"/>
+          <include name="selectFieldSensitiveDataQ4S01"/>
+          <include name="selectTypeDropdown"/>
+          <include name="selectQuestionSaveQ3S02"/>
+          <include name="selectQuestionSaveQ3S01"/>
+          <include name="selectQuestionSaveQ3S03"/>
+          <include name="setUp"/>
+          <include name="addSubQuestionQ4S01"/>
+          <include name="inputDefaultAnswerQ4S01"/>
+          <include name="selectTypeDateQ2S01"/>
+          <include name="inputDefaultAnswerQ4S02"/>
+          <include name="addSubQuestionQ4S02"/>
+        </methods>
+      </class> <!-- Execution.formsWorkflowPart2 -->
+    </classes>
+  </test> <!-- Forms Workflow Part 2(failed) -->
+  <test thread-count="5" name="Forms Workflow Part 3(failed)">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="https://leaf.va.gov/Academy/Demo1/admin/?a=form#"/>
+    <classes>
+      <class name="Execution.formsWorkflowPart3">
+        <methods>
+          <include name="closeStapleFormDialogue"/>
+          <include name="selectStapleForm02"/>
+          <include name="verifyStapledForm"/>
+          <include name="setUp"/>
+          <include name="selectFormToMergeButton"/>
+          <include name="selectViewAllForms"/>
+          <include name="initializeFramework"/>
+          <include name="selectCurrentFormByXpath02"/>
+          <include name="removeStapledForm"/>
+          <include name="saveStapledFormSelection"/>
+          <include name="closeDown"/>
+          <include name="selectFormToBeStapled"/>
+        </methods>
+      </class> <!-- Execution.formsWorkflowPart3 -->
+    </classes>
+  </test> <!-- Forms Workflow Part 3(failed) -->
 </suite> <!-- Failed suite [RegressionSuite-Prod-Demo1] -->

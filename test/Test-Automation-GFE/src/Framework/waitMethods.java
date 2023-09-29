@@ -144,7 +144,7 @@ public class waitMethods {
 		public final static int w200 = 450;		//200
 		public final static int w250 = 500;		//250
 		public final static int w300 = 550;		//300
-		public final static int w400 = 525;		//400
+		public final static int w400 = 600;		//400
 		public final static int w500 = 650;		//500
 		public final static int w600 = 800;		//600
 		public final static int w750 = 1000;	//750

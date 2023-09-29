@@ -181,12 +181,24 @@ public class formsWorkflowPart3_BAK extends setupFramework {
 		@Test(priority = 430) //
 		private void selectFormToMergeButton() {
 			waitMethods.waiter(waitMethods.w300);     //      						
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/main/div/span"));
-			//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Select a form to merge')]"));
-	    	highlightElement.highLightElement(driver, ele);
-	   		ele.click();
+			String url = driver.getCurrentUrl();
+			
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/main/div/span"));
+				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Select a form to merge')]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/main/div/span"));
+				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Select a form to merge')]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			}
+			
+			
 			waitMethods.waiter(waitMethods.w300);
-	    	System.out.println("Select a form to merge/staple");			
+	    	System.out.println("Select a form to merge/staple");
+	    	
 		}
 		
 		
