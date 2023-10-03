@@ -262,14 +262,14 @@ public class formsWorkflowPart3 extends setupFramework {
 			
 			String strExpected = "Staple Test";
 			
-			waitMethods.waiter(waitMethods.w300);   
-			WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Staple Test')]"));
+			waitMethods.waiter(waitMethods.w500);   
+			WebElement ele = driver.findElement(By.xpath("//li[contains(text(), 'Staple Test')]"));
 			//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Staple Form 01')]"));
 	    	highlightElement.highLightElement(driver, ele);
 	    	
 	   		String strActual = ele.getText().toString();
 	   		Assert.assertEquals(strActual, strExpected);
-			waitMethods.waiter(waitMethods.w300);
+			waitMethods.waiter(waitMethods.w200);
 	    	System.out.println("Verify form was Stapled");
 		}
 
