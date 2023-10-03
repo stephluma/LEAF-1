@@ -1241,8 +1241,8 @@ public class formsWorkflow extends setupFramework {
 //		//////==============    Q1 Subquestion 02 =================================================================
 	
 	
-			@Test(priority = 269) //  add sub-question										//	ERR PROD	
-			private void addSubQuestion01S02() {											// Try span or even button
+			@Test(priority = 269) //  add sub-question				
+			private void addSubQuestion01S02() {					
 				String url = driver.getCurrentUrl();    
 				waitMethods.waiter(waitMethods.w500);
 				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) { 			
@@ -1796,7 +1796,7 @@ public class formsWorkflow extends setupFramework {
 				
 			
 				
-				@Test(priority = 320) //																// ERR PROD	
+				@Test(priority = 320) //		
 				private void selectQuestionSave01S02_02() {			//
 					waitMethods.waiter(waitMethods.w500);       
 					WebElement ele = driver.findElement(By.id("button_save"));
@@ -1808,7 +1808,7 @@ public class formsWorkflow extends setupFramework {
 				
 				
 				
-				@Test(priority = 322) //  																//	ERR PROD
+				@Test(priority = 322) //  				
 				private void editQuestion01S02_2() {	//
 					waitMethods.waiter(waitMethods.w500);  
 					WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Test Q1S02 Sub-question Grid')]"));
@@ -1834,6 +1834,10 @@ public class formsWorkflow extends setupFramework {
 				2 is in Pos 1 L
 				
 				
+				
+				
+				
+				
 			*/
 				
 				@Test(priority = 324) //  																// ERR PROD						
@@ -1841,74 +1845,85 @@ public class formsWorkflow extends setupFramework {
 					waitMethods.waiter(waitMethods.w500);       
 					String url = driver.getCurrentUrl();	
 					if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
-						WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[1]/img[2]"));
+						WebElement ele = driver.findElement(By.xpath("/html/body/div[4]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[1]/img[2]"));
 				    	highlightElement.highLightElement(driver, ele);
 				   		ele.click();
-						waitMethods.waiter(waitMethods.w300);
+						waitMethods.waiter(waitMethods.w500);
 						
-				   		WebElement ele2 = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[2]"));
+				   		WebElement ele2 = driver.findElement(By.xpath("/html/body/div[4]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[2]"));
 				    	highlightElement.highLightElement(driver, ele2);
 				   		ele2.click();
-						waitMethods.waiter(waitMethods.w300);
+						waitMethods.waiter(waitMethods.w500);
 		
-				   		WebElement ele3 = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[3]/img[2]"));
+				   		WebElement ele3 = driver.findElement(By.xpath("/html/body/div[4]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[3]/img[2]"));
 				    	highlightElement.highLightElement(driver, ele3);
 				   		ele3.click();
-						waitMethods.waiter(waitMethods.w300);				
+						waitMethods.waiter(waitMethods.w500);				
 						
-				   		waitMethods.waiter(waitMethods.w300);
 					} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
 						// From left: first arrow click  OK
 						WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[1]/img[2]"));
 				    	highlightElement.highLightElement(driver, ele);
 				   		ele.click();
-						waitMethods.waiter(waitMethods.w300);
+						waitMethods.waiter(waitMethods.w500);
 																	//ok 
 				   		WebElement ele2 = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[2]"));
 				    	highlightElement.highLightElement(driver, ele2);
 				   		ele2.click();
-						waitMethods.waiter(waitMethods.w300);
+						waitMethods.waiter(waitMethods.w500);
 																	//ok ???
 				   		WebElement ele3 = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[3]/img[2]"));
 				    	highlightElement.highLightElement(driver, ele3);
 				   		ele3.click();
-						waitMethods.waiter(waitMethods.w300);				
+						waitMethods.waiter(waitMethods.w100);				
 						
 					}
 				
 			    	System.out.println("Move Col #1 3 places to right");
 				}	
 				
-				
+				//   
 				@Test(priority = 332) //  																// ERR PROD			
-				private void moveCol2_1PositionsR() {			//
-					waitMethods.waiter(waitMethods.w500);       
+				private void moveCol2_1PositionsR() {	
+					waitMethods.waiter(waitMethods.w500);
+					String url = driver.getCurrentUrl();	
+					if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+						WebElement ele = driver.findElement(By.xpath("/html/body/div[4]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[2]"));
+				    	highlightElement.highLightElement(driver, ele);
+				   		ele.click();	
+					} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+						WebElement ele = driver.findElement(By.xpath("/html/body/div[4]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[3]/img[2]"));
+				    	highlightElement.highLightElement(driver, ele);
+				   		ele.click();
+					}
 					
-					WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[2]"));
-			    	highlightElement.highLightElement(driver, ele);
-			   		ele.click();
-					
-			   		waitMethods.waiter(waitMethods.w500);
+			   		waitMethods.waiter(waitMethods.w100);
 			   		System.out.println("Move Col #2 1 places to right");
 				}	
 				
 				
 				@Test(priority = 334) //  																// ERR PROD		
-				private void moveCol2_1PositionsL() {			//
+				private void moveCol2_1PositionsL() {	
 					waitMethods.waiter(waitMethods.w500);       
+					String url = driver.getCurrentUrl();	
+					if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+						WebElement ele = driver.findElement(By.xpath("/html/body/div[4]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[1]"));
+				    	highlightElement.highLightElement(driver, ele);
+				   		ele.click();
+					} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+						WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[1]"));
+				    	highlightElement.highLightElement(driver, ele);
+				   		ele.click();
+					}		
 					
-					WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[1]"));
-			    	highlightElement.highLightElement(driver, ele);
-			   		ele.click();
-					
-			   		waitMethods.waiter(waitMethods.w500);
+			   		waitMethods.waiter(waitMethods.w100);
 			   		System.out.println("Move Col #2 1 places to left");
 				}	
 				
 						
 				
-				@Test(priority = 338) //  																// ERR PROD	
-				private void selectQuestionSave01S02b() {	//
+				@Test(priority = 338) //  	
+				private void selectQuestionSave01S02b() { 
 					waitMethods.waiter(waitMethods.w500);       
 					WebElement ele = driver.findElement(By.id("button_save"));
 			    	highlightElement.highLightElement(driver, ele);
