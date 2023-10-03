@@ -2,28 +2,16 @@ package Execution;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
-import org.testng.AssertJUnit;
-import org.testng.asserts.*;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.NoSuchElementException;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.support.ui.Select;			//Select Method
 
 import Framework.AppVariables;
-import Framework.TestData;
 import Framework.setupFramework;
 import Framework.waitMethods;
 import Framework.highlightElement;
@@ -88,10 +76,11 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	*/
 	
 	
-		@Test(priority = 360) //  
+		@Test(priority = 360) //  								 
 		private void initializePOM() {			//
 			waitMethods.waiter(waitMethods.w300);       
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div[3]"));
+			WebElement ele = driver.findElement(By.xpath("//*[contains(text(), ' Import Form')]"));
+			//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div[3]"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.click();
 			waitMethods.waiter(waitMethods.w300);
@@ -102,15 +91,15 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	
 	
 	
-			// For PreProd      /html/body/div[2]/div/div[1]/div[2]/div[2]/div[1]/div[2]
 		//Select Work-in-progress Form build using formsWorkflow.java
 		@Test(priority = 380)  //Select the form that is in first position (top left)
 		private void selectCurrentFormByXpath() {	
 			waitMethods.waiter(waitMethods.w1k);  //      
 			String url = driver.getCurrentUrl();
 			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) { 
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div[1]/div[1]"));
-		    	highlightElement.highLightElement(driver, ele);
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div[2]/div[2]/div[1]/div[2]"));
+				//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div[1]/div[1]"));
+				highlightElement.highLightElement(driver, ele);
 		    	ele.click();
 		   		waitMethods.waiter(waitMethods.w300);
 			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {	  													   
@@ -150,7 +139,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: Currency");			
@@ -170,7 +159,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: Short Label)");			
@@ -212,7 +201,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Question: input Default Answer Q2");			
@@ -249,7 +238,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			WebElement ele = driver.findElement(By.id("sort"));
 	    	highlightElement.highLightElement(driver, ele);
 	   		ele.sendKeys("5");
-			waitMethods.waiter(waitMethods.w300);
+			//waitMethods.waiter(waitMethods.w300);
 	    	System.out.println("Test Question: Sort Priority");
 		}
 		
@@ -339,25 +328,33 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			selectCurrentFormByXpath();
 		}	
 	
-		
-		
+
 		@Test(priority = 430) //  
 		private void addSubQuestionQ2S01() {	//
 			waitMethods.waiter(waitMethods.w300);  
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
-	    	highlightElement.highLightElement(driver, ele);
-	   		ele.click();
-			waitMethods.waiter(waitMethods.w300);
+			String url = driver.getCurrentUrl();
+			
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+				//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+				highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+				waitMethods.waiter(waitMethods.w300);			
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				// Looks as if it is increasing the 1st and 3rd div.   Add     [1]   to 3rd div
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+				//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+				highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+				waitMethods.waiter(waitMethods.w300);
+
+			}
+
 	    	System.out.println("Add Sub-question Q2S01");
 		}
 		
 		
-		
-		
-													//It grabbed the 1st instance, I need second - Note sure how it sorts forms??
-													//CSS:  #PHindicator_148_1 > div > span
-													//XPath:  /html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span
-	
+
 		
 		@Test(priority = 431) //
 		private void inputFieldNameQ2S01() {
@@ -371,7 +368,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-question 1: Input Field Name)");			
@@ -391,7 +388,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Sub-question Q2S01: Date)");			
@@ -430,7 +427,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-Question 1: Default Answer");			
@@ -484,23 +481,27 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 
 		
 		
-		
-		
-		
-		
-		
-		
-		
+	
 //Q2S02
-		
-		//Select add sub-question							//Used XPath for now - TODO
+																						
+		//Select add sub-question					
 		@Test(priority = 446) //  
 		private void addSubQuestionQ2S02() {	//
 			waitMethods.waiter(waitMethods.w300);  
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
-			//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-	    	highlightElement.highLightElement(driver, ele);
-	   		ele.click();
+			String url = driver.getCurrentUrl();
+			
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+				//WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[3]/div/div/div/div[1]/span/span[2]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			}
+			
 			waitMethods.waiter(waitMethods.w300);
 	    	System.out.println("Create sub-question Q2S02");
 		}
@@ -518,7 +519,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-question 2: Input Field Name)");			
@@ -538,7 +539,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Sub-question Q2S02: Radio)");			
@@ -597,7 +598,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-Question 2: Default Answer");			
@@ -658,14 +659,25 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		
 		
 //Q2S03		
-		//Select add sub-question							//Used XPath for now - TODO
+		//Select add sub-question									// 
 		@Test(priority = 468) //  
 		private void addSubQuestionQ2S03() {	//
 			waitMethods.waiter(waitMethods.w300);  
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
-			//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-	    	highlightElement.highLightElement(driver, ele);
-	   		ele.click();
+			String url = driver.getCurrentUrl();
+			
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+				
+			}
+			
 			waitMethods.waiter(waitMethods.w300);
 	    	System.out.println("Create sub-question Q2S03");
 		}
@@ -683,7 +695,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-question 3: Input Field Name)");			
@@ -703,7 +715,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Test Sub-question Q2S03: Checkbox)");			
@@ -755,7 +767,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 	    		char c = name.charAt(i);
 	    		String s = new StringBuilder().append(c).toString();
 	    		ele.sendKeys(s);
-	    		waitMethods.waiter(waitMethods.w20);
+	    		waitMethods.waiter(waitMethods.w10);
 	    	}
 	    	
 	    	System.out.println("Q2 Sub-Question 3: Default Answer");			
@@ -811,25 +823,31 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		
 		
 		
-		
-		
-		
-		
-		
 //Q2S04  
-			
-			//Select add sub-question							//Used XPath for now - TODO
+
+		
+			//Select add sub-question						
 			@Test(priority = 488) //  
 			private void addSubQuestionQ2S04() {	//
 				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-		    	highlightElement.highLightElement(driver, ele);
-		   		ele.click();
-				waitMethods.waiter(waitMethods.w300);
+				String url = driver.getCurrentUrl();
+				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+					//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/span"));
+					highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+					
+				}
+				waitMethods.waiter(waitMethods.w100);
 		    	System.out.println("Create Question Q2S04");
 			}
+
 			
+
 
 			@Test(priority = 490) //
 			private void inputFieldNameQ2S04() {
@@ -843,7 +861,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q2S04: Input Field Name)");			
@@ -863,10 +881,10 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
-		    	System.out.println("Test Sub-question Q2S04: Checkbox)");			
+		    	System.out.println("Test Sub-question Q2S04: Checkboxes)");			
 			}
 
 			
@@ -919,7 +937,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q2S04: Default Answer");			
@@ -946,7 +964,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		   		//ele.click();
 		   		//ele.click();
 		    	//waitMethods.waiter(waitMethods.w300);
-		    	System.out.println("Q3: Sensitive Data = N");
+		    	System.out.println("Q2S04: Sensitive Data = N");
 			}
 			
 			
@@ -972,24 +990,31 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    	System.out.println("Q2 Sub-Question 3: Save button");
 			}
 
+		
+			
 
-			
-			
-			
 			
 			
 			
 //Q3
-
-
+     
 			//Add Section Heading:  Q3
 			@Test(priority = 508) //  
-			private void addSubQuestionQ3() {	//
+			private void selectAddSectionHeadingQ3() {	//
 				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-		    	highlightElement.highLightElement(driver, ele);
-		   		ele.click();
+				String url = driver.getCurrentUrl();
+				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+					WebElement ele = driver.findElement(By.xpath("//*[contains(text(), ' Add Section Heading')]"));
+					// This is the XPath
+					//WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[2]"));
+					highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				}
+				
 				waitMethods.waiter(waitMethods.w300);
 		    	System.out.println("Create Question Q3");
 			}
@@ -1007,7 +1032,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3: Input Field Name)");			
@@ -1027,7 +1052,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3: Multiselect)");			
@@ -1049,7 +1074,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 				waitMethods.waiter(waitMethods.w200);
 				WebElement ele2 = driver.findElement(By.id("indicatorType"));
 				ele2.click();
-				System.out.println("Q3: Select Type Checkboxes");
+				System.out.println("Q3: Select Type Multiselect");
 			}
 			
 
@@ -1083,7 +1108,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3: Default Answer");			
@@ -1147,15 +1172,23 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			
 //Q3S01
 
-
 			//Select add sub-question
 			@Test(priority = 528) //  
 			private void addSubQuestionQ3S01() {	//
 				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-		    	highlightElement.highLightElement(driver, ele);
-		   		ele.click();
+				String url = driver.getCurrentUrl();
+				
+				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
+					//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				}
+				
 				waitMethods.waiter(waitMethods.w300);
 		    	System.out.println("Create Question Q3S01");
 			}
@@ -1173,7 +1206,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3S01: Input Field Name)");			
@@ -1193,7 +1226,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q3S01: Dropdown)");			
@@ -1249,7 +1282,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3S01: Default Answer");			
@@ -1313,10 +1346,19 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			@Test(priority = 548) //  
 			private void addSubQuestionQ3S02() {	//
 				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-		    	highlightElement.highLightElement(driver, ele);
-		   		ele.click();
+				String url = driver.getCurrentUrl();
+				
+				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
+					//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				}
+				
 				waitMethods.waiter(waitMethods.w300);
 		    	System.out.println("Create Question Q3S02");
 			}
@@ -1334,7 +1376,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3S02: Input Field Name)");			
@@ -1354,7 +1396,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q3S02: File Attachment)");			
@@ -1410,7 +1452,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3S02: Default Answer");			
@@ -1470,20 +1512,29 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 					
 //Q3S03   image			Text = Image Attachment
 
-
 			//Select add sub-question
 			@Test(priority = 568) //  
 			private void addSubQuestionQ3S03() {	//
 				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-		    	highlightElement.highLightElement(driver, ele);
-		   		ele.click();
+				String url = driver.getCurrentUrl();
+				
+				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				}
+				
 				waitMethods.waiter(waitMethods.w300);
 		    	System.out.println("Create Question Q3S03");
 			}
 			
 
+			
 			@Test(priority = 570) //
 			private void inputFieldNameQ3S03() {
 				waitMethods.waiter(waitMethods.w300);       
@@ -1496,7 +1547,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3S03: Input Field Name)");			
@@ -1516,7 +1567,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q3S03: Image Attachment)");			
@@ -1572,7 +1623,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q3S03: Default Answer");			
@@ -1635,10 +1686,18 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			@Test(priority = 586) //  					*****  Errs Here  *****
 			private void addSubQuestionQ4() {	//
 				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-		    	highlightElement.highLightElement(driver, ele);
-		   		ele.click();
+				String url = driver.getCurrentUrl();
+				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();				
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+					WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Section Heading')]"));
+					//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				}
+				
 				waitMethods.waiter(waitMethods.w300);
 		    	System.out.println("Create Question Q4");
 			}
@@ -1656,7 +1715,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q4: Input Field Name)");			
@@ -1676,7 +1735,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q4: Orgchart Group)");			
@@ -1732,7 +1791,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q4: Default Answer");			
@@ -1796,10 +1855,17 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			@Test(priority = 604) //  
 			private void addSubQuestionQ4S01() {	//
 				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[4]/div/div[2]/div/span"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-		    	highlightElement.highLightElement(driver, ele);
-		   		ele.click();
+				String url = driver.getCurrentUrl();		
+				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[4]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[4]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				}
+				
 				waitMethods.waiter(waitMethods.w300);
 		    	System.out.println("Create Question Q4S01");
 			}
@@ -1817,7 +1883,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q4S01: Input Field Name)");			
@@ -1837,7 +1903,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q4S01: Orgchart Position)");			
@@ -1893,7 +1959,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q4S01: Default Answer");			
@@ -1958,10 +2024,17 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			@Test(priority = 622) //  
 			private void addSubQuestionQ4S02() {	//
 				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[4]/div/div[2]/div/span"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
-		    	highlightElement.highLightElement(driver, ele);
-		   		ele.click();
+				String url = driver.getCurrentUrl();
+				if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[1]/div[4]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();				
+				} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+					WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[4]/div/div[2]/div/span"));
+			    	highlightElement.highLightElement(driver, ele);
+			   		ele.click();
+				}
+				
 				waitMethods.waiter(waitMethods.w300);
 		    	System.out.println("Create Question Q4S02");
 			}
@@ -1979,7 +2052,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q4S02: Input Field Name)");			
@@ -1999,7 +2072,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q4S02: Orgchart Employee)");			
@@ -2055,7 +2128,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q4S02: Default Answer");			
@@ -2117,11 +2190,11 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 //Q5		raw_data					Raw Data (for programmers)			
 		
 			//Select add Section Heading
-			@Test(priority = 640) //  
-			private void addSubQuestionQ5() {	//
-				waitMethods.waiter(waitMethods.w300);  
-				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]"));
-				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Sub-question')]"));
+			@Test(priority = 640) //  									// ERR PP
+			private void selectAddSectionHeadingQ5() {	//
+				waitMethods.waiter(waitMethods.w300);  //    
+				//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]"));
+				WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Add Section Heading')]"));
 		    	highlightElement.highLightElement(driver, ele);
 		   		ele.click();
 				waitMethods.waiter(waitMethods.w300);
@@ -2129,7 +2202,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			}
 			
 
-			@Test(priority = 642) //
+			@Test(priority = 642)										 // ERR PP
 			private void inputFieldNameQ5() {
 				waitMethods.waiter(waitMethods.w300);       
 				WebElement ele = driver.findElement(By.id("name"));
@@ -2141,7 +2214,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q5: Input Field Name)");			
@@ -2149,7 +2222,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			
 
 			
-			@Test(priority = 644) //
+			@Test(priority = 644) //										 // ERR PP
 			private void inputShortLabelQ5() {
 				waitMethods.waiter(waitMethods.w300);       
 				WebElement ele = driver.findElement(By.id("description"));
@@ -2161,7 +2234,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Test Sub-question Q5: Raw Data)");			
@@ -2169,7 +2242,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 
 			
 
-			@Test(priority = 646) //
+			@Test(priority = 646) //										 // ERR PP
 			public void selectTypeRawData() {	//Q5         
 				//waitMethods.implicitWait(waitMethods.w300);
 				waitMethods.waiter(waitMethods.w200);			
@@ -2205,7 +2278,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			
 			
 			
-			@Test(priority = 648) //
+			@Test(priority = 648) 												// ERR PP
 			private void inputDefaultAnswerQ5() {
 				waitMethods.waiter(waitMethods.w300);       
 				WebElement ele = driver.findElement(By.id("default"));
@@ -2217,13 +2290,13 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    		char c = name.charAt(i);
 		    		String s = new StringBuilder().append(c).toString();
 		    		ele.sendKeys(s);
-		    		waitMethods.waiter(waitMethods.w20);
+		    		waitMethods.waiter(waitMethods.w10);
 		    	}
 		    	
 		    	System.out.println("Q5: Default Answer");			
 			}
 			
-			@Test(priority = 650) //  
+			@Test(priority = 650) //  										 // ERR PP
 			private void selectFieldRequiredQ5() {			//
 				waitMethods.waiter(waitMethods.w300);       
 				WebElement ele = driver.findElement(By.id("required"));
@@ -2234,7 +2307,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    	System.out.println("Q5: Field Required = N");
 			}
 			
-			@Test(priority = 652) //  
+			@Test(priority = 652) // 										 // ERR PP 
 			private void selectFieldSensitiveDataQ5() {			//
 				waitMethods.waiter(waitMethods.w300);       
 				WebElement ele = driver.findElement(By.id("sensitive"));
@@ -2246,7 +2319,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 			}
 			
 			
-			@Test(priority = 654) //  
+			@Test(priority = 654) //  										 // ERR PP
 			private void selectSortValueQ5() {			//
 				waitMethods.waiter(waitMethods.w300);       
 				WebElement ele = driver.findElement(By.id("sort"));
@@ -2256,7 +2329,7 @@ public class formsWorkflowPart2_BAK extends setupFramework {
 		    	System.out.println("Q5: Sort Priority");
 			}
 			
-			@Test(priority = 656) //  
+			@Test(priority = 656) //  										 // ERR PP
 			private void selectQuestionSaveQ5() {			//
 				waitMethods.waiter(waitMethods.w300);       
 				WebElement ele = driver.findElement(By.id("button_save"));
