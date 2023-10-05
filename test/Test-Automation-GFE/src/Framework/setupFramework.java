@@ -53,9 +53,6 @@ public class setupFramework {
 			//startOptions.addArguments("--user-data-dir=C:\\Users\\OITBIRRichaM1\\AppData\\Local\\Chrome\\Cache");
 			//startOptions.addArguments("--user-data-dir=C:\\Users\\OITBIRRichaM1\\AppData\\Local\\Chrome\\Cache\\SeLeNiUm");
 			
-			//startOptions.addArguments("--profile-directory=TestAutomation");
-			//startOptions.addArguments("--profile-directory=Person 2");
-			//startOptions.addArguments("--profile-directory=SeLeNiUm");
 			startOptions.addArguments("--disable-extensions");
 			startOptions.addArguments("disable-infobars");
 			startOptions.addArguments("--disable-gpu");
@@ -65,8 +62,6 @@ public class setupFramework {
 			
 			//startOptions.addArguments("--user-data-dir=C:\\Users\\OITBIRRichaM1\\AppData\\Local\\Chrome\\Cache");
 			//startOptions.addArguments("--bwsi");			//ChromeDriver starts, then nothing, no output in Console
-			//startOptions.addArguments("");
-			//startOptions.addArguments("");
 			
 			WebDriver driver = new ChromeDriver(startOptions);
 			driver.navigate().to(env);
@@ -93,7 +88,6 @@ public class setupFramework {
 //
 //			}
 
-			
 		return driver;		//DELETE when headless code is re-enabled
 	}	
 
