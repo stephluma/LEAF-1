@@ -247,7 +247,7 @@ public class userAccessGroups extends setupFramework {
 	} 
 
 	
-	//															ERR HERE - This fails occasionally ???
+	//															ERR HERE - This fails occasionally GFE
 	@Test(priority = 160) //
 	private void openAccessGroup() {
 		//System.out.println("Before opening Group\ngroupNum = " + groupNum);
