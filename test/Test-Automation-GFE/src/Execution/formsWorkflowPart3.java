@@ -104,7 +104,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		}	
 	
 
-		@Test(priority = 405) //  			 															ERR PP
+		@Test(priority = 405) //  			 		
 		private void viewHistory() {			//
 			waitMethods.waiter(waitMethods.w300);    
 			WebElement ele = driver.findElement(By.xpath("//div[contains(text(), ' View History')]"));
@@ -151,12 +151,21 @@ public class formsWorkflowPart3 extends setupFramework {
 		}			
 			
 		
-		@Test(priority = 420) //  			 															ERR PP
+		@Test(priority = 420) //  			 							
 		private void viewHistoryClose() {			//
 			waitMethods.waiter(waitMethods.w300);       
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[1]/button/span[1]"));
-	    	highlightElement.highLightElement(driver, ele);
-	   		ele.click();
+			String url = driver.getCurrentUrl();
+			
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[1]/button/span[1]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[6]/div[1]/button/span[1]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			}
+			
 			waitMethods.waiter(waitMethods.w200);
 	    	System.out.println("Clicked View History -> Close");
 		}				
@@ -179,7 +188,7 @@ public class formsWorkflowPart3 extends setupFramework {
 
 		
 
-		@Test(priority = 430) // 																		ERR PP
+		@Test(priority = 430) // 							
 		private void selectFormToMergeButton() {
 			waitMethods.waiter(waitMethods.w1k);     //      						
 			//WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/main/div/span"));
@@ -194,26 +203,43 @@ public class formsWorkflowPart3 extends setupFramework {
 		
 		
 		@Test(priority = 435) //  - Using Form: Staple Test
-		public void selectFormToBeStapled() {      //    												ERR PP
+		public void selectFormToBeStapled() {      //    				
 			//waitMethods.implicitWait(waitMethods.w300);
 			waitMethods.waiter(waitMethods.w300);			//The below opens the DDL
-			WebElement ele = driver.findElement(By.id("stapledCategoryID"));
-			highlightElement.highLightElement(driver, ele);
-			ele.click();
-			waitMethods.waiter(waitMethods.w300);
-			Select select = new Select(driver.findElement(By.id("stapledCategoryID")));
-			highlightElement.highLightElement(driver, ele);
-			//select.selectByValue("76");
-			select.selectByVisibleText("Staple Test");
-			waitMethods.waiter(waitMethods.w300);
-			WebElement ele2 = driver.findElement(By.id("stapledCategoryID"));
-			ele2.click();
+			String url = driver.getCurrentUrl();
+			
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				WebElement ele = driver.findElement(By.id("stapledCategoryID"));
+				highlightElement.highLightElement(driver, ele);
+				ele.click();
+				waitMethods.waiter(waitMethods.w300);
+				Select select = new Select(driver.findElement(By.id("stapledCategoryID")));
+				highlightElement.highLightElement(driver, ele);
+				//select.selectByValue("76");
+				select.selectByVisibleText("Staple Test");
+				waitMethods.waiter(waitMethods.w300);
+				WebElement ele2 = driver.findElement(By.id("stapledCategoryID"));
+				ele2.click();
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				WebElement ele = driver.findElement(By.id("stapledCategoryID"));
+				highlightElement.highLightElement(driver, ele);
+				ele.click();
+				waitMethods.waiter(waitMethods.w300);
+				Select select = new Select(driver.findElement(By.id("stapledCategoryID")));
+				highlightElement.highLightElement(driver, ele);
+				//select.selectByValue("76");
+				select.selectByVisibleText("Staple Test");
+				waitMethods.waiter(waitMethods.w300);
+				WebElement ele2 = driver.findElement(By.id("stapledCategoryID"));
+				ele2.click();	
+			}
+			
 			System.out.println("Staple Form Selected");
 		}
 		
 		
 		
-		@Test(priority = 440) //   																		ERR PP
+		@Test(priority = 440) //   		
 		private void saveStapledFormSelection() {			//
 			waitMethods.waiter(waitMethods.w300);       
 			WebElement ele = driver.findElement(By.id("button_save"));
@@ -224,18 +250,28 @@ public class formsWorkflowPart3 extends setupFramework {
 		}
 		
 		
-		@Test(priority = 445) //  																		ERR PP
+		@Test(priority = 445) //  	
 		private void closeStapleFormDialogue() {	//    
 			waitMethods.waiter(waitMethods.w300);       
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[1]/button/span[1]"));
-			//WebElement ele = driver.findElement(By.xpath("/html/body/div[6]/div[1]/button/span[1]"));
-	    	highlightElement.highLightElement(driver, ele);
-	   		ele.click();
+			String url = driver.getCurrentUrl();
+			
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[1]/button/span[1]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[6]/div[1]/button/span[1]"));
+		    	highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			}
+			
 			waitMethods.waiter(waitMethods.w300);
 	    	System.out.println("Close Staple Form Dialogue");
 		}
 		
 	
+		
+		
 		@Test(priority = 450) //   VIEW ALL FORMS
 		private void selectViewAllForms() {			
 			waitMethods.waiter(waitMethods.w300);   //  
@@ -247,7 +283,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		}
 		
 
-		@Test(priority = 455)  // 																	ERR PP
+		@Test(priority = 455)  // 			
 		private void selectCurrentFormByXpath02() {	
 			selectCurrentFormByXpath();
 		}	
@@ -257,8 +293,8 @@ public class formsWorkflowPart3 extends setupFramework {
 //====================================================================================
 	
 		
-	@Test(priority = 465) //  		 																ERR PP
-		private void verifyStapledForm() {			//	
+	@Test(priority = 465) //  		 			
+		private void verifyStapledForm() {	
 			
 			String strExpected = "Staple Test";
 			
@@ -276,7 +312,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		
 			
 		@Test(priority = 470) //  Staple form question given Sort Priority = 20 - Observe where it appears
-		private void selectStapleForm02() {			 													//	ERR PP
+		private void selectStapleForm02() {			 			
 			selectStapleForm();
 		}
 		
@@ -286,7 +322,7 @@ public class formsWorkflowPart3 extends setupFramework {
 //		}
 		
 		
-		@Test(priority = 475) //  Remove form 															ERR PP
+		@Test(priority = 475) //  Remove form 					
 		private void removeStapledForm() {			
 			waitMethods.waiter(waitMethods.w300);   //   
 			WebElement ele = driver.findElement(By.partialLinkText("Remove"));
@@ -297,12 +333,20 @@ public class formsWorkflowPart3 extends setupFramework {
 		}
 		
 		
-		@Test(priority = 480) // 																			ERR PP
+		@Test(priority = 480) // 		
 		private void closeStapledFormDialogue() {			
 			waitMethods.waiter(waitMethods.w300);   //   
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[1]/button/span[1]"));
-			highlightElement.highLightElement(driver, ele);
-	   		ele.click();
+			String url = driver.getCurrentUrl();
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[1]/button/span[1]"));
+				highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[6]/div[1]/button/span[1]"));
+				highlightElement.highLightElement(driver, ele);
+		   		ele.click();
+			}
+			
 			waitMethods.waiter(waitMethods.w300);
 	    	System.out.println("Remove Stapled Form");
 		}
@@ -311,12 +355,22 @@ public class formsWorkflowPart3 extends setupFramework {
 			
 			////////////////    Add Internal-Use    \\\\\\\
 		
-		@Test(priority = 485) //  																			ERR PP
+		@Test(priority = 485) //  			
 		private void addInternalUseForm() {			
-			waitMethods.waiter(waitMethods.w300);   //    /html/body/div[1]/div/div/div[1]/div[3]
-			WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div[3]"));
-	    	highlightElement.highLightElement(driver, ele);
-	    	ele.click();
+			waitMethods.waiter(waitMethods.w300);   
+			String url = driver.getCurrentUrl();
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				//WebElement ele = driver.findElement(By.xpath("//div[contains(text(), 'Internal Use Form')]"));
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/div[3]"));
+		    	highlightElement.highLightElement(driver, ele);
+		    	ele.click();
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				//WebElement ele = driver.findElement(By.xpath("//button[contains(text(), 'Internal Use Form')]"));
+				WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div[3]"));
+		    	highlightElement.highLightElement(driver, ele);
+		    	ele.click();
+			}
+			
 			waitMethods.waiter(waitMethods.w300);
 	    	System.out.println("click on + Add Internal-Use");
 		}
@@ -342,7 +396,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		
 	
 		
-		@Test(priority = 495) //																ERR PP
+		@Test(priority = 495) //							
 		private void inputFormDesc() {
 			waitMethods.waiter(waitMethods.w300);       
 			WebElement ele = driver.findElement(By.id("description"));
@@ -362,7 +416,7 @@ public class formsWorkflowPart3 extends setupFramework {
 
 
 		
-		@Test(priority = 500) //  Cancel form													ERR PP
+		@Test(priority = 500) //  Cancel form						
 		private void cancelInternalUseForm() {			
 			waitMethods.waiter(waitMethods.w300);   //   
 			WebElement ele = driver.findElement(By.id("button_cancelchange"));
@@ -374,20 +428,20 @@ public class formsWorkflowPart3 extends setupFramework {
 		
 		//// Begin creating new Internal Use Form (above case deleted it)
 	
-		@Test(priority = 505) //  																ERR PP
+		@Test(priority = 505) //  						
 		private void addInternalUseForm02() {			
 			addInternalUseForm();
 		}
 		
 		
-		@Test(priority = 510) // 																ERR PP
+		@Test(priority = 510) // 							
 		private void inputFormLabel02() {
 			inputFormLabel();
 		}
 		
 		
 		
-		@Test(priority = 515) //																ERR PP
+		@Test(priority = 515) //						
 		private void inputFormDesc02() {
 			waitMethods.waiter(waitMethods.w300);       
 			WebElement ele = driver.findElement(By.id("description"));
@@ -406,7 +460,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		}
 
 		
-		@Test(priority = 520) //  Save form 															ERR PP
+		@Test(priority = 520) //  Save form 						
 		private void saveInternalUseForm() {			
 			waitMethods.waiter(waitMethods.w300);   //   
 			WebElement ele = driver.findElement(By.id("button_save"));
@@ -419,7 +473,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		
 		/////////// Internal Use form created, BUT it is not visible until you exit and come back in
 	
-		@Test(priority = 525) //   VIEW ALL FORMS 															ERR PP
+		@Test(priority = 525) //   VIEW ALL FORMS 				
 		private void selectViewAllForms02() {			
 			waitMethods.waiter(waitMethods.w300);   //  
 				selectViewAllForms();
@@ -427,13 +481,13 @@ public class formsWorkflowPart3 extends setupFramework {
 		
 
 		@Test(priority = 530)  //Select the form that is in first position (top left)
-		private void selectCurrentFormByXpath03() {	  // 											ERR PP
+		private void selectCurrentFormByXpath03() {	  // 		
 			selectCurrentFormByXpath();
 		}	
 
 		
 
-		@Test(priority = 535) //   																	ERR PP
+		@Test(priority = 535) //   		
 		private void verifyInternalUseForm() {			//
 			
 			String strExpected = "Internal Use Form";
@@ -453,7 +507,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		}
 		
 			
-		@Test(priority = 540) //   																			ERR PP
+		@Test(priority = 540) //   							
 		private void selectInternalUseForm() {			
 			waitMethods.waiter(waitMethods.w300);   //  
 			WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Internal Use Form')]"));
@@ -464,7 +518,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		}
 		
 
-		@Test(priority = 545) //  																			ERR PP	
+		@Test(priority = 545) //  				
 		private void deleteInternalUseForm() {			
 			waitMethods.waiter(waitMethods.w300);   //  
 			WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Delete this form')]"));
@@ -476,7 +530,7 @@ public class formsWorkflowPart3 extends setupFramework {
 
 		
 		
-		@Test(priority = 550) //  																			ERR PP
+		@Test(priority = 550) //  										
 		private void confirmDeleteInternalUseForm() {			
 			waitMethods.waiter(waitMethods.w300);   // confirm_button_save 
 			WebElement ele = driver.findElement(By.id("confirm_button_save"));
@@ -495,7 +549,7 @@ public class formsWorkflowPart3 extends setupFramework {
 		
 		
 		
-		@Test(priority = 560) //   																		ERR PP
+		@Test(priority = 560) //   									
 		private void selectExportForm() {			
 			waitMethods.waiter(waitMethods.w300);  
 			WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Export Form')]"));
@@ -571,13 +625,13 @@ public class formsWorkflowPart3 extends setupFramework {
 ////////////////////////  Change Form Name and Priority, setting up for next run \\\\\\\\\\\\\\\\\
 		
 		
-	@Test(priority = 577)  //Select the form									// ERR HERE 3/1/23
+	@Test(priority = 577)  //Select the form		
 	private void selectCurrentFormByXpath01() {
 		selectCurrentFormByXpath();
 	}
 		
 		
-	@Test(priority = 580) //		 															ERR PP
+	@Test(priority = 580) //		 			
 	private void selectEditProperties02() {
 		waitMethods.waiter(waitMethods.w250);       
 		//WebElement ele = driver.findElement(By.xpath("//*[text()='Edit Properties']"));
@@ -593,7 +647,7 @@ public class formsWorkflowPart3 extends setupFramework {
 
 	
 	
-	@Test(priority = 585) //														// ERR HERE 3/1/23
+	@Test(priority = 585) //				
 	private void changeFormName() {
 		waitMethods.waiter(waitMethods.w250);       
 		WebElement ele = driver.findElement(By.id("name"));
@@ -614,7 +668,7 @@ public class formsWorkflowPart3 extends setupFramework {
 	
 
 	@Test(priority = 590) //
-	private void changeDescription() {											// ERR HERE 3/1/23
+	private void changeDescription() {				
 		waitMethods.waiter(waitMethods.w250);       
 		WebElement ele = driver.findElement(By.id("description"));
     	highlightElement.highLightElement(driver, ele);
@@ -634,7 +688,7 @@ public class formsWorkflowPart3 extends setupFramework {
 
 	
 	// Change Need to Know back to Available
-	@Test(priority = 593) // 																		ERR PP
+	@Test(priority = 593) // 			Will not change due to an 'enhancement'				ERR PP
 	public void selectNeedToKnow() {         
 		//waitMethods.implicitWait(waitMethods.w500);
 		waitMethods.waiter(waitMethods.w200);			//The below opens the DDL
@@ -652,7 +706,7 @@ public class formsWorkflowPart3 extends setupFramework {
 	}
 	
 	
-	@Test(priority = 595) //  Accepts pos & neg integers 							// ERR HERE 3/1/23
+	@Test(priority = 595) //  Accepts pos & neg integers 						
 	private void selectSortPriority02() {	
 		waitMethods.waiter(waitMethods.w250);       
 		WebElement ele = driver.findElement(By.id("sort"));
@@ -666,7 +720,7 @@ public class formsWorkflowPart3 extends setupFramework {
 	
 	
 	
-	@Test(priority = 600) //  														// ERR HERE 3/1/23
+	@Test(priority = 600) //  		
 	private void selectSave() {
 		waitMethods.waiter(waitMethods.w250);       
 		WebElement ele = driver.findElement(By.id("button_save"));

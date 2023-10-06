@@ -1892,7 +1892,7 @@ public class formsWorkflow extends setupFramework {
 				    	highlightElement.highLightElement(driver, ele);
 				   		ele.click();	
 					} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
-						WebElement ele = driver.findElement(By.xpath("/html/body/div[4]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[3]/img[2]"));
+						WebElement ele = driver.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/main/fieldset[3]/div[3]/div/div[2]/img[2]"));
 				    	highlightElement.highLightElement(driver, ele);
 				   		ele.click();
 					}
