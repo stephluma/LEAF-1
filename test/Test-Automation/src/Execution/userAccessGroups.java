@@ -264,7 +264,7 @@ public class userAccessGroups extends setupFramework {
 //  Input User = employeeSelectorInput		Considine, Warren Bayer		
 	@Test(priority = 170)
 	public void inputEmployee() {   
-    	waitMethods.waiter(waitMethods.w1500);     			//Input Box
+    	waitMethods.waiter(waitMethods.w2k);     			//Input Box
     	WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[2]/div[1]/input"));
     	highlightElement.highLightElement(driver, ele);
     	
@@ -278,7 +278,7 @@ public class userAccessGroups extends setupFramework {
      		waitMethods.waiter(waitMethods.w10);
     	}
     	
-    	waitMethods.waiter(waitMethods.w100);				//Results Grid
+    	waitMethods.waiter(waitMethods.w300);				//Results Grid
  	    System.out.println("Input User and Select");		
 	}
 	
@@ -530,7 +530,7 @@ public class userAccessGroups extends setupFramework {
 	
 	@Test(priority = 350) 
 	private void deleteUser_0() {		// Should be Abbott, Roman
-		waitMethods.waiter(waitMethods.w300);
+		waitMethods.waiter(waitMethods.w1500);
 		WebElement ele = driver.findElement(By.id("removeMember_0"));
         highlightElement.highLightElement(driver, ele);  
         ele.click();	
@@ -695,6 +695,7 @@ public class userAccessGroups extends setupFramework {
 	@Test(priority = 555) 
 	private void ShowHideInactive3() {	
 		ShowHideInactive();
+		waitMethods.waiter(waitMethods.w1500);
 	} 
 	
 	

@@ -50,6 +50,12 @@ public class formsWorkflow extends setupFramework {
 		TODO:
 		Search for text on the 'no cert' page
 		Use an if to determine whether to run this
+		
+		
+		//Use Explicit waits
+		 * WebElement ele;
+			ele = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("xpath or contains")));
+			ele.click();
 			
 	*/			
 		

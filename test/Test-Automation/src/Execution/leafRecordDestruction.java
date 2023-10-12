@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -26,13 +27,13 @@ import Framework.waitMethods;
 import Framework.highlightElement;
 
 
-public class leafRecords extends setupFramework {
+public class leafRecordDestruction extends setupFramework {
 
 	
 	public String sRand;
 	public String groupNum;
 	public String nexusURL = "https://localhost/LEAF_Nexus/?a=view_group&groupID=";
-	public String portalURL = "https://localhost/LEAF_Request_Portal/admin/?a=mod_groups";
+	public String portalURL = "https://localhost/LEAF_Request_Portal/admin/?a=form_vue#/";
 	public String id;		
 	public WebDriver driverNexus, driverPortal;
 
@@ -183,31 +184,62 @@ public class leafRecords extends setupFramework {
  
 	
 	
-//	@Test(priority = 4040) //
-//	private void openAccessGroup() {
-//		//System.out.println("Before opening Group\ngroupNum = " + groupNum);
-//		waitMethods.waiter(waitMethods.w2k);    //  "Test User Access Group " + groupNum
-//		WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/main/div[4]/div/div/div[1]"));		
-//		highlightElement.highLightElement(driver, ele); 
-//	    ele.click();
-//	    System.out.println("Opened Test User Group ");
-//	} 
-//	
-//
-//	 
-//	
-//	
-//	@Test(priority = 4060) //			
-//	private void deleteUserGroup() {
-//		waitMethods.waiter(waitMethods.w1k);
-//		//WebElement ele = driver.findElement(By.xpath("//*[contains(text(),'Delete Group')]"));
-//		WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[1]/div[2]/button"));	
-//	    highlightElement.highLightElement(driver, ele);
-//	    ele.click();
-//	    System.out.println("Delete User Group");
-//	} 
-//	
-//	
+	@Test(priority = 4000) //  Destruction of LEAF Record Test
+	private void openForm() {
+		waitMethods.waiter(waitMethods.w2k);    //  "Test User Access Group " + groupNum
+		WebElement ele = driver.findElement(By.xpath("//*[contains(text(),'Destruction of LEAF Record Test')]"));
+		//WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/main/div[4]/div/div/div[1]"));		
+		highlightElement.highLightElement(driver, ele); 
+	    ele.click();
+	    System.out.println("Opened Form ");
+	} 
+	
+
+	
+	
+	
+	@Test(priority = 4025) //			
+	private void updateRecordDestructionYears() {
+		waitMethods.waiter(waitMethods.w1k);
+		WebElement ele = driver.findElement(By.id("destructionAgeYears"));	
+	    highlightElement.highLightElement(driver, ele);
+	    ele.click();
+	    System.out.println("Opened Record Destruction Years DDL");
+	
+	
+	    waitMethods.waiter(waitMethods.w200);
+		Select select = new Select(driver.findElement(By.id("destructionAgeYears")));
+		highlightElement.highLightElement(driver, ele);
+		select.selectByValue("5"); 
+		waitMethods.waiter(waitMethods.w100);
+		WebElement ele2 = driver.findElement(By.id("destructionAgeYears"));
+		ele2.click();
+		System.out.println("Selected 5 years - should be 1825 days");
+	
+	
+	} 
+	
+	
+	
+	/* ASSERTION Method to determine whether the value of an element is present (or not - Fail test) 
+	 * 
+	 * 	@Test(priority = 4100) //
+		public void verifyDatabaseRecord() {         
+			//waitMethods.implicitWait(waitMethods.w300);
+			waitMethods.waiter(waitMethods.w300);	
+			WebElement ele = driver.findElement(By.partialLinkText("Destruction of LEAF Record Test")); 
+			highlightElement.highLightElement(driver, ele);
+			String verify = ele.toString();
+			System.out.println(verify);
+			Assert.assertTrue(ele.toString().contains("Destruction of LEAF Record Test"));	
+			System.out.println("Verify value in Database");
+		}
+	 * 
+	 */
+	
+	
+	
+	
 //	@Test(priority = 4080) //			
 //	private void confirmYes() {			
 //		waitMethods.waiter(waitMethods.w500);

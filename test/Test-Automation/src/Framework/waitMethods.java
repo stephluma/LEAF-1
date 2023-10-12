@@ -53,8 +53,8 @@ public class waitMethods {
 		public final static int w750 = 750;		//750
 		public final static int w1k = 1000;		//1000
 		public final static int w1500 = 1500;	//1500
-		public final static int w2500 = 2500;	//2500
 		public final static int w2k = 2000;		//2000
+		public final static int w2500 = 2500;	//2500
 		public final static int w3k = 3000;		//3000
 		public final static int w4k = 4000;		//4000
 		public final static int w5k = 5000;		//5000

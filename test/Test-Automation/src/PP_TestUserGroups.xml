@@ -56,14 +56,14 @@
 <!--
 	
 
-	<test name="Service Chiefs">
+<test name="Service Chiefs">
 		<parameter name="env" value="https://localhost/LEAF_Nexus/admin/">
 		<parameter name="browser" value="chrome"/>
 			<classes>
 				<class name="Execution.serviceChiefs"/>
 			</classes>
 		</parameter>
-	</test>    
+	</test>  
 
 
 

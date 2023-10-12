@@ -199,7 +199,7 @@ public class userAccessGroupsPart3 extends setupFramework {
 	
 	@Test(priority = 4060) //			
 	private void deleteUserGroup() {
-		waitMethods.waiter(waitMethods.w1k);
+		waitMethods.waiter(waitMethods.w3k);
 		//WebElement ele = driver.findElement(By.xpath("//*[contains(text(),'Delete Group')]"));
 		WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[1]/div[2]/button"));	
 	    highlightElement.highLightElement(driver, ele);
