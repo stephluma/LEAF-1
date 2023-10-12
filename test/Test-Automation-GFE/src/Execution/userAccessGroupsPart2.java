@@ -322,13 +322,13 @@ public class userAccessGroupsPart2 extends setupFramework {
 	
 	
 	@Test(priority = 2150)
-	public void deleteNexusUser4() {		// 4th position - Terry, Rodney
+	public void deleteNexusUser4() {		// 4th position - Telluri, Jyothi    was: Terry, Rodney
 		waitMethods.waiter(waitMethods.w1k);
 		WebElement ele = driverNexus.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div/div[4]/div[2]/div[4]/a[2]")); 
         highlightElement.highLightElement(driverNexus, ele);  
         ele.click();	
         waitMethods.waiter(waitMethods.w100);
-        System.out.println("Clicked Remove User - Terry Rodney");
+        System.out.println("Clicked Remove User - Telluri, Jyothi");
 	}
 	
 	
@@ -345,13 +345,13 @@ public class userAccessGroupsPart2 extends setupFramework {
 	
 	
 	@Test(priority = 2170)
-	public void deleteNexusUser3() {		// 3th position - Sauer, Valentin
+	public void deleteNexusUser3() {		// 3th position - Sellner, Joseph G
 		waitMethods.waiter(waitMethods.w1k);
 		WebElement ele = driverNexus.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div/div[4]/div[2]/div[3]/a[2]")); 
         highlightElement.highLightElement(driverNexus, ele);  
         ele.click();	
         waitMethods.waiter(waitMethods.w100);
-        System.out.println("Clicked Remove User - Sauer, Valentin");
+        System.out.println("Clicked Remove User - Sellner, Joseph G");
 	}
 	
 	
@@ -364,13 +364,13 @@ public class userAccessGroupsPart2 extends setupFramework {
 	
 	
 	@Test(priority = 2190)
-	public void deleteNexusUser2() {		// 2nd position - Considine, Warren
+	public void deleteNexusUser2() {		// 2nd position - Considine, John F
 		waitMethods.waiter(waitMethods.w1k);
 		WebElement ele = driverNexus.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div/div[4]/div[2]/div[2]/a[2]")); 
         highlightElement.highLightElement(driverNexus, ele);  
         ele.click();	
         waitMethods.waiter(waitMethods.w100);
-        System.out.println("Clicked Remove User - Considine, Warren");
+        System.out.println("Clicked Remove User - Considine, John F");
 	}
 	
 	
@@ -383,13 +383,13 @@ public class userAccessGroupsPart2 extends setupFramework {
 
 	
 	@Test(priority = 2210)
-	public void deleteNexusUser1() {		// 1st position - Abbott, Roman
+	public void deleteNexusUser1() {		// 1st position - Abner, Petula E
 		waitMethods.waiter(waitMethods.w1k);
 		WebElement ele = driverNexus.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div/div[4]/div[2]/div[1]/a[2]")); 
         highlightElement.highLightElement(driverNexus, ele);  
         ele.click();	
         waitMethods.waiter(waitMethods.w100);
-        System.out.println("Clicked Remove User - Abbott, Roman");
+        System.out.println("Clicked Remove User - Abner, Petula");
 	}
 	
 	

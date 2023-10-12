@@ -247,12 +247,12 @@ public class userAccessGroups extends setupFramework {
 	} 
 
 	
-	//															ERR HERE - This fails occasionally GFE
+	
 	@Test(priority = 160) //
 	private void openAccessGroup() {
 		//System.out.println("Before opening Group\ngroupNum = " + groupNum);
 		waitMethods.waiter(waitMethods.w1k);    //  "Test User Access Group " + groupNum
-		WebElement ele = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/main/div[4]/div/div/div[1]"));		
+		WebElement ele = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/main/div[4]/div/div/div[1]"));		
 		highlightElement.highLightElement(driver, ele); 
 	    ele.click();
 	    System.out.println("Opened Test User Group ");
@@ -261,14 +261,14 @@ public class userAccessGroups extends setupFramework {
 
 	
 	
-//  Input User = employeeSelectorInput		Considine, Warren Bayer		
+//  Input User = employeeSelectorInput		Considine, John F		
 	@Test(priority = 170)
 	public void inputEmployee() {   
     	waitMethods.waiter(waitMethods.w1500);     			//Input Box
     	WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[2]/div[1]/input"));
     	highlightElement.highLightElement(driver, ele);
     	
-    	String name = "Considine, Warren Bayer";
+    	String name = "Considine, John F";
     	   
     	for(int i = 0; i < name.length(); i++) {
     		char c = name.charAt(i);
@@ -299,14 +299,14 @@ public class userAccessGroups extends setupFramework {
 	
 	
 	
-	//Input User 2 = employeeSelectorInput	Sauer, Valentin Will.
+	//Input User 2 = employeeSelectorInput	Sellner, Joseph G.
 	@Test(priority = 200)
 	public void inputEmployee2() {   
     	waitMethods.waiter(waitMethods.w1500);     			//Input Box
     	WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[2]/div[1]/input"));
     	highlightElement.highLightElement(driver, ele);
     	
-    	String name = "Sauer, Valentin Will";
+    	String name = "Sellner, Joseph G";
     	   
     	for(int i = 0; i < name.length(); i++) {
     		char c = name.charAt(i);
@@ -338,14 +338,14 @@ public class userAccessGroups extends setupFramework {
 	
 	
 	
-	//  Input User 3 = employeeSelectorInput	Abbott, Roman Spencer
+	//  Input User 3 = employeeSelectorInput	Abner, Petula E.
 	@Test(priority = 230)
 	public void inputEmployee3() {   
     	waitMethods.waiter(waitMethods.w1500);     			//Input Box
     	WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[2]/div[1]/input"));
     	highlightElement.highLightElement(driver, ele);
     	
-    	String name = "Abbott, Roman Spencer";
+    	String name = "Abner, Petula E";
     	   
     	for(int i = 0; i < name.length(); i++) {
     		char c = name.charAt(i);
@@ -376,14 +376,14 @@ public class userAccessGroups extends setupFramework {
 
 	
 	
-	//  Input User 4 for PRUNING = employeeSelectorInput	Thiel, Darwin Ullrich
+	//  Input User 4 for PRUNING = employeeSelectorInput	Tanner, Amanda L
 	@Test(priority = 239)
 	public void inputEmployee4() {   
     	waitMethods.waiter(waitMethods.w1k);     			//Input Box
     	WebElement ele = driver.findElement(By.xpath("/html/body/div[3]/div[2]/form/div/main/div[2]/div[1]/input"));
     	highlightElement.highLightElement(driver, ele);
     	
-    	String name = "Thiel, Darwin Ullrich";
+    	String name = "Tanner, Amanda L";
     	   
     	for(int i = 0; i < name.length(); i++) {
     		char c = name.charAt(i);
@@ -529,7 +529,7 @@ public class userAccessGroups extends setupFramework {
 	/***********    Deleting Users from Leaf Portal  Last one is Pruned (bc not added to Nexus)  ***************/
 	
 	@Test(priority = 350) 
-	private void deleteUser_0() {		// Should be Abbott, Roman
+	private void deleteUser_0() {		// Should be Abner, Petula E
 		waitMethods.waiter(waitMethods.w300);
 		WebElement ele = driver.findElement(By.id("removeMember_0"));
         highlightElement.highLightElement(driver, ele);  
@@ -548,7 +548,7 @@ public class userAccessGroups extends setupFramework {
 
 	
 	
-	@Test(priority = 370) // Should be Abbott, Roman
+	@Test(priority = 370) // Should be Abner, Petula E
 	private void deleteUser_0_1() {		
 		deleteUser_0(); 
 	} 
@@ -721,11 +721,6 @@ public class userAccessGroups extends setupFramework {
 		openAccessGroup();
 	} 
 	
-	
-
-	
-	
-	// Comment all above for the 'Testing' version
 
 	
 	
@@ -788,15 +783,14 @@ public class userAccessGroups extends setupFramework {
 	
 	
 	
-	
-	//Input NEXUS User 		Terry, Rodney Jacobi	
+	//Input NEXUS User 		Terry, Rodney Jacobi replace with Telluri, Jyothi	
 	@Test(priority = 1020)
 	public void inputNexusEmployee() {   
 	  	waitMethods.waiter(waitMethods.w300);     			//Input Box
 	  	WebElement ele = driverNexus.findElement(By.xpath("/html/body/div[5]/div[2]/form/div/div[3]/div[3]/div[1]/input"));
 	  	highlightElement.highLightElement(driverNexus, ele);
 	  	
-	  	String name = "Terry, Rodney Jacobi";
+	  	String name = "Telluri, Jyothi";
 	  	   
 	  	for(int i = 0; i < name.length(); i++) {
 	  		char c = name.charAt(i);
@@ -839,7 +833,7 @@ public class userAccessGroups extends setupFramework {
 	
 	
 	
-	
+	//PICKUP HERE PP
 	//Input NEXUS User 			Walker, Taina Moen
 	@Test(priority = 1060)
 	public void inputNexusEmployee2() {   
@@ -919,7 +913,7 @@ public class userAccessGroups extends setupFramework {
 	@Test(priority = 1200)
 	public void selectMemberPosition1() {
 		waitMethods.waiter(waitMethods.w2k);
-		WebElement ele = driverNexus.findElement(By.xpath("//a[contains(text(),'Abbott, Roman')]"));
+		WebElement ele = driverNexus.findElement(By.xpath("//a[contains(text(),'Abner, Petula E')]"));
         highlightElement.highLightElement(driverNexus, ele);  
         ele.click();	
         waitMethods.waiter(waitMethods.w100);
@@ -982,7 +976,7 @@ public class userAccessGroups extends setupFramework {
 	@Test(priority = 1250)
 	public void selectMemberPosition2() {
 		waitMethods.waiter(waitMethods.w2500);
-		WebElement ele = driverNexus.findElement(By.xpath("//a[contains(text(),'Considine, Warren')]"));
+		WebElement ele = driverNexus.findElement(By.xpath("//a[contains(text(),'Considine, John')]"));
         highlightElement.highLightElement(driverNexus, ele);  
         ele.click();	
         waitMethods.waiter(waitMethods.w100);
@@ -1211,7 +1205,7 @@ public class userAccessGroups extends setupFramework {
 	 * 
 	 * 
 	 * Show Inactive Users							showInactive
-	 * Assert that Abbott, Roman is displayed
+	 * Assert that Abner, Petula E is displayed
 	 * Reactive										reActivateMember_0   // like users 0, 1, 2
 	 * Hide Inactive						same	showInactive
 	 * 
@@ -1228,7 +1222,7 @@ public class userAccessGroups extends setupFramework {
 //		waitMethods.waiter(waitMethods.w1k);
 //
 //		//WebElement ele = driverNexus.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[1]/button[1]"));
-//		     //WebElement ele = driverNexus.findElement(By.xpath("//*[contains(text(), 'Abbott, Roman'"));
+//		     //WebElement ele = driverNexus.findElement(By.xpath("//*[contains(text(), 'Abner, Petula'"));
 //		WebElement ele = driverNexus.findElement(By.xpath("//button[contains(text(), ' Edit Group Name')]"));
 //	    highlightElement.highLightElement(driverNexus, ele);
 //	    ele.click();
