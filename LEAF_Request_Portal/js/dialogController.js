@@ -45,6 +45,12 @@ function dialogController(containerID, contentID, loadIndicatorID, btnSaveID, bt
     const preventCloseOnEnter = (e) => {
         if(e?.keyCode === 13 && (e?.target?.nodeName || '').toLowerCase() === "input" && e?.target?.type !== 'color') {
             e.preventDefault();
+            //focus save for non-request modals.  timeout is needed for chosen dropdowns.
+            if(e?.target?.type !== 'search' && this.containerID.slice(0,8) !== 'LeafForm') {
+                setTimeout(() => {
+                    $('#' + this.btnSaveID).focus();
+                }, 100);
+            }
         }
     }
     $(`#${t.contentID}`).on('keydown', preventCloseOnEnter);

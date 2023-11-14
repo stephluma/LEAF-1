@@ -40,6 +40,11 @@ function dialogController(containerID, contentID, indicatorID, btnSaveID, btnCan
     const preventCloseOnEnter = (e) => {
         if(e?.keyCode === 13 && (e?.target?.nodeName || '').toLowerCase() === "input" && e?.target?.type !== 'color') {
             e.preventDefault();
+            if(e?.target?.type !== 'search') {
+                setTimeout(() => {
+                    $('#' + this.btnSaveID).focus();
+                }, 100);
+            }
         }
     }
     $(`#${t.contentID}`).on('keydown', preventCloseOnEnter);
