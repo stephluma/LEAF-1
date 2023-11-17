@@ -331,7 +331,7 @@ public class formsWorkflowPart2 extends setupFramework {
 
 		@Test(priority = 430) //  
 		private void addSubQuestionQ2S01() {	//
-			waitMethods.waiter(waitMethods.w300);  
+			waitMethods.waiter(waitMethods.w600);  
 			String url = driver.getCurrentUrl();
 			
 			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   

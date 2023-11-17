@@ -136,7 +136,7 @@ public class homePageTest extends setupFramework {
 	public void basicSearchNumber() /*throws InterruptedException */ {
 		System.out.println("Perform basic search using Request Number");
 		//waitMethods.implicitWait(waitMethods.w300);
-    	waitMethods.waiter(waitMethods.w1k);    				//REMOVE
+    	waitMethods.waiter(waitMethods.w3k);    				//REMOVE
     	WebElement ele = driver.findElement(By.cssSelector("[title^='Enter your search text']"));
     	highlightElement.highLightElement(driver, ele);
 
@@ -162,7 +162,7 @@ public class homePageTest extends setupFramework {
 	public void basicSearchText() /*throws InterruptedException */ {
 		System.out.println("Perform basic search using Text");
 		//waitMethods.implicitWait(waitMethods.w300);
-		waitMethods.waiter(waitMethods.w1k);								//REMOVE
+		waitMethods.waiter(waitMethods.w3k);								//REMOVE
 		WebElement ele = driver.findElement(By.name("searchtxt"));
 
     	String name = "email test";

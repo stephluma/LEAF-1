@@ -249,9 +249,44 @@ public class formsWorkflowPart3 extends setupFramework {
 	    	System.out.println("Save Stapled Form Selection");
 		}
 		
+	
+		
+		@Test(priority = 442) //  		 												ERR PP 11.16.23
+		private void verifyStapledForm() {	
+			
+			String strExpected = "";
+			
+			waitMethods.waiter(waitMethods.w500);   
+			String url = driver.getCurrentUrl();
+			
+			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+				strExpected = "Staple Test";
+				WebElement ele = driver.findElement(By.xpath("//li[contains(text(), 'Staple Test [ Remove ]')]"));
+				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Staple Form 01')]"));
+		    	highlightElement.highLightElement(driver, ele);
+		    	
+		   		String strActual = ele.getText().toString();
+		   		Assert.assertEquals(strActual, strExpected);
+			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+				strExpected = "Staple Test [ Remove ]";
+				WebElement ele = driver.findElement(By.xpath("//li[contains(text(), 'Staple Test [ Remove ]')]"));
+				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Staple Form 01')]"));
+		    	highlightElement.highLightElement(driver, ele);
+		    	
+		   		String strActual = ele.getText().toString();
+		   		Assert.assertEquals(strActual, strExpected);
+			}
+			
+			waitMethods.waiter(waitMethods.w200);
+	    	System.out.println("Verify form was Stapled");
+		}
+		
+		
+		
+		
 		
 		@Test(priority = 445) //  	
-		private void closeStapleFormDialogue() {	//    
+		private void closeStapleFormDialogue() {	//    				
 			waitMethods.waiter(waitMethods.w300);       
 			String url = driver.getCurrentUrl();
 			
@@ -293,21 +328,33 @@ public class formsWorkflowPart3 extends setupFramework {
 //====================================================================================
 	
 		
-	@Test(priority = 465) //  		 			
-		private void verifyStapledForm() {	
-			
-			String strExpected = "Staple Test";
-			
-			waitMethods.waiter(waitMethods.w500);   
-			WebElement ele = driver.findElement(By.xpath("//li[contains(text(), 'Staple Test')]"));
-			//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Staple Form 01')]"));
-	    	highlightElement.highLightElement(driver, ele);
-	    	
-	   		String strActual = ele.getText().toString();
-	   		Assert.assertEquals(strActual, strExpected);
-			waitMethods.waiter(waitMethods.w200);
-	    	System.out.println("Verify form was Stapled");
-		}
+//	@Test(priority = 465) //  		 			
+//		private void verifyStapledFormDELETE() {	
+//			
+//			String strExpected = "Staple Test";
+//			
+//			waitMethods.waiter(waitMethods.w500);   
+//			String url = driver.getCurrentUrl();
+//			
+//			if(url.substring(0, 20).equals(AppVariables.PROD_DOMAIN)) {   
+//				WebElement ele = driver.findElement(By.xpath("//li[contains(text(), 'Staple Test')]"));
+//				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Staple Form 01')]"));
+//		    	highlightElement.highLightElement(driver, ele);
+//		    	
+//		   		String strActual = ele.getText().toString();
+//		   		Assert.assertEquals(strActual, strExpected);
+//			} else if (url.substring(0, 28).equals(AppVariables.PREPROD_DOMAIN)) {
+//				WebElement ele = driver.findElement(By.xpath("//li[contains(text(), 'Staple Test')]"));
+//				//WebElement ele = driver.findElement(By.xpath("//*[contains(text(), 'Staple Form 01')]"));
+//		    	highlightElement.highLightElement(driver, ele);
+//		    	
+//		   		String strActual = ele.getText().toString();
+//		   		Assert.assertEquals(strActual, strExpected);
+//			}
+//			
+//			waitMethods.waiter(waitMethods.w200);
+//	    	System.out.println("Verify form was Stapled");
+//		}
 
 		
 			
