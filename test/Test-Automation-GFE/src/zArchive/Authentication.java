@@ -10,6 +10,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.WebElement;
 
 
+@SuppressWarnings("unused")
 public class Authentication {
 	public static void main(String[] args) {
 

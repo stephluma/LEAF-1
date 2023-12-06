@@ -3,7 +3,7 @@ package zArchive;
 public class arrays {
 
 	public static void main(String[] args) {
-		int[] aryTypeI = {6,7,8,9,-55,16,7,72,81};			//Not used
+	//	int[] aryTypeI = {6,7,8,9,-55,16,7,72,81};			//Not used
 		int[] ary = new int[10];
 		int min, max;
 		

@@ -31,6 +31,7 @@ import Framework.setupFramework;
 import Framework.waitMethods;
 import Framework.highlightElement;
 
+@SuppressWarnings("unused")
 public class TestAdvancedFormatting extends setupFramework {
 
 	//private static final DateFormat Calendar = null;

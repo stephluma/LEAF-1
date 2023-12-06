@@ -3,6 +3,7 @@ package Framework;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+@SuppressWarnings("unused")
 public class AppVariables {
 
 
