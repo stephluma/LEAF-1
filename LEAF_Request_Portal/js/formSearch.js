@@ -1594,6 +1594,9 @@ var LeafFormSearch = function (containerID) {
                     if (cod == "LIKE") {
                         match = "*" + match + "*";
                     }
+                    if (cod == "MATCH" || cod == "MATCH ALL") {
+                        match = match + "*";
+                    }
                     leafFormQuery.addTerm(id, cod, match, gate);
                 } else {
                     id = $("#" + prefixID + "widgetTerm_" + i).val();
@@ -1607,6 +1610,9 @@ var LeafFormSearch = function (containerID) {
                     ).innerHTML; // Assign Operator
                     if (cod == "LIKE") {
                         match = "*" + match + "*";
+                    }
+                    if (cod == "MATCH" || cod == "MATCH ALL") {
+                        match = match + "*";
                     }
                     leafFormQuery.addDataTerm(
                         id,
