@@ -702,13 +702,30 @@ var LeafForm = function (containerID) {
     $("#" + htmlFormID)
       .serializeArray()
       .map(function (x) {
-        const empSel = document.querySelector(`#empSel_${x.name} .employeeSelected`);
-        if(empSel !== null) {
-            console.log(empSel.innerHTML);
+        const empSelArr = Array.from(document.querySelectorAll(`#empSel_${x.name} .employeeSelectorTable tbody tr`));
+        if(empSelArr.length === 1) {
+            const empSel = empSelArr[0];
             const empNameTd = empSel.querySelector('.employeeSelectorName');
-            const empName = empNameTd.textContent;
+            const empNameAndTitle = (empNameTd?.innerText || '').split('\n');
+            const name = empNameAndTitle?.[0] ?? null;
+            const title = empNameAndTitle?.[1] ?? null;
+
             const accountInfo = (empNameTd?.title || '').split(' ');
-            console.log(empName, accountInfo);
+            const empUID = accountInfo?.[0] ?? null;
+            const userID = accountInfo?.[2] ?? null;
+
+            const contactInfoTd = empSel.querySelector('.employeeSelectorContact');
+            let email = (contactInfoTd?.innerText || '').split('\n')?.[0] ?? null;
+            if(email !== null) {
+                email = email.slice(7);
+            }
+
+            const empMetadata = userID !== null && email !== null ?
+                {
+                    orgchart_employee: { name, userID, empUID, email, title }
+                } : null;
+
+            data[`${x.name}_metadata`] = empMetadata;
         }
         if (x.name.includes("_multiselect")) {
           const i = x.name.indexOf("_multiselect");

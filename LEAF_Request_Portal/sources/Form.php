@@ -1079,7 +1079,7 @@ class Form
                       ':indicatorID' => $key,
                       ':series' => $series, );
 
-        $res = $this->db->prepared_query('SELECT data, format FROM data
+        $res = $this->db->prepared_query('SELECT data, format, metadata FROM data
                                             LEFT JOIN indicators USING (indicatorID)
                                             WHERE recordID=:recordID AND indicatorID=:indicatorID AND series=:series', $vars);
 
@@ -1114,20 +1114,31 @@ class Form
             return 0;
         }
 
+        $metadata = isset($res[0]['metadata']) ? json_decode($res[0]['metadata'], true) : null;
+        $postMetadata = null;
+        if(isset($_POST[$key . "_metadata"])) {
+            $postMetadata = XSSHelpers::scrubObjectOrArray($_POST[$key . "_metadata"]);
+        }
+
+        foreach($postMetadata as $metakey => $info) {
+            $metadata[$metakey] = $info;
+        }
+
         $vars = array(':recordID' => $recordID,
                       ':indicatorID' => $key,
                       ':series' => $series,
                       ':data' => trim($_POST[$key]),
+                      ':metadata' => json_encode($metadata),
                       ':timestamp' => time(),
                       ':userID' => $this->login->getUserID(), );
 
-        $this->db->prepared_query('INSERT INTO data (recordID, indicatorID, series, data, timestamp, userID)
-                                            VALUES (:recordID, :indicatorID, :series, :data, :timestamp, :userID)
-                                            ON DUPLICATE KEY UPDATE data=:data, timestamp=:timestamp, userID=:userID', $vars);
+        $this->db->prepared_query('INSERT INTO data (recordID, indicatorID, series, data, metadata, timestamp, userID)
+                                            VALUES (:recordID, :indicatorID, :series, :data, :metadata, :timestamp, :userID)
+                                            ON DUPLICATE KEY UPDATE data=:data, metadata=:metadata, timestamp=:timestamp, userID=:userID', $vars);
 
         if (!$duplicate) {
-            $this->db->prepared_query('INSERT INTO data_history (recordID, indicatorID, series, data, timestamp, userID)
-                                                   VALUES (:recordID, :indicatorID, :series, :data, :timestamp, :userID)', $vars);
+            $this->db->prepared_query('INSERT INTO data_history (recordID, indicatorID, series, data, metadata, timestamp, userID)
+                                                   VALUES (:recordID, :indicatorID, :series, :data, :metadata, :timestamp, :userID)', $vars);
         }
         /*  signatures (not yet implemented)
         $vars = array(':recordID' => $recordID,
