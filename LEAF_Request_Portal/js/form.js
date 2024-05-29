@@ -702,6 +702,14 @@ var LeafForm = function (containerID) {
     $("#" + htmlFormID)
       .serializeArray()
       .map(function (x) {
+        const empSel = document.querySelector(`#empSel_${x.name} .employeeSelected`);
+        if(empSel !== null) {
+            console.log(empSel.innerHTML);
+            const empNameTd = empSel.querySelector('.employeeSelectorName');
+            const empName = empNameTd.textContent;
+            const accountInfo = (empNameTd?.title || '').split(' ');
+            console.log(empName, accountInfo);
+        }
         if (x.name.includes("_multiselect")) {
           const i = x.name.indexOf("_multiselect");
           if (x.value === "") {
