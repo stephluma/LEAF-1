@@ -1115,20 +1115,22 @@ class Form
         }
 
         $metadata = isset($res[0]['metadata']) ? json_decode($res[0]['metadata'], true) : null;
-        $postMetadata = null;
         if(isset($_POST[$key . "_metadata"])) {
             $postMetadata = XSSHelpers::scrubObjectOrArray($_POST[$key . "_metadata"]);
-        }
+            if(!isset($metadata)) {
+                $metadata = array();
+            }
 
-        foreach($postMetadata as $metakey => $info) {
-            $metadata[$metakey] = $info;
+            foreach($postMetadata as $metakey => $info) {
+                $metadata[$metakey] = $info;
+            }
         }
 
         $vars = array(':recordID' => $recordID,
                       ':indicatorID' => $key,
                       ':series' => $series,
                       ':data' => trim($_POST[$key]),
-                      ':metadata' => json_encode($metadata),
+                      ':metadata' => isset($metadata) ? json_encode($metadata) : null,
                       ':timestamp' => time(),
                       ':userID' => $this->login->getUserID(), );
 
