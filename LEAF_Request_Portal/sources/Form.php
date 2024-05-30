@@ -1114,15 +1114,16 @@ class Form
             return 0;
         }
 
-        $metadata = isset($res[0]['metadata']) ? json_decode($res[0]['metadata'], true) : null;
+        $metakeyOptions = array('orgchart_employee' => 1);
+        $metadata = isset($res[0]['metadata']) ? json_decode($res[0]['metadata'], true) : array();
+
         if(isset($_POST[$key . "_metadata"])) {
             $postMetadata = XSSHelpers::scrubObjectOrArray($_POST[$key . "_metadata"]);
-            if(!isset($metadata)) {
-                $metadata = array();
-            }
 
             foreach($postMetadata as $metakey => $info) {
-                $metadata[$metakey] = $info;
+                if($metakeyOptions[$metakey] === 1) {
+                    $metadata[$metakey] = $info;
+                }
             }
         }
 
@@ -1130,7 +1131,7 @@ class Form
                       ':indicatorID' => $key,
                       ':series' => $series,
                       ':data' => trim($_POST[$key]),
-                      ':metadata' => isset($metadata) ? json_encode($metadata) : null,
+                      ':metadata' => count($metadata) > 0 ? json_encode($metadata) : null,
                       ':timestamp' => time(),
                       ':userID' => $this->login->getUserID(), );
 

@@ -702,34 +702,8 @@ var LeafForm = function (containerID) {
     $("#" + htmlFormID)
       .serializeArray()
       .map(function (x) {
-        const empSel = document.getElementById(`empSel_${x.name}`);
-        if(empSel !== null) {
-            const empSelArr = Array.from(document.querySelectorAll(`#empSel_${x.name} .employeeSelectorTable tbody tr`));
-
-            let empMetadata = { orgchart_employee: { name: '', userID: '', empUID: '', email: '', title: '' }};
-            if(empSelArr.length === 1) {
-                const empSelRow = empSelArr[0];
-                const empNameTd = empSelRow.querySelector('.employeeSelectorName');
-                const empNameAndTitle = (empNameTd?.innerText || '').split('\n');
-                const name = empNameAndTitle?.[0] ?? null;
-                const title = empNameAndTitle?.[1] ?? null;
-
-                const accountInfo = (empNameTd?.title || '').split(' ');
-                const empUID = accountInfo?.[0] ?? null;
-                const userID = accountInfo?.[2] ?? null;
-
-                const contactInfoTd = empSelRow.querySelector('.employeeSelectorContact');
-
-                let email = (contactInfoTd?.innerText || '').split('\n')?.[0] || ''
-                if(email !== '' && email?.length > 7) {
-                    email = email.slice(7);
-                }
-
-                if(userID !== null && email !== null) {
-                    empMetadata =  { orgchart_employee: { name, userID, empUID, email, title }};
-                }
-            }
-            data[`${x.name}_metadata`] = empMetadata;
+        if(formMetadata[x.name] !== undefined) {
+            data[`${x.name}_metadata`] = formMetadata[x.name];
         }
 
         if (x.name.includes("_multiselect")) {
@@ -841,6 +815,7 @@ var LeafForm = function (containerID) {
     formValidator = new Object();
     formRequired = new Object();
     formConditions = new Object();
+    formMetadata = new Object();
     $.ajax({
       type: "GET",
       url:
