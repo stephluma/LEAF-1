@@ -519,7 +519,7 @@ class Form
             $idx = $data[0]['indicatorID'];
             $form[$idx]['indicatorID'] = $data[0]['indicatorID'];
             $form[$idx]['categoryID'] = $data[0]['categoryID'];
-            $form[$idx]['series'] = $series;
+            $form[$idx]['series'] = (int) $series;
             $form[$idx]['name'] = $data[0]['name'];
             $form[$idx]['description'] = $data[0]['description'];
             $form[$idx]['default'] = $data[0]['default'];
@@ -531,6 +531,7 @@ class Form
             $form[$idx]['is_sensitive'] = $data[0]['is_sensitive'];
             $form[$idx]['isEmpty'] = (isset($data[0]['data']) && !is_array($data[0]['data']) && strip_tags($data[0]['data']) != '') ? false : true;
             $form[$idx]['value'] = (isset($data[0]['data']) && $data[0]['data'] != '') ? $data[0]['data'] : $form[$idx]['default'];
+            $form[$idx]['metadata'] = $data[0]['metadata'];
             $form[$idx]['displayedValue'] = ''; // used for Org Charts
             $form[$idx]['timestamp'] = isset($data[0]['timestamp']) ? $data[0]['timestamp'] : 0;
             if(!$forceReadOnly) {
@@ -543,13 +544,7 @@ class Form
             }
             $form[$idx]['sort'] = $data[0]['sort'];
 
-            if (!empty($data[0]['html'])) {
-                $form[$idx]['has_code'] = trim($data[0]['html']);
-            } elseif (!empty($data[0]['htmlPrint'])) {
-                $form[$idx]['has_code'] = trim($data[0]['htmlPrint']);
-            } else {
-                $form[$idx]['has_code'] = '';
-            }
+            $form[$idx]['has_code'] = trim($data[0]['html'] ?? '') != '' || trim($data[0]['htmlPrint'] ?? '') != '';
 
             // handle file upload
             if (isset($data[0]['data'])
@@ -617,6 +612,7 @@ class Form
                 } else {
                     $form[$idx]['value'] = '[protected data]';
                     $form[$idx]['displayedValue'] = '[protected data]';
+                    $form[$idx]['metadata'] = '[protected data]';
                 }
             }
 
@@ -1118,7 +1114,7 @@ class Form
         $metadata = isset($res[0]['metadata']) ? json_decode($res[0]['metadata'], true) : array();
 
         if(isset($_POST[$key . "_metadata"])) {
-            $postMetadata = XSSHelpers::scrubObjectOrArray($_POST[$key . "_metadata"]);
+            $postMetadata = json_decode($_POST[$key . "_metadata"], true);
 
             foreach($postMetadata as $metakey => $info) {
                 if($metakeyOptions[$metakey] === 1) {
@@ -4155,7 +4151,7 @@ class Form
             {
                 $var = array(':series' => (int)$series,
                              ':recordID' => (int)$recordID, );
-                $res2 = $this->db->prepared_query('SELECT data, timestamp, indicatorID, groupID FROM data
+                $res2 = $this->db->prepared_query('SELECT data, metadata, timestamp, indicatorID, groupID FROM data
                 									LEFT JOIN indicator_mask USING (indicatorID)
                 									WHERE indicatorID IN (' . $indicatorList . ') AND series=:series AND recordID=:recordID', $var);
 
@@ -4165,6 +4161,7 @@ class Form
                     $data[$idx]['data'] = isset($resIn['data']) ? $resIn['data'] : '';
                     $data[$idx]['timestamp'] = isset($resIn['timestamp']) ? $resIn['timestamp'] : 0;
                     $data[$idx]['groupID'] = isset($resIn['groupID']) ? $resIn['groupID'] : null;
+                    $data[$idx]['metadata'] = $resIn['metadata'];
                 }
             }
             else if(isset($_GET['context']) && $_GET['context'] == 'formEditor') {
@@ -4184,7 +4181,7 @@ class Form
                 $idx = $field['indicatorID'];
 
                 $child[$idx]['indicatorID'] = $field['indicatorID'];
-                $child[$idx]['series'] = $series;
+                $child[$idx]['series'] = (int) $series;
                 $child[$idx]['name'] = $field['name'];
                 $child[$idx]['default'] = $field['default'];
                 $child[$idx]['description'] = $field['description'];
@@ -4195,11 +4192,12 @@ class Form
                 $child[$idx]['is_sensitive'] = $field['is_sensitive'];
                 $child[$idx]['isEmpty'] = (isset($data[$idx]['data']) && !is_array($data[$idx]['data']) && strip_tags($data[$idx]['data']) != '') ? false : true;
                 $child[$idx]['value'] = (isset($data[$idx]['data']) && $data[$idx]['data'] != '') ? $data[$idx]['data'] : $child[$idx]['default'];
+                $child[$idx]['metadata'] = $data[$idx]['metadata'];
                 $child[$idx]['timestamp'] = isset($data[$idx]['timestamp']) ? $data[$idx]['timestamp'] : 0;
                 $child[$idx]['isWritable'] = $this->hasWriteAccess($recordID, $field['categoryID']);
                 $child[$idx]['isMasked'] = isset($data[$idx]['groupID']) ? $this->isMasked($field['indicatorID'], $recordID) : 0;
                 $child[$idx]['sort'] = $field['sort'];
-                $child[$idx]['has_code'] = trim($field['html']) != '' || trim($field['htmlPrint']) != '';
+                $child[$idx]['has_code'] = trim($field['html'] ?? '') != '' || trim($field['htmlPrint'] ?? '') != '';
 
                 if(isset($_GET['context']) && $_GET['context'] == 'formEditor') {
                     $child[$idx]['isMaskable'] = isset($data[$idx]['groupID']) ? 1 : 0;
@@ -4300,6 +4298,7 @@ class Form
                     }
                     if(isset($child[$idx]['displayedValue']) && $child[$idx]['displayedValue'] != '') {
                         $child[$idx]['displayedValue'] = '[protected data]';
+                        $child[$idx]['metadata'] = '[protected data]';
                     }
                 }
 

@@ -2,6 +2,8 @@ package main
 
 type FormCategoryResponse []FormCategoryResponseItem
 
+type FormCategoryRawIndicatorResponse map[string]FormCategoryResponseItem
+
 type FormCategoryResponseItemChild struct {
 	IndicatorID    int    `json:"indicatorID"`
 	CategoryID     string `json:"categoryID"`
@@ -17,13 +19,14 @@ type FormCategoryResponseItemChild struct {
 	IsSensitive    int    `json:"is_sensitive"`
 	IsEmpty        bool   `json:"isEmpty"`
 	Value          string `json:"value"`
+	Metadata       string `json:"metadata,omitempty"`
 	DisplayedValue string `json:"displayedValue"`
 	Timestamp      int    `json:"timestamp"`
 	IsWritable     int    `json:"isWritable"`
 	IsMasked       int    `json:"isMasked"`
 	IsMaskable     *int   `json:"isMaskable,omitempty"`
 	Sort           int    `json:"sort"`
-	HasCode        string `json:"has_code"`
+	HasCode        bool   `json:"has_code"`
 	Format         string `json:"format"`
 }
 
@@ -42,13 +45,14 @@ type FormCategoryResponseItem struct {
 	IsSensitive    int                                   `json:"is_sensitive"`
 	IsEmpty        bool                                  `json:"isEmpty"`
 	Value          string                                `json:"value"`
+	Metadata       string                                `json:"metadata,omitempty"`
 	DisplayedValue string                                `json:"displayedValue"`
 	Timestamp      int                                   `json:"timestamp"`
 	IsWritable     int                                   `json:"isWritable"`
 	IsMasked       int                                   `json:"isMasked"`
 	IsMaskable     *int                                  `json:"isMaskable,omitempty"`
 	Sort           int                                   `json:"sort"`
-	HasCode        string                                `json:"has_code"`
+	HasCode        bool                                  `json:"has_code"`
 	Format         string                                `json:"format"`
 	Child          map[int]FormCategoryResponseItemChild `json:"child"`
 }

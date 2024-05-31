@@ -703,7 +703,7 @@ var LeafForm = function (containerID) {
       .serializeArray()
       .map(function (x) {
         if(formMetadata[x.name] !== undefined) {
-            data[`${x.name}_metadata`] = formMetadata[x.name];
+            data[`${x.name}_metadata`] = JSON.stringify(formMetadata[x.name]);
         }
 
         if (x.name.includes("_multiselect")) {

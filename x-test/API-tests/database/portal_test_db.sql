@@ -1124,6 +1124,7 @@ CREATE TABLE `data` (
   `indicatorID` smallint NOT NULL,
   `series` tinyint unsigned NOT NULL DEFAULT '1',
   `data` text NOT NULL,
+  `metadata` json DEFAULT NULL,
   `timestamp` int unsigned NOT NULL DEFAULT '0',
   `userID` varchar(50) NOT NULL,
   UNIQUE KEY `unique` (`recordID`,`indicatorID`,`series`),
@@ -5487,6 +5488,7 @@ CREATE TABLE `data_history` (
   `indicatorID` smallint NOT NULL,
   `series` tinyint unsigned NOT NULL DEFAULT '1',
   `data` text NOT NULL,
+  `metadata` json DEFAULT NULL,
   `timestamp` int unsigned NOT NULL DEFAULT '0',
   `userID` varchar(50) NOT NULL,
   KEY `recordID` (`recordID`,`indicatorID`,`series`),
@@ -13129,7 +13131,7 @@ CREATE TABLE `settings` (
 
 INSERT INTO `settings` (`setting`, `data`) VALUES
 ('adPath',	'{}'),
-('dbversion',	'2024022901'),
+('dbversion',	'2024052000'),
 ('emailBCC',	'{}'),
 ('emailCC',	'{}'),
 ('heading',	'New LEAF Site'),
