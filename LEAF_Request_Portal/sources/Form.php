@@ -656,6 +656,32 @@ class Form
         return $form;
     }
 
+    public function getIndicatorMetadata(int $recordID, int $indicatorID, int $series): ?string
+    {
+        if (!$this->hasReadAccess($recordID))
+        {
+            return null;
+        }
+
+        $sql = "SELECT metadata, is_sensitive, groupID FROM `data`
+            LEFT JOIN indicators USING (indicatorID)
+            LEFT JOIN indicator_mask USING (indicatorID)
+            WHERE recordID=:recordID AND indicatorID=:indicatorID AND series=:series";
+        $vars = array(
+            ':recordID' => $recordID,
+            ':indicatorID' => $indicatorID,
+            ':series' => $series,
+        );
+        $resMetadata = $this->db->prepared_query($sql,$vars);
+
+        //TODO: masking and sensitive behavior
+        if(isset($resMetadata[0])) {
+            $resMetadata[0]['isMaskable'] = isset($resMetadata[0]['groupID']) ? 1 : 0;
+        }
+
+        return $resMetadata[0]['metadata'];
+    }
+
     public function getIndicatorLog($indicatorID, $series, $recordID)
     {
         // check needToKnow mode

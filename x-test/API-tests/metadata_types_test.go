@@ -16,8 +16,7 @@ func TestMetadata_EmployeeMetadataSet(t *testing.T) {
 		Name:      "Watsica, Ramon Yundt",
 		Email:     "Ramon.Watsica@fake-email.com",
 		Title:     "Retail Assistant",
-		EmpUID:    "201",
-		NatEmpUID: "9999",
+		UserID:    "VTRYCXBETHANY",
 	}
 	mock_md := Metadata{
 		Orgchart_employee: mock_org_emp,

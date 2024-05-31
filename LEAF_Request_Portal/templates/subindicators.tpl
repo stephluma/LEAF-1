@@ -1120,7 +1120,6 @@
                                     $('#<!--{$indicator.indicatorID|strip_tags}-->').val(res);
                                     $('#<!--{$indicator.indicatorID|strip_tags}-->').trigger('change');
                                     $('#loadingIndicator_<!--{$indicator.indicatorID}-->').html('');
-                                    formMetadata['<!--{$indicator.indicatorID}-->'].orgchart_employee.empUID = res || '';
                                 },
                                 error: function(err) {
                                     console.log(err);
@@ -1146,8 +1145,6 @@
                                 name: user !== null ? `${user.lastName}, ${user.firstName} ${user.middleName}` : '',
                                 email: user?.email || '',
                                 title: user?.data?.["23"]?.data || '',
-                                empUID: '',
-                                natEmpUID: String(empSel?.selection || ''),
                                 userID: user?.userName || '',
                             }
                         };
