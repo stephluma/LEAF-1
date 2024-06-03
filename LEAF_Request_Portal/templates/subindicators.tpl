@@ -1142,10 +1142,11 @@
                         const user = empSel.selectionData[empSel.selection] || null;
                         formMetadata['<!--{$indicator.indicatorID}-->'] = {
                             orgchart_employee: {
-                                name: user !== null ? `${user.lastName}, ${user.firstName} ${user.middleName}` : '',
+                                firstName: user?.firstName || '',
+                                lastName: user?.lastName || '',
+                                middleName: user?.middleName || '',
                                 email: user?.email || '',
-                                title: user?.data?.["23"]?.data || '',
-                                userID: user?.userName || '',
+                                userName: user?.userName || '',
                             }
                         };
                     });

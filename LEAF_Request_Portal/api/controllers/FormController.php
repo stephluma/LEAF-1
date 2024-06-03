@@ -133,8 +133,8 @@ class FormController extends RESTfulResponse
             return $form->getIndicator($args[1], $args[2], $args[0]);
         });
 
-        $this->index['GET']->register('form/[digit]/metadata/[digit]/[digit]', function ($args) use ($form) {
-            return $form->getIndicatorMetadata((int)$args[0], (int)$args[1], (int)$args[2]);
+        $this->index['GET']->register('form/[digit]/metadata/[digit]/[digit]/[text]', function ($args) use ($form) {
+            return $form->getIndicatorMetadata((int)$args[0], (int)$args[1], (int)$args[2], XSSHelpers::xscrub($args[3]));
         });
 
         $this->index['GET']->register('form/[digit]/[digit]/[digit]/history', function ($args) use ($form) {

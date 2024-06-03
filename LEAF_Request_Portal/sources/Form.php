@@ -656,21 +656,23 @@ class Form
         return $form;
     }
 
-    public function getIndicatorMetadata(int $recordID, int $indicatorID, int $series): ?string
+    public function getIndicatorMetadata(int $recordID, int $indicatorID, int $series, string $metakey): ?string
     {
-        if (!$this->hasReadAccess($recordID))
+        $metadataTypes = array('orgchart_employee' => 1);
+        if (!$this->hasReadAccess($recordID) || $metadataTypes[$metakey] !== 1)
         {
             return null;
         }
 
-        $sql = "SELECT metadata, is_sensitive, groupID FROM `data`
+        $sql = 'SELECT JSON_EXTRACT(metadata, :metakey) AS metadata_value, is_sensitive, groupID FROM `data`
             LEFT JOIN indicators USING (indicatorID)
             LEFT JOIN indicator_mask USING (indicatorID)
-            WHERE recordID=:recordID AND indicatorID=:indicatorID AND series=:series";
+            WHERE recordID=:recordID AND indicatorID=:indicatorID AND series=:series';
         $vars = array(
             ':recordID' => $recordID,
             ':indicatorID' => $indicatorID,
             ':series' => $series,
+            ':metakey' => '$.' . $metakey
         );
         $resMetadata = $this->db->prepared_query($sql,$vars);
 
@@ -679,7 +681,7 @@ class Form
             $resMetadata[0]['isMaskable'] = isset($resMetadata[0]['groupID']) ? 1 : 0;
         }
 
-        return $resMetadata[0]['metadata'];
+        return $resMetadata[0]['metadata_value'];
     }
 
     public function getIndicatorLog($indicatorID, $series, $recordID)
@@ -1136,19 +1138,19 @@ class Form
             return 0;
         }
 
-        $metakeyOptions = array('orgchart_employee' => 1);
+        $validMetadataTypes = array('orgchart_employee' => 1);
         $metadata = isset($res[0]['metadata']) ? json_decode($res[0]['metadata'], true) : array();
 
         if(isset($_POST[$key . "_metadata"])) {
             $postMetadata = json_decode($_POST[$key . "_metadata"], true);
 
             foreach($postMetadata as $metakey => $info) {
-                if($metakeyOptions[$metakey] === 1) {
-                    $metadata[$metakey] = $info;
+                if($validMetadataTypes[$metakey] === 1) {
+                    $metadata[$metakey] = is_array($info) || is_object($info) ?
+                        XSSHelpers::scrubObjectOrArray($info) : XSSHelpers::xscrub($info);
                 }
             }
         }
-
         $vars = array(':recordID' => $recordID,
                       ':indicatorID' => $key,
                       ':series' => $series,
