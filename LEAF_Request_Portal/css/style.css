@@ -22,15 +22,21 @@ body {
 }
 
 .btn_formgrid_sort {
-    margin-left: 0.25rem;
-    cursor: pointer;
-    width: 1.75rem;
-    height: 1.5rem;
-    padding: 0.125rem 0.375rem;
-    background-color: transparent;
-    color: inherit;
-    border: 1px solid rgba(0,0,30,0.15);
-    border-radius: 3px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 2px;
+  background-color: rgba(0,0,20,0.04);
+  color: inherit;
+  border:0;
+  height:100%;
+}
+.btn_formgrid_sort span {
+  color: inherit;
 }
 body a:link,
 body a:visited {
@@ -697,6 +703,7 @@ table.leaf_grid {
 }
 
 table.leaf_grid th {
+  position: relative;
   font-weight: normal;
   padding: 4px 2px 4px 2px;
   font-size: 12px;

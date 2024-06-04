@@ -222,7 +222,7 @@ var LeafFormGrid = function (containerID, options) {
     headers = headersIn;
     let temp = `<tr id="${prefixID}thead_tr">`;
     if (showIndex) {
-      const sortIcon = sortPreference?.key !== 'recordID' ?
+      const sortIcon = typeof sortPreference === 'undefined' || sortPreference?.key !== 'recordID' ?
         '⇕' : sortPreference?.order === 'asc' ? '▲' : '▼';
       temp +=
         '<th scope="col" tabindex="0" id="' +
@@ -267,7 +267,7 @@ var LeafFormGrid = function (containerID, options) {
     $("#" + prefixID + "thead").append("</tr>");
 
     $("#" + prefixID + "table>thead>tr>th").css({
-      padding: "4px 2px 4px 2px",
+      padding: "6px 28px 6px 2px",
       "font-size": "12px",
     });
 
@@ -708,7 +708,7 @@ var LeafFormGrid = function (containerID, options) {
         setTimeout(() => {
           const elBtn = document.querySelector(`#${prefixID}header_${h.indicatorID} > button.btn_formgrid_sort`);
           if(elBtn === null) {
-            const sortIcon = sortPreference?.key !== String(h.indicatorID) ?
+            const sortIcon = typeof sortPreference === 'undefined' || sortPreference?.key !== String(h.indicatorID) ?
               '⇕' : sortPreference?.order === 'asc' ? '▲' : '▼';
             $("#" + prefixID + "header_" + h.indicatorID).append(
               `<button type="button" class="btn_formgrid_sort" aria-label="sortable">
