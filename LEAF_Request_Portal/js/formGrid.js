@@ -222,13 +222,14 @@ var LeafFormGrid = function (containerID, options) {
     headers = headersIn;
     let temp = `<tr id="${prefixID}thead_tr">`;
     if (showIndex) {
+      const sortIcon = sortPreference?.key !== 'recordID' ?
+        '⇕' : sortPreference?.order === 'asc' ? '▲' : '▼';
       temp +=
         '<th scope="col" tabindex="0" id="' +
         prefixID +
         'header_UID" style="text-align: center">UID' +
         `<button type="button" class="btn_formgrid_sort" aria-label="sortable">
-          <span aria-hidden="true" class="sort_btn_span"> ⇕ </span>
-          <span aria-hidden="true" class="sort_icon_span"></span>
+          <span aria-hidden="true" class="sort_btn_span">${sortIcon}</span>
         </button>`
         + '</th>';
     }
@@ -341,22 +342,21 @@ var LeafFormGrid = function (containerID, options) {
   function sort(key, order, callback) {
     sortDirection[key] = order;
     const headerSelector = "#" + prefixID + "header_" + (key === "recordID" ? "UID" : key);
-    const headerText = (document.querySelector(headerSelector)?.innerText || "").replace(/\p{Emoji}/gu, '');
+    const headerText = (document.querySelector(headerSelector)?.innerText || "").replace(/[⇕▼▲]/gu, '');
     if (key != "recordID" && currLimit != Infinity) {
       renderBody(0, Infinity);
     }
 
-    //$("." + prefixID + "sort").css("display", "none");
-    $(".sort_icon_span").html('');
-    //$(`th[id*="${prefixID}header_"]`).removeAttr('aria-sort');
+    $(".sort_btn_span").html('⇕');
+    $(`th[id*="${prefixID}header_"]`).removeAttr('aria-sort');
     if (order.toLowerCase() == "asc") {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", ascending.");
-      $(headerSelector + " .sort_icon_span").html('▲');
-      //$(headerSelector).attr('aria-sort', 'ascending');
+      $(headerSelector + " .sort_btn_span").html('▲');
+      $(headerSelector).attr('aria-sort', 'ascending');
     } else {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", descending.");
-      $(headerSelector + " .sort_icon_span").html('▼');
-      //$(headerSelector).attr('aria-sort', 'descending');
+      $(headerSelector + " .sort_btn_span").html('▼');
+      $(headerSelector).attr('aria-sort', 'descending');
     }
     $(headerSelector + "_sort").css("display", "inline");
     var array = [];
@@ -708,10 +708,11 @@ var LeafFormGrid = function (containerID, options) {
         setTimeout(() => {
           const elBtn = document.querySelector(`#${prefixID}header_${h.indicatorID} > button.btn_formgrid_sort`);
           if(elBtn === null) {
+            const sortIcon = sortPreference?.key !== String(h.indicatorID) ?
+              '⇕' : sortPreference?.order === 'asc' ? '▲' : '▼';
             $("#" + prefixID + "header_" + h.indicatorID).append(
               `<button type="button" class="btn_formgrid_sort" aria-label="sortable">
-                <span aria-hidden="true" class="sort_btn_span"> ⇕ </span>
-                <span aria-hidden="true" class="sort_icon_span"></span>
+                <span aria-hidden="true" class="sort_btn_span">${sortIcon}</span>
               </button>`
             );
 
@@ -904,7 +905,7 @@ var LeafFormGrid = function (containerID, options) {
       });
       output.push(headers); //first row will be headers
       $("#" + prefixID + "thead>tr>th>button .sort_btn_span").each(function (idx, val) {
-        $(val).html(" ⇕ ");
+        $(val).html("⇕");
       });
       let line = [];
       let i = 0;
