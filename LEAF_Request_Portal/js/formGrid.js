@@ -18,6 +18,8 @@ var LeafFormGrid = function (containerID, options) {
   var postProcessDataFunc = null;
   var preRenderFunc = null;
   var postRenderFunc = null;
+  let scrolled = false;
+  let renderRequest = [];
   let postSortRequestFunc = null;
   var rootURL = "";
   var isRenderingBody = false;
@@ -223,21 +225,20 @@ var LeafFormGrid = function (containerID, options) {
       temp +=
         '<th scope="col" tabindex="0" id="' +
         prefixID +
-        'header_UID" style="text-align: center">UID<span id="' + prefixID + 'header_UID_sort" class="' + prefixID + 'sort"></span></th>';
+        'header_UID" style="text-align: center">UID<span id="' + prefixID + 'header_UID_sort" class="' + prefixID + 'sort"></span>' +
+        '<button type="button" class="btn_formgrid_sort" aria-label="sortable"><span aria-hidden="true">↕</span></button></th>';
     }
     $("#" + prefixID + "thead").html(temp);
 
     if (showIndex) {
       $("#" + prefixID + "header_UID").css("cursor", "pointer");
-      $("#" + prefixID + "header_UID").on("click keydown", null, null, function (event) {
-        if(event.type === "click" || event?.which === 13) {
-          if(sortDirection['recordID'] == undefined || sortDirection['recordID'] == 'desc') {
-            sort("recordID", "asc", postSortRequestFunc);
-          } else {
-            sort("recordID", "desc", postSortRequestFunc);
-          }
-          renderBody(0, Infinity);
+      $("#" + prefixID + "header_UID > button").on("click", null, null, function (event) {
+        if(sortDirection['recordID'] == undefined || sortDirection['recordID'] == 'desc') {
+          sort("recordID", "asc", postSortRequestFunc);
+        } else {
+          sort("recordID", "desc", postSortRequestFunc);
         }
+        renderBody(0, Infinity);
       });
     }
 
@@ -263,30 +264,6 @@ var LeafFormGrid = function (containerID, options) {
           prefixID +
           'sort"></span></th>'
       );
-
-      if (headers[i].sortable == undefined || headers[i].sortable == true) {
-        $("#" + prefixID + "header_" + headers[i].indicatorID).css(
-          "cursor",
-          "pointer"
-        );
-        $("#" + prefixID + "header_" + headers[i].indicatorID).on(
-          "click keydown",
-          null,
-          headers[i].indicatorID,
-          function (event) {
-            if(event.type === "click" || event?.which === 13) {
-              if(sortDirection[event.data] == undefined || sortDirection[event.data] == 'desc') {
-                sort(event.data, "asc", postSortRequestFunc);
-              } else {
-                sort(event.data, "desc", postSortRequestFunc);
-              }
-              let currPosition = renderRequest.length; // retain scroll position
-              renderRequest = [];
-              renderBody(0, currPosition);
-            }
-          }
-        );
-      }
     }
     $("#" + prefixID + "thead").append("</tr>");
 
@@ -296,13 +273,12 @@ var LeafFormGrid = function (containerID, options) {
     });
 
     // sticky headers
-    var scrolled = false;
     let initialTop = Infinity;
 
     $(window).on("scroll", function () {
       scrolled = true;
     });
-    var renderRequest = [];
+
     setInterval(function () {
       scrollPos = $(window).scrollTop();
       tableHeight = $("#" + prefixID + "table").height();
@@ -367,21 +343,21 @@ var LeafFormGrid = function (containerID, options) {
   function sort(key, order, callback) {
     sortDirection[key] = order;
     const headerSelector = "#" + prefixID + "header_" + (key === "recordID" ? "UID" : key);
-    const headerText = document.querySelector(headerSelector)?.innerText || "";
+    const headerText = (document.querySelector(headerSelector)?.innerText || "").replace(/\p{Emoji}/gu, '');
     if (key != "recordID" && currLimit != Infinity) {
       renderBody(0, Infinity);
     }
 
     $("." + prefixID + "sort").css("display", "none");
-    $(`th[id*="${prefixID}header_"]`).removeAttr('aria-sort');
+    //$(`th[id*="${prefixID}header_"]`).removeAttr('aria-sort');
     if (order.toLowerCase() == "asc") {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", ascending.");
       $(headerSelector + "_sort").html('<span class="sort_icon_span" aria-hidden="true">▲</span>');
-      $(headerSelector).attr('aria-sort', 'ascending');
+      //$(headerSelector).attr('aria-sort', 'ascending');
     } else {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", descending.");
       $(headerSelector + "_sort").html('<span class="sort_icon_span" aria-hidden="true">▼</span>');
-      $(headerSelector).attr('aria-sort', 'descending');
+      //$(headerSelector).attr('aria-sort', 'descending');
     }
     $(headerSelector + "_sort").css("display", "inline");
     var array = [];
@@ -728,6 +704,37 @@ var LeafFormGrid = function (containerID, options) {
       postRenderFunc();
     }
 
+    headers.forEach(h => {
+      if (h.sortable == undefined || h.sortable == true) {
+        setTimeout(() => {
+          const elBtn = document.querySelector(`#${prefixID}header_${h.indicatorID} > button.btn_formgrid_sort`);
+          if(elBtn === null) {
+            $("#" + prefixID + "header_" + h.indicatorID).append(
+              '<button type="button" class="btn_formgrid_sort" aria-label="sortable"><span aria-hidden="true">↕</span></button>'
+            );
+
+            $("#" + prefixID + "header_" + h.indicatorID + " > button.btn_formgrid_sort").on(
+              "click",
+              null,
+              h.indicatorID,
+              function (event) {
+                if(event.type === "click" || event?.which === 13) {
+                  if(sortDirection[event.data] == undefined || sortDirection[event.data] == 'desc') {
+                    sort(event.data, "asc", postSortRequestFunc);
+                  } else {
+                    sort(event.data, "desc", postSortRequestFunc);
+                  }
+                  let currPosition = renderRequest.length; // retain scroll position
+                  renderRequest = [];
+                  renderBody(0, currPosition);
+                }
+              }
+            );
+          }
+        });
+      }
+    });
+
     // Cache rendered content
     if(limit == Infinity && !processedCallbackBuffer && !disabledRenderCache) {
       processedCallbackBuffer = true;
@@ -889,7 +896,7 @@ var LeafFormGrid = function (containerID, options) {
       let output = [];
       let headers = [];
       //removes triangle symbols so that ascii chars are not present in exported headers.
-      $("#" + prefixID + "thead>tr>th>span").each(function (idx, val) {
+      $("#" + prefixID + "thead>tr>th>span, #" + prefixID + "thead>tr>th>button").each(function (idx, val) {
         $(val).html("");
       });
       $("#" + prefixID + "thead>tr>th").each(function (idx, val) {

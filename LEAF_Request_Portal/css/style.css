@@ -21,6 +21,12 @@ body {
   z-index: 100;
 }
 
+.btn_formgrid_sort {
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
+    border: 0;
+}
 body a:link,
 body a:visited {
   color: #004b76;
