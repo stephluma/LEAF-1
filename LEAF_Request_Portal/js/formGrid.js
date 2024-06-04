@@ -226,7 +226,7 @@ var LeafFormGrid = function (containerID, options) {
         '<th scope="col" tabindex="0" id="' +
         prefixID +
         'header_UID" style="text-align: center">UID<span id="' + prefixID + 'header_UID_sort" class="' + prefixID + 'sort"></span>' +
-        '<button type="button" class="btn_formgrid_sort" aria-label="sortable"><span aria-hidden="true">↕</span></button></th>';
+        '<button type="button" class="btn_formgrid_sort" aria-label="sortable"><span aria-hidden="true"> ⇕ </span></button></th>';
     }
     $("#" + prefixID + "thead").html(temp);
 
@@ -710,7 +710,7 @@ var LeafFormGrid = function (containerID, options) {
           const elBtn = document.querySelector(`#${prefixID}header_${h.indicatorID} > button.btn_formgrid_sort`);
           if(elBtn === null) {
             $("#" + prefixID + "header_" + h.indicatorID).append(
-              '<button type="button" class="btn_formgrid_sort" aria-label="sortable"><span aria-hidden="true">↕</span></button>'
+              '<button type="button" class="btn_formgrid_sort" aria-label="sortable"><span aria-hidden="true"> ⇕ </span></button>'
             );
 
             $("#" + prefixID + "header_" + h.indicatorID + " > button.btn_formgrid_sort").on(
@@ -718,16 +718,14 @@ var LeafFormGrid = function (containerID, options) {
               null,
               h.indicatorID,
               function (event) {
-                if(event.type === "click" || event?.which === 13) {
-                  if(sortDirection[event.data] == undefined || sortDirection[event.data] == 'desc') {
-                    sort(event.data, "asc", postSortRequestFunc);
-                  } else {
-                    sort(event.data, "desc", postSortRequestFunc);
-                  }
-                  let currPosition = renderRequest.length; // retain scroll position
-                  renderRequest = [];
-                  renderBody(0, currPosition);
+                if(sortDirection[event.data] == undefined || sortDirection[event.data] == 'desc') {
+                  sort(event.data, "asc", postSortRequestFunc);
+                } else {
+                  sort(event.data, "desc", postSortRequestFunc);
                 }
+                let currPosition = renderRequest.length; // retain scroll position
+                renderRequest = [];
+                renderBody(0, currPosition);
               }
             );
           }
