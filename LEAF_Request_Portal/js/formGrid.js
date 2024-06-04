@@ -225,8 +225,12 @@ var LeafFormGrid = function (containerID, options) {
       temp +=
         '<th scope="col" tabindex="0" id="' +
         prefixID +
-        'header_UID" style="text-align: center">UID<span id="' + prefixID + 'header_UID_sort" class="' + prefixID + 'sort"></span>' +
-        '<button type="button" class="btn_formgrid_sort" aria-label="sortable"><span aria-hidden="true"> ⇕ </span></button></th>';
+        'header_UID" style="text-align: center">UID' +
+        `<button type="button" class="btn_formgrid_sort" aria-label="sortable">
+          <span aria-hidden="true" class="sort_btn_span"> ⇕ </span>
+          <span aria-hidden="true" class="sort_icon_span"></span>
+        </button>`
+        + '</th>';
     }
     $("#" + prefixID + "thead").html(temp);
 
@@ -256,13 +260,7 @@ var LeafFormGrid = function (containerID, options) {
           align +
           '">' +
           headers[i].name +
-          '<span id="' +
-          prefixID +
-          "header_" +
-          headers[i].indicatorID +
-          '_sort" class="' +
-          prefixID +
-          'sort"></span></th>'
+        '</th>'
       );
     }
     $("#" + prefixID + "thead").append("</tr>");
@@ -348,15 +346,16 @@ var LeafFormGrid = function (containerID, options) {
       renderBody(0, Infinity);
     }
 
-    $("." + prefixID + "sort").css("display", "none");
+    //$("." + prefixID + "sort").css("display", "none");
+    $(".sort_icon_span").html('');
     //$(`th[id*="${prefixID}header_"]`).removeAttr('aria-sort');
     if (order.toLowerCase() == "asc") {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", ascending.");
-      $(headerSelector + "_sort").html('<span class="sort_icon_span" aria-hidden="true">▲</span>');
+      $(headerSelector + " .sort_icon_span").html('▲');
       //$(headerSelector).attr('aria-sort', 'ascending');
     } else {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", descending.");
-      $(headerSelector + "_sort").html('<span class="sort_icon_span" aria-hidden="true">▼</span>');
+      $(headerSelector + " .sort_icon_span").html('▼');
       //$(headerSelector).attr('aria-sort', 'descending');
     }
     $(headerSelector + "_sort").css("display", "inline");
@@ -710,7 +709,10 @@ var LeafFormGrid = function (containerID, options) {
           const elBtn = document.querySelector(`#${prefixID}header_${h.indicatorID} > button.btn_formgrid_sort`);
           if(elBtn === null) {
             $("#" + prefixID + "header_" + h.indicatorID).append(
-              '<button type="button" class="btn_formgrid_sort" aria-label="sortable"><span aria-hidden="true"> ⇕ </span></button>'
+              `<button type="button" class="btn_formgrid_sort" aria-label="sortable">
+                <span aria-hidden="true" class="sort_btn_span"> ⇕ </span>
+                <span aria-hidden="true" class="sort_icon_span"></span>
+              </button>`
             );
 
             $("#" + prefixID + "header_" + h.indicatorID + " > button.btn_formgrid_sort").on(
@@ -893,15 +895,17 @@ var LeafFormGrid = function (containerID, options) {
       }
       let output = [];
       let headers = [];
-      //removes triangle symbols so that ascii chars are not present in exported headers.
-      $("#" + prefixID + "thead>tr>th>span, #" + prefixID + "thead>tr>th>button").each(function (idx, val) {
+      //removes sorting symbols so that ascii chars are not present in exported headers.
+      $("#" + prefixID + "thead>tr>th>button span").each(function (idx, val) {
         $(val).html("");
       });
       $("#" + prefixID + "thead>tr>th").each(function (idx, val) {
         headers.push($(val).text().trim());
       });
       output.push(headers); //first row will be headers
-
+      $("#" + prefixID + "thead>tr>th>button .sort_btn_span").each(function (idx, val) {
+        $(val).html(" ⇕ ");
+      });
       let line = [];
       let i = 0;
       let numColumns = headers.length - 1;
