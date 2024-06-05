@@ -531,7 +531,6 @@ class Form
             $form[$idx]['is_sensitive'] = $data[0]['is_sensitive'];
             $form[$idx]['isEmpty'] = (isset($data[0]['data']) && !is_array($data[0]['data']) && strip_tags($data[0]['data']) != '') ? false : true;
             $form[$idx]['value'] = (isset($data[0]['data']) && $data[0]['data'] != '') ? $data[0]['data'] : $form[$idx]['default'];
-            $form[$idx]['metadata'] = $data[0]['metadata'];
             $form[$idx]['displayedValue'] = ''; // used for Org Charts
             $form[$idx]['timestamp'] = isset($data[0]['timestamp']) ? $data[0]['timestamp'] : 0;
             if(!$forceReadOnly) {
@@ -558,11 +557,16 @@ class Form
             else if ($data[0]['format'] == 'orgchart_employee'
                 && !empty($data[0]['data']))
             {
-                $empRes = $this->employee->lookupEmpUID($data[0]['data']);
-                if (!empty($empRes)) {
-                    $form[$idx]['displayedValue'] = "{$empRes[0]['firstName']} {$empRes[0]['lastName']}";
+                $form[$idx]['displayedValue'] = '';
+                $metadata = json_decode($data[0]['metadata'], true);
+                if(isset($metadata['orgchart_employee'])) {
+                    $form[$idx]['displayedValue'] = $metadata['orgchart_employee']['firstName'] . " " . $metadata['orgchart_employee']['lastName'];
+
                 } else {
-                    $form[$idx]['displayedValue'] = '';
+                    $empRes = $this->employee->lookupEmpUID($data[0]['data']);
+                    if (!empty($empRes)) {
+                        $form[$idx]['displayedValue'] = "{$empRes[0]['firstName']} {$empRes[0]['lastName']}";
+                    }
                 }
             }
             else if ($data[0]['format'] == 'orgchart_position'
@@ -612,7 +616,6 @@ class Form
                 } else {
                     $form[$idx]['value'] = '[protected data]';
                     $form[$idx]['displayedValue'] = '[protected data]';
-                    $form[$idx]['metadata'] = '[protected data]';
                 }
             }
 
@@ -656,9 +659,14 @@ class Form
         return $form;
     }
 
+    /**
+     * used for API testing of posted metadata values.
+     * returns null if no read access, field is sensitive, or a masking group is set
+     */
     public function getIndicatorMetadata(int $recordID, int $indicatorID, int $series, string $metakey): ?string
     {
         $metadataTypes = array('orgchart_employee' => 1);
+
         if (!$this->hasReadAccess($recordID) || $metadataTypes[$metakey] !== 1)
         {
             return null;
@@ -676,12 +684,13 @@ class Form
         );
         $resMetadata = $this->db->prepared_query($sql,$vars);
 
-        //TODO: masking and sensitive behavior
-        if(isset($resMetadata[0])) {
-            $resMetadata[0]['isMaskable'] = isset($resMetadata[0]['groupID']) ? 1 : 0;
+        $return_value = null;
+
+        if($resMetadata[0]['is_sensitive'] !== 1 && !isset($resMetadata[0]['groupID']) && isset($resMetadata[0])) {
+            $return_value = $resMetadata[0]['metadata_value'];
         }
 
-        return $resMetadata[0]['metadata_value'];
+        return $return_value;
     }
 
     public function getIndicatorLog($indicatorID, $series, $recordID)
@@ -2594,15 +2603,22 @@ class Form
                             }
                             break;
                         case 'orgchart_employee':
-                            $empRes = $this->employee->lookupEmpUID($item['data']);
-                            if (isset($empRes[0]))
-                            {
-                                $item['data'] = "{$empRes[0]['firstName']} {$empRes[0]['lastName']}";
-                                $item['dataOrgchart'] = $empRes[0];
-                            }
-                            else
-                            {
-                                $item['data'] = '';
+                            $metadata = json_decode($item['metadata'] ?? '', true);
+                            if(isset($metadata['orgchart_employee'])) {
+                                $item['dataOrgchart'] = $metadata['orgchart_employee'];
+                                $item['dataOrgchart']['empUID'] = (int) $item['data'];
+                                $item['data'] = $metadata['orgchart_employee']['firstName'] . " " . $metadata['orgchart_employee']['lastName'];
+                            } else {
+                                $empRes = $this->employee->lookupEmpUID($item['data']);
+                                if (isset($empRes[0]))
+                                {
+                                    $item['data'] = "{$empRes[0]['firstName']} {$empRes[0]['lastName']}";
+                                    $item['dataOrgchart'] = $empRes[0];
+                                }
+                                else
+                                {
+                                    $item['data'] = '';
+                                }
                             }
                             break;
                         case 'orgchart_position':
@@ -4220,7 +4236,6 @@ class Form
                 $child[$idx]['is_sensitive'] = $field['is_sensitive'];
                 $child[$idx]['isEmpty'] = (isset($data[$idx]['data']) && !is_array($data[$idx]['data']) && strip_tags($data[$idx]['data']) != '') ? false : true;
                 $child[$idx]['value'] = (isset($data[$idx]['data']) && $data[$idx]['data'] != '') ? $data[$idx]['data'] : $child[$idx]['default'];
-                $child[$idx]['metadata'] = $data[$idx]['metadata'];
                 $child[$idx]['timestamp'] = isset($data[$idx]['timestamp']) ? $data[$idx]['timestamp'] : 0;
                 $child[$idx]['isWritable'] = $this->hasWriteAccess($recordID, $field['categoryID']);
                 $child[$idx]['isMasked'] = isset($data[$idx]['groupID']) ? $this->isMasked($field['indicatorID'], $recordID) : 0;
@@ -4257,11 +4272,19 @@ class Form
                 // special handling for org chart data types
                 if ($field['format'] == 'orgchart_employee')
                 {
-                    $empRes = $this->employee->lookupEmpUID($data[$idx]['data']);
                     $child[$idx]['displayedValue'] = '';
-                    if (isset($empRes[0]))
-                    {
-                      $child[$idx]['displayedValue'] = ($child[$idx]['isMasked']) ? '[protected data]' : "{$empRes[0]['firstName']} {$empRes[0]['lastName']}";
+
+                    $metadata = json_decode($data[$idx]['metadata'], true);
+                    if(isset($metadata['orgchart_employee'])) {
+                        $child[$idx]['displayedValue'] = ($child[$idx]['isMasked']) ?
+                            '[protected data]' : $metadata['orgchart_employee']['firstName'] . " " . $metadata['orgchart_employee']['lastName'];
+
+                    } else {
+                        $empRes = $this->employee->lookupEmpUID($data[$idx]['data']);
+                        if (isset($empRes[0]))
+                        {
+                          $child[$idx]['displayedValue'] = ($child[$idx]['isMasked']) ? '[protected data]' : "{$empRes[0]['firstName']} {$empRes[0]['lastName']}";
+                        }
                     }
                 }
                 if ($field['format'] == 'orgchart_position')
@@ -4326,7 +4349,6 @@ class Form
                     }
                     if(isset($child[$idx]['displayedValue']) && $child[$idx]['displayedValue'] != '') {
                         $child[$idx]['displayedValue'] = '[protected data]';
-                        $child[$idx]['metadata'] = '[protected data]';
                     }
                 }
 

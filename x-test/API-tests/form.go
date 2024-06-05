@@ -19,7 +19,6 @@ type FormCategoryResponseItemChild struct {
 	IsSensitive    int    `json:"is_sensitive"`
 	IsEmpty        bool   `json:"isEmpty"`
 	Value          string `json:"value"`
-	Metadata       string `json:"metadata,omitempty"`
 	DisplayedValue string `json:"displayedValue"`
 	Timestamp      int    `json:"timestamp"`
 	IsWritable     int    `json:"isWritable"`
@@ -45,7 +44,6 @@ type FormCategoryResponseItem struct {
 	IsSensitive    int                                   `json:"is_sensitive"`
 	IsEmpty        bool                                  `json:"isEmpty"`
 	Value          string                                `json:"value"`
-	Metadata       string                                `json:"metadata,omitempty"`
 	DisplayedValue string                                `json:"displayedValue"`
 	Timestamp      int                                   `json:"timestamp"`
 	IsWritable     int                                   `json:"isWritable"`
