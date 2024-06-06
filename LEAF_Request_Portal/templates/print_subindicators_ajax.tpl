@@ -227,7 +227,7 @@
             <span class="printResponse" id="data_<!--{$indicator.indicatorID}-->_<!--{$indicator.series}-->">
             <!--{if trim($indicator.value) != ''}-->
             <div style="padding: 0px">
-                <!--{if $indicator.displayedValue != ''}-->
+                <!--{if trim($indicator.displayedValue) != ''}-->
                     <a href="<!--{$orgchartPath}-->/?a=view_employee&empUID=<!--{$indicator.value|escape}-->"><!--{$indicator.displayedValue|sanitize}--></a>
                 <!--{else}-->
                     empUID #:<!--{$indicator.value|escape }--> (disabled account)<br>
