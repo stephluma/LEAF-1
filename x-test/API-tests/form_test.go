@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/url"
 	"strconv"
+	"html"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -188,9 +189,10 @@ func TestForm_Orgchart_Employee_Metadata(t *testing.T) {
 	//get and confirm values struct values are the same
 	resJSON, res := httpGet(RootURL + `api/form/505/metadata/8/1/_orgchart_employee`)
 	if !cmp.Equal(res.StatusCode, 200) {
-		t.Errorf("./api/form/505/data?masquerade=nonAdmin Status Code = %v, want = %v", res.StatusCode, 200)
+		t.Errorf("./api/form/505/metadata/8/1/_orgchart_employee Status Code = %v, want = %v", res.StatusCode, 200)
 	}
 	resMetadata, _ := strconv.Unquote(resJSON)
+	resMetadata = html.UnescapeString(resMetadata)
 	var org_emp_info Orgchart_employee_metadata
 	err = json.Unmarshal([]byte(resMetadata), &org_emp_info)
 	if err != nil {
