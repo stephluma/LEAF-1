@@ -659,40 +659,6 @@ class Form
         return $form;
     }
 
-    /**
-     * used for API testing of posted metadata values.
-     * returns null if no read access, field is sensitive, or a masking group is set
-     */
-    public function getIndicatorMetadata(int $recordID, int $indicatorID, int $series, string $metakey): ?string
-    {
-        $metadataTypes = array('orgchart_employee' => 1);
-
-        if (!$this->hasReadAccess($recordID) || $metadataTypes[$metakey] !== 1)
-        {
-            return null;
-        }
-
-        $sql = 'SELECT JSON_EXTRACT(metadata, :metakey) AS metadata_value, is_sensitive, groupID FROM `data`
-            LEFT JOIN indicators USING (indicatorID)
-            LEFT JOIN indicator_mask USING (indicatorID)
-            WHERE recordID=:recordID AND indicatorID=:indicatorID AND series=:series';
-        $vars = array(
-            ':recordID' => $recordID,
-            ':indicatorID' => $indicatorID,
-            ':series' => $series,
-            ':metakey' => '$.' . $metakey
-        );
-        $resMetadata = $this->db->prepared_query($sql,$vars);
-
-        $return_value = null;
-
-        if($resMetadata[0]['is_sensitive'] !== 1 && !isset($resMetadata[0]['groupID']) && isset($resMetadata[0])) {
-            $return_value = $resMetadata[0]['metadata_value'];
-        }
-
-        return $return_value;
-    }
-
     public function getIndicatorLog($indicatorID, $series, $recordID)
     {
         // check needToKnow mode

@@ -5,7 +5,6 @@ import (
 	"io"
 	"net/url"
 	"strconv"
-	"html"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -149,79 +148,5 @@ func TestForm_NonadminCannotCancelOwnSubmittedRecord(t *testing.T) {
 
 	if got == "1" {
 		t.Errorf("./api/form/[recordID]/cancel got = %v, want = %v", got, "An error message")
-	}
-}
-
-
-func TestForm_Orgchart_Employee_Metadata(t *testing.T) {
-	//setup.  normally set in employee selector result handler.
-	mock_orgchart_employee := Orgchart_employee_metadata{
-		FirstName: "Ramon",
-		LastName: "Watsica",
-		MiddleName: "Yundt",
-		Email: "Ramon.Watsica@fake-email.com",
-		UserName: "VTRYCXBETHANY",
-	}
-	org_emp_bytes, err := json.Marshal(mock_orgchart_employee)
-	if err != nil {
-		t.Error("Error Marshalling org emp struct")
-	}
-
-	//post and confirm post success
-	postData := url.Values{}
-	postData.Set("CSRFToken", CsrfToken)
-	postData.Set("8", "201")
-	postData.Set("8_metadata", "{\"orgchart_employee\":" + string(org_emp_bytes) + "}")
-
-	res, err := client.PostForm(RootURL+`api/form/505`, postData)
-	if err != nil {
-		t.Error("Error sending post request")
-	}
-
-	bodyBytes, _ := io.ReadAll(res.Body)
-	got := string(bodyBytes)
-	want := `"1"`
-	if !cmp.Equal(got, want) {
-		t.Errorf("Admin did not have access got = %v, want = %v", got, want)
-	}
-
-
-	//get and confirm values struct values are the same
-	resJSON, res := httpGet(RootURL + `api/form/505/metadata/8/1/_orgchart_employee`)
-	if !cmp.Equal(res.StatusCode, 200) {
-		t.Errorf("./api/form/505/metadata/8/1/_orgchart_employee Status Code = %v, want = %v", res.StatusCode, 200)
-	}
-	resMetadata, _ := strconv.Unquote(resJSON)
-	resMetadata = html.UnescapeString(resMetadata)
-	var org_emp_info Orgchart_employee_metadata
-	err = json.Unmarshal([]byte(resMetadata), &org_emp_info)
-	if err != nil {
-		t.Error("Error on orgchart_employee_metadata unmarshal")
-	}
-
-	got = org_emp_info.FirstName
-	want = mock_orgchart_employee.FirstName
-	if !cmp.Equal(got, want) {
-		t.Errorf("firstName got = %v, want = %v", got, want)
-	}
-	got = org_emp_info.LastName
-	want = mock_orgchart_employee.LastName
-	if !cmp.Equal(got, want) {
-		t.Errorf("lastName got = %v, want = %v", got, want)
-	}
-	got = org_emp_info.MiddleName
-	want = mock_orgchart_employee.MiddleName
-	if !cmp.Equal(got, want) {
-		t.Errorf("middleName got = %v, want = %v", got, want)
-	}
-	got = org_emp_info.Email
-	want = mock_orgchart_employee.Email
-	if !cmp.Equal(got, want) {
-		t.Errorf("email got = %v, want = %v", got, want)
-	}
-	got = org_emp_info.UserName
-	want = mock_orgchart_employee.UserName
-	if !cmp.Equal(got, want) {
-		t.Errorf("userName got = %v, want = %v", got, want)
 	}
 }
