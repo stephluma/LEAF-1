@@ -519,7 +519,7 @@ class Form
             $idx = $data[0]['indicatorID'];
             $form[$idx]['indicatorID'] = $data[0]['indicatorID'];
             $form[$idx]['categoryID'] = $data[0]['categoryID'];
-            $form[$idx]['series'] = (int) $series;
+            $form[$idx]['series'] = $series;
             $form[$idx]['name'] = $data[0]['name'];
             $form[$idx]['description'] = $data[0]['description'];
             $form[$idx]['default'] = $data[0]['default'];
@@ -543,7 +543,13 @@ class Form
             }
             $form[$idx]['sort'] = $data[0]['sort'];
 
-            $form[$idx]['has_code'] = trim($data[0]['html'] ?? '') != '' || trim($data[0]['htmlPrint'] ?? '') != '';
+            if (!empty($data[0]['html'])) {
+                $form[$idx]['has_code'] = trim($data[0]['html']);
+            } elseif (!empty($data[0]['htmlPrint'])) {
+                $form[$idx]['has_code'] = trim($data[0]['htmlPrint']);
+            } else {
+                $form[$idx]['has_code'] = '';
+            }
 
             // handle file upload
             if (isset($data[0]['data'])
@@ -2642,9 +2648,10 @@ class Form
 			    break;
                     }
 
-
-                    $out[$item['recordID']]['s' . $item['series']]['id' . $item['indicatorID']] = isset($indicatorMasks[$item['indicatorID']]) && $indicatorMasks[$item['indicatorID']] == 1 ? '[protected data]' : $item['data'];
-                    if (isset($item['dataOrgchart']))
+                    $isProtected = isset($indicatorMasks[$item['indicatorID']]) && $indicatorMasks[$item['indicatorID']] == 1;
+                    $out[$item['recordID']]['s' . $item['series']]['id' . $item['indicatorID']] = $isProtected ?
+                        '[protected data]' : $item['data'];
+                    if (isset($item['dataOrgchart']) && !$isProtected)
                     {
                         $out[$item['recordID']]['s' . $item['series']]['id' . $item['indicatorID'] . '_orgchart'] = $item['dataOrgchart'];
                     }
@@ -4191,7 +4198,7 @@ class Form
                 $idx = $field['indicatorID'];
 
                 $child[$idx]['indicatorID'] = $field['indicatorID'];
-                $child[$idx]['series'] = (int) $series;
+                $child[$idx]['series'] = $series;
                 $child[$idx]['name'] = $field['name'];
                 $child[$idx]['default'] = $field['default'];
                 $child[$idx]['description'] = $field['description'];
@@ -4206,7 +4213,7 @@ class Form
                 $child[$idx]['isWritable'] = $this->hasWriteAccess($recordID, $field['categoryID']);
                 $child[$idx]['isMasked'] = isset($data[$idx]['groupID']) ? $this->isMasked($field['indicatorID'], $recordID) : 0;
                 $child[$idx]['sort'] = $field['sort'];
-                $child[$idx]['has_code'] = trim($field['html'] ?? '') != '' || trim($field['htmlPrint'] ?? '') != '';
+                $child[$idx]['has_code'] = trim($field['html']) != '' || trim($field['htmlPrint']) != '';
 
                 if(isset($_GET['context']) && $_GET['context'] == 'formEditor') {
                     $child[$idx]['isMaskable'] = isset($data[$idx]['groupID']) ? 1 : 0;

@@ -71,7 +71,7 @@ func TestFormQuery_Employee_Metadata(t *testing.T) {
 	postData.Set("8", "201")
 	postData.Set("8_metadata", "{\"orgchart_employee\":" + string(org_emp_bytes) + "}")
 
-	res, err := client.PostForm(RootURL+`api/form/505`, postData)
+	res, err := client.PostForm(RootURL+`api/form/8`, postData)
 	if err != nil {
 		t.Error("Error sending post request")
 	}
@@ -85,11 +85,11 @@ func TestFormQuery_Employee_Metadata(t *testing.T) {
 
 	formRes, _ := getFormQuery(RootURL + `api/form/query/?q={"terms":[{"id":"categoryID","operator":"=","match":"form_5ea07","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":[],"sort":{},"getData":["8"],"limit":10000,"limitOffset":0}&x-filterData=recordID,title`)
 
-	if _, exists := formRes[505]; !exists {
-		t.Errorf("Record 505 should be readable")
+	if _, exists := formRes[8]; !exists {
+		t.Errorf("Record 8 should be readable")
 	}
 
-	recData := formRes[505].S1
+	recData := formRes[8].S1
 
 	metadataInterface := recData["id8_orgchart"]
 	orgchart := metadataInterface.(map[string]interface {})

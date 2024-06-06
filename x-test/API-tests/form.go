@@ -2,8 +2,6 @@ package main
 
 type FormCategoryResponse []FormCategoryResponseItem
 
-type FormCategoryRawIndicatorResponse map[string]FormCategoryResponseItem
-
 type FormCategoryResponseItemChild struct {
 	IndicatorID    int    `json:"indicatorID"`
 	CategoryID     string `json:"categoryID"`
@@ -25,7 +23,7 @@ type FormCategoryResponseItemChild struct {
 	IsMasked       int    `json:"isMasked"`
 	IsMaskable     *int   `json:"isMaskable,omitempty"`
 	Sort           int    `json:"sort"`
-	HasCode        bool   `json:"has_code"`
+	HasCode        string `json:"has_code"`
 	Format         string `json:"format"`
 }
 
@@ -50,7 +48,7 @@ type FormCategoryResponseItem struct {
 	IsMasked       int                                   `json:"isMasked"`
 	IsMaskable     *int                                  `json:"isMaskable,omitempty"`
 	Sort           int                                   `json:"sort"`
-	HasCode        bool                                  `json:"has_code"`
+	HasCode        string                                `json:"has_code"`
 	Format         string                                `json:"format"`
 	Child          map[int]FormCategoryResponseItemChild `json:"child"`
 }
