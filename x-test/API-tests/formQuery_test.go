@@ -71,7 +71,7 @@ func TestFormQuery_Employee_Metadata(t *testing.T) {
 	postData.Set("8", "201")
 	postData.Set("8_metadata", "{\"orgchart_employee\":" + string(org_emp_bytes) + "}")
 
-	res, err := client.PostForm(RootURL+`api/form/8`, postData)
+	res, err := client.PostForm(RootURL+`api/form/11`, postData)
 	if err != nil {
 		t.Error("Error sending post request")
 	}
@@ -85,11 +85,11 @@ func TestFormQuery_Employee_Metadata(t *testing.T) {
 
 	formRes, _ := getFormQuery(RootURL + `api/form/query/?q={"terms":[{"id":"categoryID","operator":"=","match":"form_5ea07","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":[],"sort":{},"getData":["8"],"limit":10000,"limitOffset":0}&x-filterData=recordID,title`)
 
-	if _, exists := formRes[8]; !exists {
-		t.Errorf("Record 8 should be readable")
+	if _, exists := formRes[11]; !exists {
+		t.Errorf("Record 11 should be readable")
 	}
 
-	recData := formRes[8].S1
+	recData := formRes[11].S1
 
 	metadataInterface := recData["id8_orgchart"]
 	orgchart := metadataInterface.(map[string]interface {})
@@ -202,5 +202,13 @@ func TestFormQuery_RecordIdAndFulltext(t *testing.T) {
 
 	if _, exists := res[499]; !exists {
 		t.Errorf(`Record 499 should exist because the data fields contain the word "apple". want = recordID IS 499 AND data contains apple`)
+	}
+}
+
+func TestFormQuery_GroupClickedApprove(t *testing.T) {
+	res, _ := getFormQuery(RootURL + `api/form/query?q={"terms":[{"id":"stepAction","indicatorID":"4","operator":"=","match":"approve","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service","status","categoryName"],"sort":{"column":"date","direction":"DESC"},"limit":50}`)
+
+	if _, exists := res[9]; !exists {
+		t.Errorf(`Record 9 should exist because the "Group designated step" clicked "Approve". want = recordID 9 exists in the result set`)
 	}
 }
