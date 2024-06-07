@@ -8,10 +8,10 @@ $db = new App\Leaf\Db(DIRECTORY_HOST, DIRECTORY_USER, DIRECTORY_PASS, 'national_
 
 
 $log_file = fopen("update_metadata_log.txt", "w") or die("unable to open file");
-
+$time_start = date_create();
 
 //get records of each portal and assoc orgchart
-$q = "SELECT `site_path`, `portal_database`, `orgchart_database` FROM `sites`
+$q = "SELECT `portal_database`, `orgchart_database` FROM `sites`
 	WHERE `portal_database` IS NOT NULL AND `site_type`='portal'";
 
 $portal_records = $db->query($q);
@@ -24,7 +24,7 @@ foreach($portal_records as $rec) {
         //************ PORTAL (first use) ************ */
 		$db->query("USE `{$portal_db}`");
 		
-        //get unique empUID entries from orghcart_employee type fields
+        //get distinct data (empUID) entries from orghcart_employee format indicators
 		try {
 			$dataQ = "SELECT DISTINCT `data` as `empUID_Data` FROM `data`
                 JOIN `indicators` on `data`.`indicatorID`=`indicators`.`indicatorID`
@@ -36,76 +36,74 @@ foreach($portal_records as $rec) {
 			if($numEmpUIDs > 0) {
 				fwrite(
 					$log_file,
-					"\r\nUnique data empUID count for " . $portal_db . ": " . $numEmpUIDs . "\r\n"
+					"\r\nUnique data empUID count for " . $portal_db . ": " . $numEmpUIDs . "\r\n-----------------------\r\n"
 				);
 				
                 try {
-                    //get all emp info for those IDs from local orgchart
+                    //switch to orgchart and get needed info for these IDs
                     //************ ORGCHART ************ */
                     $db->query("USE `{$orgchart_db}`");
                     
-                    $inEmpsArr = array_map(
-                        function($rec) {
-                            return $rec['empUID_Data'];
-                        }, $resUniqueIDs
-                    );
+                    $inEmpsArr = array_column($resUniqueIDs, 'empUID_Data');
                     $inEmpsSet = implode(',', $inEmpsArr);
 
-                    $v = array(
-                        ':empSet' => $inEmpsSet
-                    );
+                    $v = array(':inEmpsSet' => $inEmpsSet);
 
-                    $qEmployee = "SELECT employee.empUID, userName, lastName, firstName, middleName, deleted, `data` AS email FROM employee
-                        JOIN employee_data ON employee.empUID=employee_data.empUID 
-                        WHERE indicatorID=6 AND FIND_IN_SET(employee.empUID, :empSet)";
+                    $qEmployee = "SELECT `employee`.`empUID`, `userName`, `lastName`, `firstName`, `middleName`, `deleted`, `data` AS `email` FROM `employee`
+                        JOIN `employee_data` ON `employee`.`empUID`=`employee_data`.`empUID`
+                        WHERE `indicatorID`=6 AND FIND_IN_SET(`employee`.`empUID`, :inEmpsSet)";
 
                     try {
-                            
                         $resEmployeeInfo = $db->prepared_query($qEmployee, $v) ?? [];
 
-                        //************ PORTAL ************ */
+                        //************ PORTAL to update metadata ************ */
                         $db->query("USE `{$portal_db}`");
 
                         foreach ($resEmployeeInfo as $emp) {
-                            /* test log
+                            /* //test log
                             fwrite(
                                 $log_file,
-                                "local info empUID " . $emp['empUID'] . '): ' .
+                                "local info empUID " . $emp['empUID'] . ': ' .
                                 $emp['userName'] . ', ' . $emp['email'] . ', ' .
                                 $emp['firstName'] . ', ' . $emp['lastName'] . ', ' . $emp['middleName'] . ', ' .
                                 $emp['deleted'] . "\r\n"
-                            );*/
-                            $isDeleted = $emp['deleted'] !== 0;
-                            $orgchart_info = 
-                                array(
-                                    'userName' => $isDeleted ? "" : $emp['userName'],
-                                    'firstName' => $isDeleted ? "" : $emp['firstName'],
-                                    'lastName' => $isDeleted ? "" : $emp['lastName'],
-                                    'middleName' => $isDeleted ? "" : $emp['middleName'],
-                                    'email' => $isDeleted ? "" : $emp['email']
-                                );
+                            );//*/
+
+                            $isActive = $emp['deleted'] === 0;
+                            //still want something here for inactive to avoid the lookup
+                            $metadata = json_encode(
+                                array("orgchart_employee" =>
+                                    array(
+                                        'userName' => $isActive ? $emp['userName'] : '',
+                                        'firstName' => $isActive ? $emp['firstName'] : '',
+                                        'lastName' => $isActive ? $emp['lastName'] : '',
+                                        'middleName' => $isActive ? $emp['middleName'] : '',
+                                        'email' => $isActive ? $emp['email'] : ''
+                                    )
+                                )
+                            );
 
                             $vMeta = array(
                                 ':empUID' => $emp['empUID'],
-                                ':metadata' => json_encode(array("orgchart_employee" => $orgchart_info)),
+                                ':metadata' => $metadata,
                             );
-                            $qMetadata = "UPDATE `data` SET data.metadata=:metadata
-                                WHERE data.data=:empUID AND indicatorID IN (
-                                    SELECT indicatorID FROM indicators
-                                    WHERE indicators.format='orgchart_employee'
+                            $qMetadata = "UPDATE `data` SET `data`.`metadata`=:metadata
+                                WHERE `data`.`data`=:empUID AND `indicatorID` IN (
+                                    SELECT `indicatorID` FROM `indicators`
+                                    WHERE `indicators`.`format`='orgchart_employee'
                                 )";
 
                             try {
                                 $db->prepared_query($qMetadata, $vMeta);
 
-                            } catch (Exception $e) { //catch portal post
+                            } catch (Exception $e) {
                                 fwrite(
                                     $log_file,
-                                    "Caught Exception (metadata update): " . $e->getMessage() . "\r\n"
+                                    "Caught Exception (update metadata): " . $e->getMessage() . "\r\n"
                                 );
                             }
-                        }
 
+                        }
                     
                     } catch (Exception $e) {
                         fwrite(
@@ -120,16 +118,15 @@ foreach($portal_records as $rec) {
                         "Caught Exception (orgchart connect): " . $e->getMessage() . "\r\n"
                     );
                 }
-
 			}
-			
+
 		} catch (Exception $e) {
 			fwrite(
 				$log_file,
-				"Caught Exception (query unique emp data): " . $e->getMessage() . "\r\n"
+				"Caught Exception (query distinct data): " . $e->getMessage() . "\r\n"
 			);
 		}
-		
+
 	} catch (Exception $e) {
 		fwrite(
 			$log_file,
@@ -137,5 +134,12 @@ foreach($portal_records as $rec) {
 		);
 	}
 }
+$time_end = date_create();
+$time_diff = date_diff($time_start, $time_end);
+
+fwrite(
+    $log_file,
+    "\r\n-----------------------\r\nProcess took: " . $time_diff->format('%i min, %S sec, %f mcr') . "\r\n"
+);
 
 fclose($log_file);
