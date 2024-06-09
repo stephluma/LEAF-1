@@ -56,10 +56,15 @@ foreach($portal_records as $rec) {
                     try {
                         $resEmployeeInfo = $db->prepared_query($qEmployee, $v) ?? [];
 
-                        //************ PORTAL to update metadata ************ */
+                        //************ switch to PORTAL to update metadata ************ */
                         $db->query("USE `{$portal_db}`");
 
-                        foreach ($resEmployeeInfo as $emp) {
+                        //build CASE statement for org_emp indicators
+                        $sqlUpdateMetadata = "UPDATE `data`
+                            SET `metadata` = CASE `data` ";
+
+                        $metaVars = array();
+                        foreach ($resEmployeeInfo as $idx => $emp) {
                             /* //test log
                             fwrite(
                                 $log_file,
@@ -70,7 +75,7 @@ foreach($portal_records as $rec) {
                             );//*/
 
                             $isActive = $emp['deleted'] === 0;
-                            //still want something here for inactive to avoid the lookup
+                            //NOTE: we still want to set metadata here for inactive users to avoid hitting else lookupEmpUID
                             $metadata = json_encode(
                                 array("orgchart_employee" =>
                                     array(
@@ -82,33 +87,31 @@ foreach($portal_records as $rec) {
                                     )
                                 )
                             );
-
-                            $vMeta = array(
-                                ':empUID' => $emp['empUID'],
-                                ':metadata' => $metadata,
-                            );
-                            $qMetadata = "UPDATE `data` SET `data`.`metadata`=:metadata
-                                WHERE `data`.`data`=:empUID AND `indicatorID` IN (
-                                    SELECT `indicatorID` FROM `indicators`
-                                    WHERE `indicators`.`format`='orgchart_employee'
-                                )";
-
-                            try {
-                                $db->prepared_query($qMetadata, $vMeta);
-
-                            } catch (Exception $e) {
-                                fwrite(
-                                    $log_file,
-                                    "Caught Exception (update metadata): " . $e->getMessage() . "\r\n"
-                                );
-                            }
-
+                            $metaVars[":emp_" . $idx] = $emp['empUID'];
+                            $metaVars[":meta_" . $idx] = $metadata;
+                            $sqlUpdateMetadata .= " WHEN :emp_" . $idx . " THEN :meta_" . $idx;
                         }
-                    
+
+                        $sqlUpdateMetadata .= " END";
+                        $sqlUpdateMetadata .= " WHERE `indicatorID` IN (
+                            SELECT `indicatorID` FROM `indicators`
+                                WHERE `indicators`.`format`='orgchart_employee'
+                            )";
+
+                        try {
+                            $db->prepared_query($sqlUpdateMetadata, $metaVars);
+
+                        } catch (Exception $e) {
+                            fwrite(
+                                $log_file,
+                                "Caught Exception (update metadata case): " . $e->getMessage() . "\r\n"
+                            );
+                        }
+
                     } catch (Exception $e) {
                         fwrite(
                             $log_file,
-                            "Caught Exceptioni (query employee): " . $e->getMessage() . "\r\n"
+                            "Caught Exceptioni (query employee join employee_data): " . $e->getMessage() . "\r\n"
                         );
                     }
 
