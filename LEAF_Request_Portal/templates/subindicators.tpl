@@ -1141,13 +1141,11 @@
                         importFromNational(empSel);
                         const user = empSel.selectionData[empSel.selection] || null;
                         formMetadata['<!--{$indicator.indicatorID}-->'] = {
-                            orgchart_employee: {
-                                firstName: user?.firstName || '',
-                                lastName: user?.lastName || '',
-                                middleName: user?.middleName || '',
-                                email: user?.email || '',
-                                userName: user?.userName || '',
-                            }
+                            firstName: user?.firstName || '',
+                            lastName: user?.lastName || '',
+                            middleName: user?.middleName || '',
+                            email: user?.email || '',
+                            userName: user?.userName || ''
                         };
                     });
                     empSel.initialize();

@@ -69,7 +69,7 @@ func TestFormQuery_Employee_Metadata(t *testing.T) {
 	postData := url.Values{}
 	postData.Set("CSRFToken", CsrfToken)
 	postData.Set("8", "201")
-	postData.Set("8_metadata", "{\"orgchart_employee\":" + string(org_emp_bytes) + "}")
+	postData.Set("8_metadata", string(org_emp_bytes))
 
 	res, err := client.PostForm(RootURL+`api/form/11`, postData)
 	if err != nil {

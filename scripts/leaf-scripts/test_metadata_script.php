@@ -65,7 +65,7 @@ foreach($portal_records as $rec) {
 
                         $metaVars = array();
                         foreach ($resEmployeeInfo as $idx => $emp) {
-                            /* //test log
+                            //* //test log
                             fwrite(
                                 $log_file,
                                 "local info empUID " . $emp['empUID'] . ': ' .
@@ -77,14 +77,12 @@ foreach($portal_records as $rec) {
                             $isActive = $emp['deleted'] === 0;
                             //NOTE: we still want to set metadata here for inactive users to avoid hitting else lookupEmpUID
                             $metadata = json_encode(
-                                array("orgchart_employee" =>
-                                    array(
-                                        'userName' => $isActive ? $emp['userName'] : '',
-                                        'firstName' => $isActive ? $emp['firstName'] : '',
-                                        'lastName' => $isActive ? $emp['lastName'] : '',
-                                        'middleName' => $isActive ? $emp['middleName'] : '',
-                                        'email' => $isActive ? $emp['email'] : ''
-                                    )
+                                array(
+                                    'userName' => $isActive ? $emp['userName'] : '',
+                                    'firstName' => $isActive ? $emp['firstName'] : '',
+                                    'lastName' => $isActive ? $emp['lastName'] : '',
+                                    'middleName' => $isActive ? $emp['middleName'] : '',
+                                    'email' => $isActive ? $emp['email'] : ''
                                 )
                             );
                             $metaVars[":emp_" . $idx] = $emp['empUID'];

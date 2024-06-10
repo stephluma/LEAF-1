@@ -566,8 +566,8 @@ class Form
             {
                 $form[$idx]['displayedValue'] = '';
                 $metadata = json_decode($data[0]['metadata'], true);
-                if(isset($metadata['orgchart_employee'])) {
-                    $form[$idx]['displayedValue'] = $metadata['orgchart_employee']['firstName'] . " " . $metadata['orgchart_employee']['lastName'];
+                if(isset($metadata)) {
+                    $form[$idx]['displayedValue'] = $metadata['firstName'] . " " . $metadata['lastName'];
 
                 } else {
                     $empRes = $this->employee->lookupEmpUID($data[0]['data']);
@@ -1120,14 +1120,22 @@ class Form
             return 0;
         }
 
-        $validMetadataTypes = array('orgchart_employee' => 1);
-        $metadata = isset($res[0]['metadata']) ? json_decode($res[0]['metadata'], true) : array();
-
+        $validMetadataTypes = array(
+            'orgchart_employee' => array(
+                "firstName" => 1,
+                "lastName" => 1,
+                "middleName" => 1,
+                "email" => 1,
+                "userName" => 1,
+            )
+        );
+        $metadata = array();
         if(isset($_POST[$key . "_metadata"])) {
+            $baseFormat = explode(PHP_EOL, $res[0]['format'])[0] ?? "";
             $postMetadata = json_decode($_POST[$key . "_metadata"], true);
 
             foreach($postMetadata as $metakey => $info) {
-                if($validMetadataTypes[$metakey] === 1) {
+                if(isset($validMetadataTypes[$baseFormat]) && $validMetadataTypes[$baseFormat][$metakey] === 1) {
                     $metadata[$metakey] = is_array($info) || is_object($info) ?
                         XSSHelpers::scrubObjectOrArray($info) : XSSHelpers::xscrub($info);
                 }
@@ -2577,10 +2585,10 @@ class Form
                             break;
                         case 'orgchart_employee':
                             $metadata = json_decode($item['metadata'] ?? '', true);
-                            if(isset($metadata['orgchart_employee'])) {
-                                $item['dataOrgchart'] = $metadata['orgchart_employee'];
+                            if(isset($metadata)) {
+                                $item['dataOrgchart'] = $metadata;
                                 $item['dataOrgchart']['empUID'] = (int) $item['data'];
-                                $item['data'] = $metadata['orgchart_employee']['firstName'] . " " . $metadata['orgchart_employee']['lastName'];
+                                $item['data'] = $metadata['firstName'] . " " . $metadata['lastName'];
                             } else {
                                 $empRes = $this->employee->lookupEmpUID($item['data']);
                                 if (isset($empRes[0]))
@@ -4305,9 +4313,9 @@ class Form
                     $child[$idx]['displayedValue'] = '';
 
                     $metadata = json_decode($data[$idx]['metadata'], true);
-                    if(isset($metadata['orgchart_employee'])) {
+                    if(isset($metadata)) {
                         $child[$idx]['displayedValue'] = ($child[$idx]['isMasked']) ?
-                            '[protected data]' : $metadata['orgchart_employee']['firstName'] . " " . $metadata['orgchart_employee']['lastName'];
+                            '[protected data]' : $metadata['firstName'] . " " . $metadata['lastName'];
 
                     } else {
                         $empRes = $this->employee->lookupEmpUID($data[$idx]['data']);
