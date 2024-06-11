@@ -20,6 +20,7 @@ var LeafFormGrid = function (containerID, options) {
   var postRenderFunc = null;
   let scrolled = false;
   let renderRequest = 0;
+  let scrollX, scrollY, virtualIndex;
   let postSortRequestFunc = null;
   var rootURL = "";
   var isRenderingBody = false;
@@ -225,7 +226,7 @@ var LeafFormGrid = function (containerID, options) {
     let temp = `<tr id="${prefixID}thead_tr">`;
     if (showIndex) {
       const sortIcon = typeof sortPreference === 'undefined' || sortPreference?.key !== 'recordID' ?
-        '⇕' : sortPreference?.order === 'asc' ? '▲' : '▼';
+        '' : sortPreference?.order === 'asc' ? '▲' : '▼';
       temp +=
         '<th scope="col" tabindex="0" id="' +
         prefixID +
@@ -240,6 +241,8 @@ var LeafFormGrid = function (containerID, options) {
     if (showIndex) {
       $("#" + prefixID + "header_UID").css("cursor", "pointer");
       $("#" + prefixID + "header_UID > button").on("click", null, null, function (event) {
+        event.stopPropagation();
+        console.log('clicked the header UID')
         if(sortDirection['recordID'] == undefined || sortDirection['recordID'] == 'desc') {
           sort("recordID", "asc", postSortRequestFunc);
         } else {
@@ -248,7 +251,6 @@ var LeafFormGrid = function (containerID, options) {
         renderRequest = 0;
         renderBody(0, virtualIndex);
         window.scrollTo(scrollX, scrollY); // compensate for browser reflow
-        renderBody(0, Infinity);
       });
     }
 
@@ -258,43 +260,23 @@ var LeafFormGrid = function (containerID, options) {
         continue;
       }
       var align = headers[i].align != undefined ? headers[i].align : "center";
-      domThead.insertAdjacentHTML('beforeend', `<th scope="col" id="${prefixID}header_${headers[i].indicatorID}" tabindex="0"  style="text-align:${align}">
-        ${headers[i].name}<span id="${prefixID}header_${headers[i].indicatorID}_sort" class="${prefixID}sort"></span>
-        </th>`);
+      domThead.insertAdjacentHTML('beforeend', `<th scope="col" id="${prefixID}header_${headers[i].indicatorID}" tabindex="0"  style="text-align:${align}">${headers[i].name}</th>`);
 
       if (headers[i].sortable == undefined || headers[i].sortable == true) {
         $("#" + prefixID + "header_" + headers[i].indicatorID).css(
           "cursor",
           "pointer"
         );
-        $("#" + prefixID + "header_" + headers[i].indicatorID).on(
-          "click keydown",
-          null,
-          headers[i].indicatorID,
-          function (event) {
-            if(event.type === "click" || event?.which === 13) {
-              if(sortDirection[event.data] == undefined || sortDirection[event.data] == 'desc') {
-                sort(event.data, "asc", postSortRequestFunc);
-              } else {
-                sort(event.data, "desc", postSortRequestFunc);
-              }
-              renderRequest = 0;
-              renderBody(0, virtualIndex);
-              window.scrollTo(scrollX, scrollY); // compensate for browser reflow
-            }
-          }
-        );
       }
     }
     $("#" + prefixID + "thead").append("</tr>");
 
     $("#" + prefixID + "table>thead>tr>th").css({
-      padding: "6px 28px 6px 2px",
+      padding: "4px 2px",
       "font-size": "12px",
     });
 
     // sticky headers
-    let initialTop = Infinity;
     if(document.onscrollend != undefined) {
       document.onscrollend = handleScroll;
     } else {
@@ -306,7 +288,6 @@ var LeafFormGrid = function (containerID, options) {
       };
     }
 
-    let scrollX, scrollY, virtualIndex;
     function handleScroll() {
       scrollY = window.scrollY;
       scrollX = window.scrollX;
@@ -376,12 +357,12 @@ var LeafFormGrid = function (containerID, options) {
   function sort(key, order, callback) {
     sortDirection[key] = order;
     const headerSelector = "#" + prefixID + "header_" + (key === "recordID" ? "UID" : key);
-    const headerText = (document.querySelector(headerSelector)?.innerText || "").replace(/[⇕▼▲]/gu, '');
+    const headerText = (document.querySelector(headerSelector)?.innerText || "").replace(/[▼▲]/gu, '');
     if (key != "recordID" && currLimit != Infinity) {
       renderBody(0, Infinity);
     }
 
-    $(".sort_btn_span").html('⇕');
+    $(".sort_btn_span").html('');
     $(`th[id*="${prefixID}header_"]`).removeAttr('aria-sort');
     if (order.toLowerCase() == "asc") {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", ascending.");
@@ -757,7 +738,7 @@ var LeafFormGrid = function (containerID, options) {
           const elBtn = document.querySelector(`#${prefixID}header_${h.indicatorID} > button.btn_formgrid_sort`);
           if(elBtn === null) {
             const sortIcon = typeof sortPreference === 'undefined' || sortPreference?.key !== String(h.indicatorID) ?
-              '⇕' : sortPreference?.order === 'asc' ? '▲' : '▼';
+              '' : sortPreference?.order === 'asc' ? '▲' : '▼';
             $("#" + prefixID + "header_" + h.indicatorID).append(
               `<button type="button" class="btn_formgrid_sort" aria-label="sortable">
                 <span aria-hidden="true" class="sort_btn_span">${sortIcon}</span>
@@ -774,9 +755,14 @@ var LeafFormGrid = function (containerID, options) {
                 } else {
                   sort(event.data, "desc", postSortRequestFunc);
                 }
+                /*
                 let currPosition = renderRequest.length; // retain scroll position
                 renderRequest = [];
-                renderBody(0, currPosition);
+                renderBody(0, currPosition);*/
+
+                renderRequest = 0;
+                renderBody(0, virtualIndex);
+                window.scrollTo(scrollX, scrollY); // compensate for browser reflow
               }
             );
           }
@@ -946,9 +932,6 @@ var LeafFormGrid = function (containerID, options) {
         headers.push($(val).text().trim());
       });
       output.push(headers); //first row will be headers
-      $("#" + prefixID + "thead>tr>th>button .sort_btn_span").each(function (idx, val) {
-        $(val).html("⇕");
-      });
       let line = [];
       let i = 0;
       let numColumns = headers.length - 1;
