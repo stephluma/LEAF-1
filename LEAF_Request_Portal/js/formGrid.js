@@ -231,26 +231,24 @@ var LeafFormGrid = function (containerID, options) {
         '<th scope="col" tabindex="0" id="' +
         prefixID +
         'header_UID" style="text-align: center">UID' +
-        `<button type="button" class="btn_formgrid_sort" aria-label="sortable">
+        `<div class="btn_formgrid_sort" aria-hidden="true">
           <span aria-hidden="true" class="sort_btn_span">${sortIcon}</span>
-        </button>`
+        </div>`
         + '</th>';
     }
     $("#" + prefixID + "thead").html(temp);
 
     if (showIndex) {
       $("#" + prefixID + "header_UID").css("cursor", "pointer");
-      $("#" + prefixID + "header_UID > button").on("click", null, null, function (event) {
+      $("#" + prefixID + "header_UID").on("click keydown", null, null, function (event) {
         event.stopPropagation();
-        console.log('clicked the header UID')
-        if(sortDirection['recordID'] == undefined || sortDirection['recordID'] == 'desc') {
-          sort("recordID", "asc", postSortRequestFunc);
-        } else {
-          sort("recordID", "desc", postSortRequestFunc);
+        if(event.type === "click" || (event?.which === 13 || event?.which === 32)) {
+          const delegate = event.currentTarget;  //th
+          const underlay = delegate.querySelector(".btn_formgrid_sort");
+          if(underlay !== null) {
+            underlay.dispatchEvent(new Event("click"));
+          }
         }
-        renderRequest = 0;
-        renderBody(0, virtualIndex);
-        window.scrollTo(scrollX, scrollY); // compensate for browser reflow
       });
     }
 
@@ -267,12 +265,22 @@ var LeafFormGrid = function (containerID, options) {
           "cursor",
           "pointer"
         );
+        $("#" + prefixID + "header_" + headers[i].indicatorID).on("click keydown", null, null, function (event) {
+          event.stopPropagation();
+          if(event.type === "click" || (event?.which === 13 || event?.which === 32)) {
+            const delegate = event.currentTarget;  //th element
+            const underlay = delegate.querySelector(".btn_formgrid_sort");
+            if(underlay !== null) {
+              underlay.dispatchEvent(new Event("click"));
+            }
+          }
+        });
       }
     }
     $("#" + prefixID + "thead").append("</tr>");
 
     $("#" + prefixID + "table>thead>tr>th").css({
-      padding: "4px 2px",
+      padding: "4px 24px 4px 2px",
       "font-size": "12px",
     });
 
@@ -363,15 +371,12 @@ var LeafFormGrid = function (containerID, options) {
     }
 
     $(".sort_btn_span").html('');
-    $(`th[id*="${prefixID}header_"]`).removeAttr('aria-sort');
     if (order.toLowerCase() == "asc") {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", ascending.");
       $(headerSelector + " .sort_btn_span").html('▲');
-      $(headerSelector).attr('aria-sort', 'ascending');
     } else {
       $("#table_sorting_info").attr("aria-label", "sorted by " + (key === "recordID" ? "unique ID" : headerText) + ", descending.");
       $(headerSelector + " .sort_btn_span").html('▼');
-      $(headerSelector).attr('aria-sort', 'descending');
     }
     $(headerSelector + "_sort").css("display", "inline");
     var array = [];
@@ -732,38 +737,45 @@ var LeafFormGrid = function (containerID, options) {
       postRenderFunc();
     }
 
+    const handleClickDispatch = (event) => {
+      event.stopPropagation()
+      if(sortDirection?.[event.data] == undefined || sortDirection?.[event.data] == 'desc') {
+        sort(event.data, "asc", postSortRequestFunc);
+      } else {
+        sort(event.data, "desc", postSortRequestFunc);
+      }
+      renderRequest = 0;
+      renderBody(0, virtualIndex);
+      window.scrollTo(scrollX, scrollY); // compensate for browser reflow
+    }
+
+    if (showIndex) {
+      $("#" + prefixID + "header_UID .btn_formgrid_sort").off();
+      $("#" + prefixID + "header_UID .btn_formgrid_sort").on(
+        "click",
+        null,
+        "recordID",
+        handleClickDispatch,
+      );
+    }
+
     headers.forEach(h => {
       if (h.sortable == undefined || h.sortable == true) {
         setTimeout(() => {
-          const elBtn = document.querySelector(`#${prefixID}header_${h.indicatorID} > button.btn_formgrid_sort`);
-          if(elBtn === null) {
+          const elBtn = document.querySelector(`#${prefixID}header_${h.indicatorID} > .btn_formgrid_sort`);
+          if(elBtn === null) { //do not add if it already exists
             const sortIcon = typeof sortPreference === 'undefined' || sortPreference?.key !== String(h.indicatorID) ?
               '' : sortPreference?.order === 'asc' ? '▲' : '▼';
             $("#" + prefixID + "header_" + h.indicatorID).append(
-              `<button type="button" class="btn_formgrid_sort" aria-label="sortable">
+              `<div class="btn_formgrid_sort" aria-hidden="true">
                 <span aria-hidden="true" class="sort_btn_span">${sortIcon}</span>
-              </button>`
+              </div>`
             );
-
-            $("#" + prefixID + "header_" + h.indicatorID + " > button.btn_formgrid_sort").on(
+            $("#" + prefixID + "header_" + h.indicatorID + ' .btn_formgrid_sort').on(
               "click",
               null,
               h.indicatorID,
-              function (event) {
-                if(sortDirection[event.data] == undefined || sortDirection[event.data] == 'desc') {
-                  sort(event.data, "asc", postSortRequestFunc);
-                } else {
-                  sort(event.data, "desc", postSortRequestFunc);
-                }
-                /*
-                let currPosition = renderRequest.length; // retain scroll position
-                renderRequest = [];
-                renderBody(0, currPosition);*/
-
-                renderRequest = 0;
-                renderBody(0, virtualIndex);
-                window.scrollTo(scrollX, scrollY); // compensate for browser reflow
-              }
+              handleClickDispatch,
             );
           }
         });
@@ -925,7 +937,7 @@ var LeafFormGrid = function (containerID, options) {
       let output = [];
       let headers = [];
       //removes sorting symbols so that ascii chars are not present in exported headers.
-      $("#" + prefixID + "thead>tr>th>button span").each(function (idx, val) {
+      $(".sort_btn_span").each(function (idx, val) {
         $(val).html("");
       });
       $("#" + prefixID + "thead>tr>th").each(function (idx, val) {
