@@ -70,19 +70,25 @@ export default {
                     :aria-expanded="indicatorID === focusedIndicatorID"
                     class="drag_question_button"
                     @click="focusIndicator(indicatorID)">
-                </button>
-                <div v-show="!previewMode" :id="'question_location_submenu_' + indicatorID" class="icon_move_container">
                     <span role="img" aria-hidden="true" alt="" class="icon_drag">∷</span>
-                    <button v-show="indicatorID === focusedIndicatorID" type="button"
-                        :id="'click_to_move_up_' + indicatorID" class="icon_move up"
-                        :title="'move indicatorID ' + indicatorID + ' up'" :aria-label="'move indicatorID ' + indicatorID + ' up'"
-                        @click.stop="clickToMoveListItem($event, indicatorID, true)">
-                    </button>
-                    <button v-show="indicatorID === focusedIndicatorID" type="button"
-                        :id="'click_to_move_down_' + indicatorID" class="icon_move down"
-                        :title="'move indicatorID ' + indicatorID + ' down'" :aria-label="'move indicatorID ' + indicatorID + ' down'"
-                        @click.stop="clickToMoveListItem($event, indicatorID, false)">
-                    </button>
+                </button>
+                <div v-show="!previewMode && indicatorID === focusedIndicatorID" :id="'question_location_submenu_' + indicatorID" class="icon_move_container">
+                    <div class="icon_move_inputs" style="gap:0.625rem;">
+                        <button type="button"
+                            :id="'click_to_move_up_' + indicatorID" class="icon_move up"
+                            :title="'move indicatorID ' + indicatorID + ' up'" :aria-label="'move indicatorID ' + indicatorID + ' up'"
+                            @click.stop="clickToMoveListItem($event, indicatorID, true)">
+                        </button>
+                        <button type="button"
+                            :id="'click_to_move_down_' + indicatorID" class="icon_move down"
+                            :title="'move indicatorID ' + indicatorID + ' down'" :aria-label="'move indicatorID ' + indicatorID + ' down'"
+                            @click.stop="clickToMoveListItem($event, indicatorID, false)">
+                        </button>
+                    </div>
+                    <div class="icon_move_inputs">
+                        <label for="increment_input">places</label>
+                        <input type="number" id="increment_input" min="1" max="20" style="width:60px" />
+                    </div>
                 </div>
 
                 <!-- TOOLBAR -->

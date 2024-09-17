@@ -497,18 +497,24 @@ table[class$="SelectorTable"] th {
                 height: 100%;
                 left: 0;
                 top: 0;
-            }
-            .icon_move_container {
-                @include flexcenter;
-                cursor: move;
-                position: absolute;
-                width: 1.5rem;
-                left: 0;
-                top: 0;
-                flex-direction: column;
                 .icon_drag {
                     opacity: 0.6;
                     font-size: 20px;
+                    align-self: flex-start;
+                }
+            }
+            .icon_move_container {
+                @include flexcenter;
+                gap: 0.5rem;
+                position: absolute;
+                background-color: #fff;
+                padding: 0.5em;
+                left: 2px;
+                top: 1rem;
+
+                .icon_move_inputs {
+                    display: flex;
+                    flex-direction: column;
                 }
                 .icon_move {
                     @include flexcenter;
@@ -527,7 +533,6 @@ table[class$="SelectorTable"] th {
                         }
                     }
                     &.down {
-                        margin-top: 0.625rem;
                         border-top: 18px solid $BG-DarkNavy;
                         border-bottom: 2px;
                         &:hover, &:focus, &:active {

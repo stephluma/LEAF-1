@@ -510,7 +510,6 @@ export default {
         editQuestion(indicatorID = 0) {
             this.focusAfterFormUpdateSelector = '#' + document?.activeElement?.id || null;
             this.getIndicatorByID(indicatorID).then(indicator => {
-                this.focusedIndicatorID = indicatorID;
                 const parentID = indicator?.parentID || null;
                 this.openIndicatorEditingDialog(indicatorID, parentID, indicator);
             }).catch(err => console.log('error getting indicator information', err));
@@ -536,11 +535,10 @@ export default {
             }
         },
         /**
-         * @param {Number|null} nodeID indicatorID of the form section selected in the Form Index
+         * @param {Number|null} nodeID indicatorID of a selected form question, highlighted for location update options
          */
         focusIndicator(nodeID = null) {
-            this.focusedIndicatorID = nodeID;
-            this.ariaStatusFormDisplay = 'click to move options available';
+            this.focusedIndicatorID = this.focusedIndicatorID === nodeID ? null : nodeID;
         },
         /**
          * switch between edit and preview mode
