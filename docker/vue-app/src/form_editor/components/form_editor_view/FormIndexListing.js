@@ -20,10 +20,10 @@ export default {
         'addToListTracker',
         'previewMode',
         'startDrag',
+        'scrollForDrag',
         'onDragEnter',
         'onDragLeave',
         'onDrop',
-        'clickToMoveListItem',
         'makePreviewKey',
         'newQuestion',
     ],
@@ -79,7 +79,8 @@ export default {
                     :index="idx"
                     :key="'index_list_item_' + listItem.indicatorID"
                     :draggable="!previewMode"
-                    @dragstart.stop="startDrag">
+                    @dragstart.stop="startDrag"
+                    @drag.stop="scrollForDrag">
                 </form-index-listing>
             </ul>
             <div v-if="depth === 0 && !previewMode" style="padding:0.5rem;">

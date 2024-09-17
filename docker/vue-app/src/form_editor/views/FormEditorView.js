@@ -111,6 +111,7 @@ export default {
             addToListTracker: this.addToListTracker,
             focusIndicator: this.focusIndicator,
             startDrag: this.startDrag,
+            scrollForDrag: this.scrollForDrag,
             onDragEnter: this.onDragEnter,
             onDragLeave: this.onDragLeave,
             onDrop: this.onDrop,
@@ -562,8 +563,9 @@ export default {
          * @param {Object} event 
          * @param {number} indID of the list item to move
          * @param {boolean} moveup click/enter moves the item up (false moves it down)
+         * @param {number} increment how many places to move
          */
-        clickToMoveListItem(event = {}, indID = 0, moveup = false) {
+        clickToMoveListItem(event = {}, indID = 0, moveup = false, increment = 1) {
             if(!this.previewMode) {
                 if (event?.keyCode === 32) event.preventDefault();
                 this.ariaStatusFormDisplay = '';
@@ -573,9 +575,10 @@ export default {
                 const oldElsLI = Array.from(document.querySelectorAll(`#${parentEl.id} > li`));
                 const newElsLI = oldElsLI.filter(li => li !== elToMove);
                 const listitem = this.listTracker[indID];
-                const condition = moveup === true ? listitem.listIndex > 0 : listitem.listIndex < oldElsLI.length - 1;
-                const spliceLoc = moveup === true ? -1 : 1;
-                if(condition) {
+                //if trying to move up, check current index is greater than 0. if moving down, check it is len - 1
+                const boundaryLogic = moveup === true ? listitem.listIndex > 0 : listitem.listIndex < oldElsLI.length - 1;
+                const spliceLoc = moveup === true ? -increment : increment;
+                if(boundaryLogic) {
                     const oldIndex = listitem.listIndex;
                     newElsLI.splice(oldIndex + spliceLoc, 0, elToMove);
                     oldElsLI.forEach(li => parentEl.removeChild(li));
@@ -684,9 +687,18 @@ export default {
                         const y = btn.offsetHeight/2;
                         event.dataTransfer.setDragImage(btn, x, y);
                     }
-                    const indID = (event.target.id || '').replace(this.dragLI_Prefix, '');
-                    this.focusIndicator(+indID);
                 }
+            }
+        },
+        scrollForDrag(event = {}) {
+            const scrollBuffer = 75;
+            const y = +event?.clientY;
+            if (y < scrollBuffer || y > window.innerHeight - scrollBuffer) {
+                const scrollIncrement = 5;
+                const sX = window.scrollX;
+                const sY = window.scrollY;
+                const increment = y < scrollBuffer ? -scrollIncrement : scrollIncrement;
+                window.scrollTo(sX, sY + increment);
             }
         },
         onDrop(event = {}) {
@@ -929,7 +941,8 @@ export default {
                                 :parentID=null
                                 :key="'index_list_item_' + formSection.indicatorID"
                                 :draggable="!previewMode"
-                                @dragstart.stop="startDrag">
+                                @dragstart.stop="startDrag"
+                                @drag.stop="scrollForDrag">
                             </form-index-listing>
                         </ul>
                     </div>

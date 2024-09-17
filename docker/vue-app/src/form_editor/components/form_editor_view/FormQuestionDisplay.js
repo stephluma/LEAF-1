@@ -15,7 +15,6 @@ export default {
     inject: [
         'libsPath',
         'newQuestion',
-        'shortIndicatorNameStripped',
         'focusedFormID',
         'focusIndicator',
         'focusedIndicatorID',
@@ -23,9 +22,7 @@ export default {
         'hasDevConsoleAccess',
         'editAdvancedOptions',
         'openIfThenDialog',
-        'listTracker',
         'previewMode',
-        'makePreviewKey',
         'clickToMoveListItem'
     ],
     computed: {
@@ -65,13 +62,16 @@ export default {
     },
     template:`<div class="form_editing_area">
             <div class="name_and_toolbar" :class="{'form-header': isHeader, preview: previewMode}">
-                <!-- VISIBLE DRAG INDICATOR / CLICK UP DOWN -->
+                <!-- VISIBLE DRAG INDICATOR / CLICK UP DOWN PAR ID SUBMENU -->
                 <button v-show="!previewMode" type="button" :id="'index_listing_' + indicatorID + '_button'"
                     :title="'drag to move indicatorID (' + indicatorID + '). Click for click to move options.'"
                     :aria-label="'drag to move indicatorID (' + indicatorID + '). Click for click to move options.'"
-                    class="drag_question_button" @click="focusIndicator(indicatorID)">
+                    :aria-controls="'question_location_submenu_' + indicatorID"
+                    :aria-expanded="indicatorID === focusedIndicatorID"
+                    class="drag_question_button"
+                    @click="focusIndicator(indicatorID)">
                 </button>
-                <div v-show="!previewMode" class="icon_move_container">
+                <div v-show="!previewMode" :id="'question_location_submenu_' + indicatorID" class="icon_move_container">
                     <span role="img" aria-hidden="true" alt="" class="icon_drag">∷</span>
                     <button v-show="indicatorID === focusedIndicatorID" type="button"
                         :id="'click_to_move_up_' + indicatorID" class="icon_move up"
