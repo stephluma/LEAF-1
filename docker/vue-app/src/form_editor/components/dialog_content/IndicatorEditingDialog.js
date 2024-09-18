@@ -267,7 +267,7 @@ export default {
         onSave(){
             //check for advanced text formatting for name field
             const elTrumbow = document.querySelector('.trumbowyg-editor');
-            if(elTrumbow !== undefined && elTrumbow !== null){
+            if(elTrumbow !== null){
                 this.name = elTrumbow.innerHTML;
             }
             
@@ -286,9 +286,6 @@ export default {
                 const parentIDChanged = this.parentID !== this.dialogData?.indicator.parentID;
                 const shouldArchive = this.archived === true;
                 const shouldDelete = this.deleted === true;
-                //keeping for now for potential debugging
-                //console.log('CHANGES?: name,descr,fullFormat,default,required,sensitive,parentID,archive,delete');
-                //console.log(nameChanged,descriptionChanged,fullFormatChanged,defaultChanged,requiredChanged,sensitiveChanged,parentIDChanged,shouldArchive,shouldDelete);
 
                 if(nameChanged) {
                     indicatorEditingUpdates.push(
@@ -648,6 +645,10 @@ export default {
         rawNameEditorClick() {
             $('#advNameEditor').css('display', 'block');
             $('#rawNameEditor').css('display', 'none');
+            const elTrumbow = document.querySelector('.trumbowyg-editor');
+            if(elTrumbow !== null) {
+                this.name = elTrumbow.innerHTML;
+            }
             $('#name').trumbowyg('destroy');
             this.ariaTextEditorStatus = 'Showing formatted code.'
             document.getElementById('advNameEditor').focus();
