@@ -503,17 +503,20 @@ table[class$="SelectorTable"] th {
                     align-self: flex-start;
                 }
             }
-            .icon_move_container {
+            .move_indicator_container {
                 @include flexcenter;
-                gap: 0.5rem;
+                gap: 1.5rem;
                 position: absolute;
                 background-color: #fff;
-                padding: 0.5em;
+                border: 1px solid $charcoal;
+                border-radius: 3px;
+                box-shadow: 1px 1px 4px rgba(0, 0, 25, 0.5);
+                padding: 1em;
                 left: 2px;
-                top: 2rem;
+                top: 1.75rem;
                 z-index: 100;
 
-                .icon_move_inputs {
+                .move_indicator_inputs {
                     display: flex;
                     flex-direction: column;
                 }

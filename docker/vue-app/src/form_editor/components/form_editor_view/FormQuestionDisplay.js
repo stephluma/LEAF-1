@@ -25,7 +25,9 @@ export default {
         'previewMode',
         'clickToMoveListItem',
         'parentID_select_options',
-        'updateIndicatorParentID',
+        'changeIndicatorParentID',
+        'clickToMoveIncrement',
+        'changeClickToMoveIncrement',
     ],
     computed: {
         indicatorID() {
@@ -77,8 +79,9 @@ export default {
                     @click="focusIndicator(indicatorID)">
                     <span role="img" aria-hidden="true" alt="" class="icon_drag">∷</span>
                 </button>
-                <div v-show="!previewMode && indicatorID === focusedIndicatorID" :id="'question_location_submenu_' + indicatorID" class="icon_move_container">
-                    <div class="icon_move_inputs" style="gap:0.625rem;">
+                <div v-if="!previewMode && indicatorID === focusedIndicatorID"
+                    :id="'question_location_submenu_' + indicatorID" class="move_indicator_container">
+                    <div class="move_indicator_inputs" style="gap:0.625rem;">
                         <button type="button"
                             :id="'click_to_move_up_' + indicatorID" class="icon_move up"
                             :title="'move indicatorID ' + indicatorID + ' up'" :aria-label="'move indicatorID ' + indicatorID + ' up'"
@@ -90,14 +93,16 @@ export default {
                             @click.stop="clickToMoveListItem($event, indicatorID, false)">
                         </button>
                     </div>
-                    <div class="icon_move_inputs">
-                        <label for="increment_input">places</label>
-                        <input type="number" id="increment_input" min="1" max="20" value="1" style="width:60px" />
+                    <div class="move_indicator_inputs">
+                        <label for="increment_input">Step</label>
+                        <input type="number" id="increment_input" min="1" max="25"
+                            :value="clickToMoveIncrement" style="width:50px" @change="changeClickToMoveIncrement" />
                     </div>
-                    <div v-if="Object.keys(parentID_select_options).length > 0" class="icon_move_inputs" style="margin-left:0.5rem;">
+                    <div v-if="Object.keys(parentID_select_options).length > 0" class="move_indicator_inputs">
                         <label for="parent_id_select">Parent ID</label>
-                        <select id="parent_id_select" @change="updateIndicatorParentID($event, indicatorID)">
-                            <option v-for="option in parentID_select_options"
+                        <select id="parent_id_select" @change="changeIndicatorParentID($event, indicatorID)">
+                            <option value="">None (form section)</option>
+                            <option v-for="option in parentID_select_options" :key="'select_parentID_' + option.indicatorID"
                                 :value="option.indicatorID" :selected="option.indicatorID===parentID">
                                 {{option.indicatorID}}: {{option.name}}
                             </option>

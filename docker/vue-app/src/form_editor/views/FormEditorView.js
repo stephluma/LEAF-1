@@ -34,6 +34,7 @@ export default {
             fileManagerTextFiles: [],
             ariaStatusFormDisplay: '',
             focusAfterFormUpdateSelector: null,
+            clickToMoveIncrement: 1,
         }
     },
     components: {
@@ -103,6 +104,7 @@ export default {
             focusedFormIsSensitive: computed(() => this.focusedFormIsSensitive),
             noForm: computed(() => this.noForm),
             mainFormID: computed(() => this.mainFormID),
+            clickToMoveIncrement: computed(() => this.clickToMoveIncrement),
 
             getFormByCategoryID: this.getFormByCategoryID,
             editAdvancedOptions: this.editAdvancedOptions,
@@ -117,9 +119,10 @@ export default {
             onDragLeave: this.onDragLeave,
             onDrop: this.onDrop,
             clickToMoveListItem: this.clickToMoveListItem,
+            changeClickToMoveIncrement: this.changeClickToMoveIncrement,
+            changeIndicatorParentID: this.changeIndicatorParentID,
             makePreviewKey: this.makePreviewKey,
             checkFormCollaborators: this.checkFormCollaborators,
-            updateIndicatorParentID: this.updateIndicatorParentID,
         }
     },
     computed: {
@@ -503,15 +506,24 @@ export default {
                console.log(error);
             }
         },
+        changeClickToMoveIncrement(event) {
+            let increment = +event.target.value;
+            if(increment < 1 || increment > 25) {
+                increment = increment < 1 ? 1 : 25;
+            }
+            this.clickToMoveIncrement = increment;
+            event.target.value = increment;
+        },
         /**
          * update an indicator's parentID and update view.
          * @param {Object} event passed by onchange event.  target value is the selected parentID.
          * @param {number} indicatorID to set the parent for
          */
-        updateIndicatorParentID(event, indicatorID) {
+        changeIndicatorParentID(event, indicatorID) {
             const newParentID = +event.target.value;
-            if(+newParentID > 0 && +indicatorID > 0) {
-                
+            if(+indicatorID > 0) {
+                const currentParentListLength = newParentID > 0 ?
+                    Array.from(`.drop_area_parent_${newParentID} > li`)?.length || 0 : this.focusedFormTree.length;
                 $.ajax({
                     type: 'POST',
                     url: `${this.APIroot}formEditor/${indicatorID}/parentID`,
@@ -521,8 +533,8 @@ export default {
                     },
                     success: (res) => {
                         if(res === null) {
-                            this.getFormByCategoryID(this.focusedFormID);
-                            this.showLastUpdate('form_properties_last_update');
+                            //adding it to the end, since that will not shift any other sort values
+                            this.updateListTracker(indicatorID, newParentID, currentParentListLength);
                         } else {
                             alert(res);
                         }
@@ -608,24 +620,29 @@ export default {
          * @param {Object} event 
          * @param {number} indID of the list item to move
          * @param {boolean} moveup click/enter moves the item up (false moves it down)
-         * @param {number} increment how many places to move
          */
-        clickToMoveListItem(event = {}, indID = 0, moveup = false, increment = 1) {
+        clickToMoveListItem(event = {}, indID = 0, moveup = false) {
             if(!this.previewMode) {
                 if (event?.keyCode === 32) event.preventDefault();
                 this.ariaStatusFormDisplay = '';
                 this.focusAfterFormUpdateSelector = '#' + event?.target?.id || '';
+                const increment = this.clickToMoveIncrement;
                 const parentEl = event?.currentTarget?.closest('ul');
                 const elToMove = document.getElementById(`index_listing_${indID}`);
                 const oldElsLI = Array.from(document.querySelectorAll(`#${parentEl.id} > li`));
+                const listLength = oldElsLI.length;
                 const newElsLI = oldElsLI.filter(li => li !== elToMove);
                 const listitem = this.listTracker[indID];
                 //if trying to move up, check current index is greater than 0. if moving down, check it is len - 1
-                const boundaryLogic = moveup === true ? listitem.listIndex > 0 : listitem.listIndex < oldElsLI.length - 1;
-                const spliceLoc = moveup === true ? -increment : increment;
+                const boundaryLogic = moveup === true ? listitem.listIndex > 0 : listitem.listIndex < listLength - 1;
+                const change = moveup === true ? -increment : increment;
                 if(boundaryLogic) {
                     const oldIndex = listitem.listIndex;
-                    newElsLI.splice(oldIndex + spliceLoc, 0, elToMove);
+                    const newIndex = oldIndex + change;
+                    const spliceLoc = newIndex < 0 ? 0 : newIndex > listLength - 1 ?
+                        listLength - 1 : newIndex;
+
+                    newElsLI.splice(spliceLoc, 0, elToMove);
                     oldElsLI.forEach(li => parentEl.removeChild(li));
                     newElsLI.forEach((li, i) => {
                         const liIndID = parseInt(li.id.replace('index_listing_', ''));

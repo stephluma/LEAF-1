@@ -154,7 +154,7 @@ export default {
             })
         },
         updateNeedToKnow(forceOn = false) {
-            const newValue = forceOn ? 1 : this.needToKnow;
+            const newValue = forceOn === true ? 1 : this.needToKnow;
             $.ajax({
                 type: 'POST',
                 url: `${this.APIroot}formEditor/formNeedToKnow`,
