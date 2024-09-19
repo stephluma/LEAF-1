@@ -510,7 +510,8 @@ table[class$="SelectorTable"] th {
                 background-color: #fff;
                 padding: 0.5em;
                 left: 2px;
-                top: 1rem;
+                top: 2rem;
+                z-index: 100;
 
                 .icon_move_inputs {
                     display: flex;

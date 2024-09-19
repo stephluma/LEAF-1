@@ -54,8 +54,6 @@ export default {
                 orgchart_employee: `Orgchart Employee format is used to select a specific LEAF user from the orgchart`,
                 raw_data: `Raw Data is associated with Advanced Options, which can be used by programmers to run custom code during form data entry or review`,
             },
-            listForParentIDs: [],
-            isLoadingParentIDs: true,
             multianswerFormats: ['checkboxes','radio','multiselect','dropdown'],
             ariaTextEditorStatus: '',
 
@@ -117,12 +115,6 @@ export default {
         IndicatorPrivileges
     },
     mounted() {
-        if (this.isEditingModal === true) {
-            this.getFormParentIDs().then(res => {
-                this.listForParentIDs = res;
-                this.isLoadingParentIDs = false;
-            }).catch(err => console.log('an error has occurred', err));
-        }
         if(this.sort === null){
             this.sort = this.newQuestionSortValue;
         }
@@ -242,21 +234,6 @@ export default {
                 this[dataPropertyName] = !this[dataPropertyName];
             }
         },
-        getFormParentIDs() {
-            return new Promise((resolve, reject)=> {
-                $.ajax({
-                    type: 'GET',
-                    url: `${this.APIroot}/form/_${this.formID}/flat`,
-                    success: (res)=> {
-                        for (let i in res) {
-                            res[i]['1'].name = XSSHelpers.stripAllTags(res[i]['1'].name);
-                        }
-                        resolve(res);
-                    },
-                    error: (err)=> reject(err)
-                });
-            });
-        },
         preventSelectionIfFormatNone() {
             if (this.format === '' && (this.required === true || this.is_sensitive === true)) {
                 this.required = false;
@@ -283,7 +260,6 @@ export default {
                 const defaultChanged = this.decodeAndStripHTML(this.defaultValue) !== this.decodeAndStripHTML(this.dialogData?.indicator.default);
                 const requiredChanged = +this.required !== parseInt(this.dialogData?.indicator.required);
                 const sensitiveChanged = +this.is_sensitive !== parseInt(this.dialogData?.indicator.is_sensitive);
-                const parentIDChanged = this.parentID !== this.dialogData?.indicator.parentID;
                 const shouldArchive = this.archived === true;
                 const shouldDelete = this.deleted === true;
 
@@ -416,19 +392,6 @@ export default {
                             },
                             success: () => {},
                             error: err => console.log('ind disabled (deletion) post err', err)
-                        })
-                    );
-                }
-                if(parentIDChanged && this.parentID !== this.indicatorID) {
-                    indicatorEditingUpdates.push(
-                        $.ajax({
-                            type: 'POST',
-                            url: `${this.APIroot}formEditor/${this.indicatorID}/parentID`,
-                            data: {
-                                parentID: this.parentID,
-                                CSRFToken: this.CSRFToken
-                            },
-                            error: err => console.log('ind parentID post err', err)
                         })
                     );
                 }
@@ -774,31 +737,13 @@ export default {
                     </label>
                 </template>
             </div>
-            <button v-if="isEditingModal" type="button" aria-controls="indicator_advanced_attributes" :aria-expanded="showAdditionalOptions"
+            <button v-if="isEditingModal" type="button" aria-controls="indicatorPrivileges" :aria-expanded="showAdditionalOptions"
                 class="btn-general" 
                 aria-label="edit additional options"
                 @click="toggleSelection($event, 'showAdditionalOptions')">
                 {{showAdditionalOptions ? 'Hide' : 'Show'}} Advanced Attributes
             </button>
-            <div id="indicator_advanced_attributes" v-if="showAdditionalOptions">
-                <div class="attribute-row" style="margin-top: 1rem; justify-content: space-between;">
-                    <template v-if="isLoadingParentIDs === false">
-                        <label for="container_parentID" style="margin-right: 1rem;">Parent Question ID
-                            <select v-model.number="parentID" id="container_parentID" style="width:250px; margin-left:3px;">
-                                <option :value="null" :selected="parentID === null">None</option> 
-                                <template v-for="kv in Object.entries(listForParentIDs)">
-                                    <option v-if="indicatorID !== parseInt(kv[0])" 
-                                        :value="kv[0]" 
-                                        :key="'parent_'+kv[0]">
-                                        {{kv[0]}}: {{truncateText(kv[1]['1'].name), 50}}
-                                    </option>
-                                </template>
-                            </select>
-                        </label>
-                    </template>
-                </div>
-                <indicator-privileges :indicatorID="indicatorID"></indicator-privileges>
-            </div>
+            <indicator-privileges v-if="showAdditionalOptions" :indicatorID="indicatorID"></indicator-privileges>
             <span v-show="archived" id="archived-warning">
                 This field will be archived. &nbsp;It can be<br/>re-enabled by using Restore Fields.
             </span>

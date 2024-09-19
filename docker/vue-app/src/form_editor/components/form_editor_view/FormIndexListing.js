@@ -15,7 +15,6 @@ export default {
         FormQuestionDisplay
     },
     inject: [
-        'shortIndicatorNameStripped',
         'clearListItem',
         'addToListTracker',
         'previewMode',

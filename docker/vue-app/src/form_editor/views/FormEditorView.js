@@ -97,6 +97,7 @@ export default {
             queryID: computed(() => this.queryID),
             focusedFormID: computed(() => this.focusedFormID),
             focusedFormTree: computed(() => this.focusedFormTree),
+            parentID_select_options: computed(() => this.parentID_select_options),
             previewTree: computed(() => this.previewTree),
             focusedFormRecord: computed(() => this.focusedFormRecord),
             focusedFormIsSensitive: computed(() => this.focusedFormIsSensitive),
@@ -116,9 +117,9 @@ export default {
             onDragLeave: this.onDragLeave,
             onDrop: this.onDrop,
             clickToMoveListItem: this.clickToMoveListItem,
-            shortIndicatorNameStripped: this.shortIndicatorNameStripped,
             makePreviewKey: this.makePreviewKey,
-            checkFormCollaborators: this.checkFormCollaborators
+            checkFormCollaborators: this.checkFormCollaborators,
+            updateIndicatorParentID: this.updateIndicatorParentID,
         }
     },
     computed: {
@@ -158,6 +159,31 @@ export default {
                 }
             });
             return isSensitive;
+        },
+        focusedFormIndicatorsFlat_name_ID_parID() {
+            let inds = {};
+            const mapper = (node) => {
+                const indicatorID = node.indicatorID;
+                const parentID = node.parentID;
+                const name = this.shortIndicatorNameStripped(node.name);
+                const children = node.child || null;
+                inds[indicatorID] = { indicatorID, parentID, name, };
+                if (children !== null) {
+                    children.forEach(c => mapper(c));
+                }
+            };
+            this.focusedFormTree.forEach(form_page => mapper(form_page));
+            return inds;
+        },
+        parentID_select_options() {
+            let selections = {};
+            const currentIndicator = this.focusedIndicatorID;
+            for (let ind in this.focusedFormIndicatorsFlat_name_ID_parID) {
+                if(+ind !== currentIndicator) {
+                    selections[ind] = { ...this.focusedFormIndicatorsFlat_name_ID_parID[ind] }
+                }
+            }
+            return selections;
         },
         /**
          * @returns {array} of categories records for queried form and any staples
@@ -454,17 +480,10 @@ export default {
          */
         getIndicatorByID(indicatorID = 0) {
             return new Promise((resolve, reject)=> {
-                try {
-                    fetch(`${this.APIroot}formEditor/indicator/${indicatorID}`)
-                    .then(res => {
-                        res.json()
-                        .then(data => {
-                            resolve(data[indicatorID]);
-                        }).catch(err => reject(err));
-                    }).catch(err => reject(err));
-                } catch (error) {
-                    reject(error);
-                }
+                fetch(`${this.APIroot}formEditor/indicator/${indicatorID}`)
+                .then(res => res.json())
+                .then(data => resolve(data[indicatorID]))
+                .catch(err => reject(err));
             });
         },
         /**
@@ -482,6 +501,34 @@ export default {
                 });
             } catch (error) {
                console.log(error);
+            }
+        },
+        /**
+         * update an indicator's parentID and update view.
+         * @param {Object} event passed by onchange event.  target value is the selected parentID.
+         * @param {number} indicatorID to set the parent for
+         */
+        updateIndicatorParentID(event, indicatorID) {
+            const newParentID = +event.target.value;
+            if(+newParentID > 0 && +indicatorID > 0) {
+                
+                $.ajax({
+                    type: 'POST',
+                    url: `${this.APIroot}formEditor/${indicatorID}/parentID`,
+                    data: {
+                        parentID: newParentID,
+                        CSRFToken: this.CSRFToken
+                    },
+                    success: (res) => {
+                        if(res === null) {
+                            this.getFormByCategoryID(this.focusedFormID);
+                            this.showLastUpdate('form_properties_last_update');
+                        } else {
+                            alert(res);
+                        }
+                    },
+                    error: err => console.log('ind parentID post err', err)
+                });
             }
         },
         /**

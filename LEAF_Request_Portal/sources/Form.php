@@ -4316,6 +4316,7 @@ class Form
                 $idx = $field['indicatorID'];
 
                 $child[$idx]['indicatorID'] = $field['indicatorID'];
+                $child[$idx]['parentID'] = $field['parentID'];
                 $child[$idx]['series'] = $series;
                 $child[$idx]['name'] = $field['name'];
                 $child[$idx]['default'] = $field['default'];

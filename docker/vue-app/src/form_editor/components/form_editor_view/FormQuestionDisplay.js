@@ -23,11 +23,16 @@ export default {
         'editAdvancedOptions',
         'openIfThenDialog',
         'previewMode',
-        'clickToMoveListItem'
+        'clickToMoveListItem',
+        'parentID_select_options',
+        'updateIndicatorParentID',
     ],
     computed: {
         indicatorID() {
             return +this.formNode?.indicatorID;
+        },
+        parentID() {
+            return +this.formNode?.parentID;
         },
         isHeader() {
             return this.depth === 0;
@@ -58,7 +63,7 @@ export default {
         },
         sensitive() {
             return parseInt(this.formNode.is_sensitive) === 1;
-        }
+        },
     },
     template:`<div class="form_editing_area">
             <div class="name_and_toolbar" :class="{'form-header': isHeader, preview: previewMode}">
@@ -87,7 +92,16 @@ export default {
                     </div>
                     <div class="icon_move_inputs">
                         <label for="increment_input">places</label>
-                        <input type="number" id="increment_input" min="1" max="20" style="width:60px" />
+                        <input type="number" id="increment_input" min="1" max="20" value="1" style="width:60px" />
+                    </div>
+                    <div v-if="Object.keys(parentID_select_options).length > 0" class="icon_move_inputs" style="margin-left:0.5rem;">
+                        <label for="parent_id_select">Parent ID</label>
+                        <select id="parent_id_select" @change="updateIndicatorParentID($event, indicatorID)">
+                            <option v-for="option in parentID_select_options"
+                                :value="option.indicatorID" :selected="option.indicatorID===parentID">
+                                {{option.indicatorID}}: {{option.name}}
+                            </option>
+                        </select>
                     </div>
                 </div>
 
