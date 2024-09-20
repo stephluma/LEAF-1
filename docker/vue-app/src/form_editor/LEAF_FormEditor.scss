@@ -504,17 +504,23 @@ table[class$="SelectorTable"] th {
                 }
             }
             .move_indicator_container {
-                @include flexcenter;
-                gap: 1.5rem;
                 position: absolute;
                 background-color: #fff;
                 border: 1px solid $charcoal;
                 border-radius: 3px;
                 box-shadow: 1px 1px 4px rgba(0, 0, 25, 0.5);
-                padding: 1em;
+                padding: 0.75em 1em;
                 left: 2px;
                 top: 1.75rem;
                 z-index: 100;
+                h3 {
+                    margin: 0 0 1rem 0;
+                }
+            }
+
+            .move_indicator_controls {
+                display: flex;
+                gap: 1.5rem;
 
                 .move_indicator_inputs {
                     display: flex;
@@ -535,6 +541,10 @@ table[class$="SelectorTable"] th {
                             outline: none !important;
                             border-bottom: 18px solid $USWDS_Cyan;
                         }
+                        &:disabled {
+                            cursor: auto;
+                            border-bottom: 18px solid gray;
+                        }
                     }
                     &.down {
                         border-top: 18px solid $BG-DarkNavy;
@@ -542,6 +552,10 @@ table[class$="SelectorTable"] th {
                         &:hover, &:focus, &:active {
                             outline: none !important;
                             border-top: 18px solid $USWDS_Cyan;
+                        }
+                        &:disabled {
+                            cursor: auto;
+                            border-top: 18px solid gray;
                         }
                     }
                 }

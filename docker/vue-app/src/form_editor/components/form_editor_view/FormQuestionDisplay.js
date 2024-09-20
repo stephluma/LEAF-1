@@ -1,4 +1,5 @@
 import FormatPreview from "./FormatPreview";
+import MoveQuestionSubmenu from "./MoveQuestionSubmenu";
 
 export default {
     name: 'form-question-display',
@@ -7,10 +8,12 @@ export default {
         depth: Number,
         formPage: Number,
         index: Number,
+        currentListLength: Number,
         formNode: Object
     },
     components: {
-        FormatPreview
+        FormatPreview,
+        MoveQuestionSubmenu
     },
     inject: [
         'libsPath',
@@ -23,11 +26,6 @@ export default {
         'editAdvancedOptions',
         'openIfThenDialog',
         'previewMode',
-        'clickToMoveListItem',
-        'parentID_select_options',
-        'changeIndicatorParentID',
-        'clickToMoveIncrement',
-        'changeClickToMoveIncrement',
     ],
     computed: {
         indicatorID() {
@@ -79,36 +77,12 @@ export default {
                     @click="focusIndicator(indicatorID)">
                     <span role="img" aria-hidden="true" alt="" class="icon_drag">∷</span>
                 </button>
-                <div v-if="!previewMode && indicatorID === focusedIndicatorID"
-                    :id="'question_location_submenu_' + indicatorID" class="move_indicator_container">
-                    <div class="move_indicator_inputs" style="gap:0.625rem;">
-                        <button type="button"
-                            :id="'click_to_move_up_' + indicatorID" class="icon_move up"
-                            :title="'move indicatorID ' + indicatorID + ' up'" :aria-label="'move indicatorID ' + indicatorID + ' up'"
-                            @click.stop="clickToMoveListItem($event, indicatorID, true)">
-                        </button>
-                        <button type="button"
-                            :id="'click_to_move_down_' + indicatorID" class="icon_move down"
-                            :title="'move indicatorID ' + indicatorID + ' down'" :aria-label="'move indicatorID ' + indicatorID + ' down'"
-                            @click.stop="clickToMoveListItem($event, indicatorID, false)">
-                        </button>
-                    </div>
-                    <div class="move_indicator_inputs">
-                        <label for="increment_input">Step</label>
-                        <input type="number" id="increment_input" min="1" max="25"
-                            :value="clickToMoveIncrement" style="width:50px" @change="changeClickToMoveIncrement" />
-                    </div>
-                    <div v-if="Object.keys(parentID_select_options).length > 0" class="move_indicator_inputs">
-                        <label for="parent_id_select">Parent ID</label>
-                        <select id="parent_id_select" @change="changeIndicatorParentID($event, indicatorID)">
-                            <option value="">None (form section)</option>
-                            <option v-for="option in parentID_select_options" :key="'select_parentID_' + option.indicatorID"
-                                :value="option.indicatorID" :selected="option.indicatorID===parentID">
-                                {{option.indicatorID}}: {{option.name}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <move-question-submenu v-if="!previewMode && indicatorID === focusedIndicatorID"
+                    :indicatorID="indicatorID"
+                    :parentID="parentID"
+                    :currentListIndex="index"
+                    :currentListLength="currentListLength"
+                ></move-question-submenu>
 
                 <!-- TOOLBAR -->
                 <div v-show="!previewMode"

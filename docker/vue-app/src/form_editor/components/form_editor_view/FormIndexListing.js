@@ -9,6 +9,7 @@ export default {
         indicatorID: Number,
         formNode: Object,
         index: Number,
+        currentListLength: Number,
         parentID: Number
     },
     components: {
@@ -55,6 +56,7 @@ export default {
                 :depth="depth"
                 :formPage="formPage"
                 :index="index"
+                :currentListLength="currentListLength"
                 :formNode="formNode">
             </form-question-display>
             
@@ -76,6 +78,7 @@ export default {
                     :indicatorID="listItem.indicatorID"
                     :formNode="listItem"
                     :index="idx"
+                    :currentListLength="formNode.child.length"
                     :key="'index_list_item_' + listItem.indicatorID"
                     :draggable="!previewMode"
                     @dragstart.stop="startDrag"

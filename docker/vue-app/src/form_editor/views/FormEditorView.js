@@ -508,9 +508,7 @@ export default {
         },
         changeClickToMoveIncrement(event) {
             let increment = +event.target.value;
-            if(increment < 1 || increment > 25) {
-                increment = increment < 1 ? 1 : 25;
-            }
+            increment = increment < 1 ? 1 : increment > 50 ? 50 : increment;
             this.clickToMoveIncrement = increment;
             event.target.value = increment;
         },
@@ -1000,6 +998,7 @@ export default {
                                 :indicatorID="formSection.indicatorID"
                                 :formNode="formSection"
                                 :index=i
+                                :currentListLength="fullFormTree.length"
                                 :parentID=null
                                 :key="'index_list_item_' + formSection.indicatorID"
                                 :draggable="!previewMode"
