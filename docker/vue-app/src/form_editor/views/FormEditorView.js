@@ -99,6 +99,7 @@ export default {
             focusedFormID: computed(() => this.focusedFormID),
             focusedFormTree: computed(() => this.focusedFormTree),
             parentID_select_options: computed(() => this.parentID_select_options),
+            disableMovementButtons: computed(() => this.disableMovementButtons),
             previewTree: computed(() => this.previewTree),
             focusedFormRecord: computed(() => this.focusedFormRecord),
             focusedFormIsSensitive: computed(() => this.focusedFormIsSensitive),
@@ -187,6 +188,10 @@ export default {
                 }
             }
             return selections;
+        },
+        disableMovementButtons() {
+            const min = this.focusedIndicatorID === null ? 2 : 1;
+            return Object.keys(this.parentID_select_options).length < min;
         },
         /**
          * @returns {array} of categories records for queried form and any staples
@@ -352,6 +357,66 @@ export default {
             }
         },
         /**
+         * Used after form load to handle swapping view to internal form, if needed, and applicable element/aria updates.
+         * @param {boolean} sameForm whether existing form was (re) loaded
+         */
+        handleAfterFormLoadUpdates(sameForm = false) {
+            setTimeout(() => {
+                //if an internalID query exists but isn't focused, dispatch internal btn click event to switch to that form
+                if(this.internalID !== null && this.focusedFormID !== this.internalID) {
+                    const elBtnInternal = document.getElementById('internal_form_' + this.internalID);
+                    if(elBtnInternal !== null) {
+                        elBtnInternal.dispatchEvent(new Event("click"));
+                    }
+                }
+                //if a focus after form update ID is stored and it's the same form, try to move focus to that el
+                if(sameForm) {
+                    const selector = this.focusAfterFormUpdateSelector;
+                    if(selector !== null) {
+                        let element = document.querySelector(selector);
+                        let aria = '';
+                        switch(true) {
+                            case selector === '#parent_id_select':
+                                aria = `moved indicator ${this.focusedIndicatorID}`;
+                                break;
+                            case selector.startsWith(`#click_to_move`):
+                                const idArr = selector.split('_');
+                                const direction = idArr?.[3];
+                                const id = idArr?.[4];
+                                if(direction && id) {
+                                    aria = `moved indicator ${id} ${direction}`;
+                                    /*If moved to start or end, the button that had been pressed will be disabled
+                                    In this case, focus the opposite button */
+                                    if(element?.disabled === true) {
+                                        const otherDir = direction === 'up' ? 'down' : 'up';
+                                        element = document.getElementById(`click_to_move_${otherDir}_${id}`);
+                                    }
+                                }
+                                break;
+                            case selector.startsWith(`#edit_indicator`):
+                                aria = `edited indicator`;
+                                break;
+                            case selector.startsWith(`#programmer`):
+                                aria = `edited programmer`;
+                                break;
+                            case selector.startsWith(`ul#`):
+                                aria = `created new question`;
+                                break;
+                            default:
+                            break;
+                        }
+                        this.ariaStatusFormDisplay = aria;
+                        if (element !== null && !this.showFormDialog) {
+                            element.focus();
+                        }
+                    }
+
+                } else {
+                    this.focusAfterFormUpdateSelector = null
+                }
+            });
+        },
+        /**
          * Get details for a specific form and update focused form info
          * @param {string} catID
          * @param {boolean} setFormLoading show loader
@@ -395,51 +460,7 @@ export default {
                         this.focusedFormID = catID || '';
                         this.focusedFormTree = res || [];
                         this.appIsLoadingForm = false;
-
-                        setTimeout(() => {
-                            //if an internalID query exists and it is an internal for the current form, dispatch internal btn click event
-                            if(this.internalID !== null && this.focusedFormID !== this.internalID) {
-                                const elBtnInternal = document.getElementById('internal_form_' + this.internalID);
-                                if(elBtnInternal !== null) {
-                                    elBtnInternal.dispatchEvent(new Event("click"));
-                                }
-                            }
-                            //if a focus after form update ID is stored and it's the same form, try to move focus to that el
-                            if(sameForm) {
-                                const selector = this.focusAfterFormUpdateSelector;
-                                if(selector !== null) {
-                                    let aria = '';
-                                    switch(true) {
-                                        case selector.startsWith(`#click_to_move`):
-                                            const idArr = selector.split('_');
-                                            if(idArr?.[3] && idArr?.[4]) {
-                                                aria = `moved indicator ${idArr[4]} ${idArr[3]}`;
-                                            }
-                                            break;
-                                        case selector.startsWith(`#edit_indicator`):
-                                            aria = `edited indicator`;
-                                            break;
-                                        case selector.startsWith(`#programmer`):
-                                            aria = `edited programmer`;
-                                            break;
-                                        case selector.startsWith(`ul#`):
-                                            aria = `created new question`;
-                                            break;
-                                        default:
-                                        break;
-                                    }
-                                    this.ariaStatusFormDisplay = aria;
-                                    const btn = document.querySelector(selector);
-                                    if (btn !== null && !this.showFormDialog) {
-                                        btn.focus();
-                                        this.focusAfterFormUpdateSelector = null;
-                                    }
-                                }
-
-                            } else {
-                                this.focusAfterFormUpdateSelector = null
-                            }
-                        });
+                        this.handleAfterFormLoadUpdates(sameForm);
                     },
                     error: (err)=> console.log(err)
                 });
@@ -520,25 +541,13 @@ export default {
         changeIndicatorParentID(event, indicatorID) {
             const newParentID = +event.target.value;
             if(+indicatorID > 0) {
+                //adding it to the end, since that will not shift any other sort values
                 const currentParentListLength = newParentID > 0 ?
-                    Array.from(`.drop_area_parent_${newParentID} > li`)?.length || 0 : this.focusedFormTree.length;
-                $.ajax({
-                    type: 'POST',
-                    url: `${this.APIroot}formEditor/${indicatorID}/parentID`,
-                    data: {
-                        parentID: newParentID,
-                        CSRFToken: this.CSRFToken
-                    },
-                    success: (res) => {
-                        if(res === null) {
-                            //adding it to the end, since that will not shift any other sort values
-                            this.updateListTracker(indicatorID, newParentID, currentParentListLength);
-                        } else {
-                            alert(res);
-                        }
-                    },
-                    error: err => console.log('ind parentID post err', err)
-                });
+                    Array.from(document.querySelectorAll(`#drop_area_parent_${newParentID} > li`))?.length || 0 :
+                    this.focusedFormTree.length;
+
+                this.focusAfterFormUpdateSelector = '#parent_id_select';
+                this.updateListTracker(indicatorID, newParentID, currentParentListLength);
             }
         },
         /**
@@ -685,7 +694,12 @@ export default {
                             parentID: item.newParentID,
                             CSRFToken: this.CSRFToken
                         },
-                        success: () => {}, //returns null
+                        success: (res) => {
+                            //returns null or text for alert if move could not occur.
+                            if(res !== null) {
+                                alert(res);
+                            }
+                        },
                         error: err => console.log('ind parentID post err', err)
                     })
                 );
@@ -911,7 +925,7 @@ export default {
             <div id="form_index_and_editing" :data-focus="focusedIndicatorID">
                 <!-- NOTE: INDEX (main + stapled forms, internals) -->
                 <div id="form_index_display">
-                    <div role="status" style="position:absolute;opacity:0" aria-live="assertive" :aria-label="ariaStatusFormDisplay"></div>
+                    <div role="status" style="position:absolute;opacity:0" aria-live="polite" :aria-label="ariaStatusFormDisplay"></div>
                     <button type="button" id="indicator_toolbar_toggle" class="btn-general preview"
                         @click.stop="toggleToolbars()">
                         <span role="img" aria-hidden="true" alt="">{{ previewMode ? '📃' : '🔎' }}&nbsp;</span>

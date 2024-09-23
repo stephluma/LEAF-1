@@ -26,6 +26,7 @@ export default {
         'editAdvancedOptions',
         'openIfThenDialog',
         'previewMode',
+        'disableMovementButtons',
     ],
     computed: {
         indicatorID() {
@@ -69,6 +70,7 @@ export default {
             <div class="name_and_toolbar" :class="{'form-header': isHeader, preview: previewMode}">
                 <!-- VISIBLE DRAG INDICATOR / CLICK UP DOWN PAR ID SUBMENU -->
                 <button v-show="!previewMode" type="button" :id="'index_listing_' + indicatorID + '_button'"
+                    :disabled="disableMovementButtons"
                     :title="'drag to move indicatorID (' + indicatorID + '). Click for click to move options.'"
                     :aria-label="'drag to move indicatorID (' + indicatorID + '). Click for click to move options.'"
                     :aria-controls="'question_location_submenu_' + indicatorID"
