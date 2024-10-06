@@ -40,12 +40,12 @@ $db->query("
 );
 
 function getOrgchartBatch(&$db, $batchcount = 0):array {
-    $limit = 10000;
+    $limit = 2500;
     $offset = $limit * $batchcount;
 
     $SQL = "SELECT `employee`.`empUID`, `userName`, `lastName`, `firstName`, `middleName`, `deleted`, `data` AS `email` FROM `employee`
     JOIN `employee_data` ON `employee`.`empUID`=`employee_data`.`empUID`
-    WHERE `userName` NOT LIKE 'disabled_%' AND `indicatorID`=6 LIMIT $limit OFFSET $offset ";
+    WHERE `indicatorID`=6 ORDER BY empUID LIMIT $limit OFFSET $offset ";
 
     return $db->query($SQL) ?? [];
 }
@@ -56,12 +56,16 @@ try {
     $batchcount = 0;
     while(count($resEmployees = getOrgchartBatch($db, $batchcount)) > 0) {
         $batchcount += 1;
-        foreach($resEmployees as $emp) {
-            $isActive = $emp['deleted'] === 0;
-            $rowVars = array(
-                ':userID' => $emp['userName'],
-                ':userDisplay' => $isActive ? $emp['firstName'] . " " . $emp['lastName'] : "",
-                ':userMetadata' => json_encode(
+        $sql = "INSERT INTO $temp_table_name (`userID`, `userDisplay`, `userMetadata`) VALUES ";
+        $vars = array();
+        foreach($resEmployees as $idx => $emp) {
+            //not bothering inserting them if flagged this way, since respective table userIDs cannot match them anyway
+            if (!str_starts_with($emp['userName'], 'disabled')) {
+                $isActive = $emp['deleted'] === 0; //still check if this field is set, since it can be even if not flagged as above
+
+                $vars[":userID_$idx"] = $emp['userName'];
+                $vars[":userDisplay_$idx"] = $isActive ? $emp['firstName'] . " " . $emp['lastName'] : "";
+                $vars[":userMetadata_$idx"] = json_encode(
                     array(
                         'userName' => $isActive ? $emp['userName'] : '',
                         'firstName' => $isActive ? $emp['firstName'] : '',
@@ -69,22 +73,22 @@ try {
                         'middleName' => $isActive ? $emp['middleName'] : '',
                         'email' => $isActive ? $emp['email'] : '',
                     )
-                ),
-            );
-            
-            $sql = "INSERT INTO $temp_table_name
-                (`userID`, `userDisplay`, `userMetadata`)
-                VALUES (:userID, :userDisplay, :userMetadata)";
-
-            $db->prepared_query($sql, $rowVars);
+                );
+                $sql .= "(:userID_$idx, :userDisplay_$idx, :userMetadata_$idx),";
+            }
         }
+        $sql = trim($sql, ',');
+
+        $db->prepared_query($sql, $vars);
+        unset($sql);
+        unset($vars);
     }
     $orgchart_time_end = date_create();
     $orgchart_time_diff = date_diff($orgchart_time_start, $orgchart_time_end);
 
     fwrite(
         $log_file,
-        "\r\nOrgchart " . $orgchart_db . "temp table prep took: " . $orgchart_time_diff->format('%i min, %S sec, %f mcr') . "\r\n"
+        "\r\nOrgchart " . $orgchart_db . " temp table prep took: " . $orgchart_time_diff->format('%i min, %S sec, %f mcr') . "\r\n"
     );
 
 } catch (Exception $e) {
@@ -107,10 +111,10 @@ $fields_to_update = array(
     "data_history" => "userDisplay",
 );
 
-function getUniqueIDBatch(&$db, $batchcount = 0, $table_name, &$batch_tracking):array {
+function getUniqueIDBatch(&$db, $batchcount = 0, $table_name):array {
     $limit = 1000;
     $offset = $limit * $batchcount;
-    $SQL = "SELECT DISTINCT `userID` FROM `$table_name` LIMIT $limit OFFSET $offset";
+    $SQL = "SELECT DISTINCT `userID` FROM `$table_name` ORDER BY `userID` LIMIT $limit OFFSET $offset";
     return $db->query($SQL) ?? [];
 }
 
@@ -125,17 +129,22 @@ foreach($portal_records as $rec) {
             "records" => 0,
             "data_history" => 0,
         );
+        fwrite(
+            $log_file,
+            "\r\nProcessing " . $portal_db
+        );
         $portal_time_start = date_create();
         foreach ($tables_to_update as $table_name) {
             $field_name = $fields_to_update[$table_name];
             fwrite(
                 $log_file,
-                "\r\nProcessing " . $portal_db . ", " . $table_name . "\r\n"
+                "\r\n" . $table_name . ": "
             );
 
             $batchcount = 0;
-            while(count($resUniqueIDsBatch = getUniqueIDBatch($db, $batchcount, $table_name, $batch_tracking)) > 0) {
+            while(count($resUniqueIDsBatch = getUniqueIDBatch($db, $batchcount, $table_name)) > 0) {
                 $batchcount += 1;
+                $batch_tracking[$table_name] += 1;
                 $numIDs = count($resUniqueIDsBatch);
                 $arrValues = array_column($resUniqueIDsBatch, 'userID');
                 $strValues = implode(',', $arrValues);
@@ -154,7 +163,7 @@ foreach($portal_records as $rec) {
 
                     fwrite(
                         $log_file,
-                        "batch: " . $batchcount - 1 . " (" . $numIDs . "), "
+                        "batch " . $batchcount - 1 . " (" . $numIDs . "), "
                     );
                 } catch (Exception $e) {
                     fwrite(
@@ -167,10 +176,12 @@ foreach($portal_records as $rec) {
         }
 
         $processed_portals_count += 1;
-        $update_details = "records: " . $batch_tracking["records"] . ", notes: " . $batch_tracking["notes"] . ", data_history: " . $batch_tracking["data_history"];
+        $update_details = "records: " . $batch_tracking["records"] .
+            ", notes: " . $batch_tracking["notes"] .
+            ", data_history: " . $batch_tracking["data_history"] . "\r\n";
         fwrite(
             $log_file,
-            "Portal " . $portal_db . " (" . $processed_portals_count . "): table batches, " . $update_details  . "\r\n"
+            "\r\nPortal " . $portal_db . " (" . $processed_portals_count . "): table batches, " . $update_details
         );
 
     } catch (Exception $e) {
