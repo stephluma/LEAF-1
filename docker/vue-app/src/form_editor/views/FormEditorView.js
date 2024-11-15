@@ -109,7 +109,7 @@ export default {
             editQuestion: this.editQuestion,
             clearListItem: this.clearListItem,
             addToListTracker: this.addToListTracker,
-            toggleIndicatorFocus: this.toggleIndicatorFocus,
+            setIndicatorFocus: this.setIndicatorFocus,
             startDrag: this.startDrag,
             endDrag: this.endDrag,
             handleOnDragCustomizations: this.handleOnDragCustomizations,
@@ -539,8 +539,16 @@ export default {
         /**
          * @param {Number|null} nodeID indicatorID of the form section selected in the Form Index
          */
-        toggleIndicatorFocus(nodeID = null) {
-            this.focusedIndicatorID = this.focusedIndicatorID !== nodeID ? nodeID : null;
+        setIndicatorFocus(event, nodeID = null) {
+            //Since it can be targetted specifically, enter on li itself can toggle options
+            if (event.target.id === 'index_listing_' + nodeID && event.type.toLowerCase() === 'keyup') {
+                this.focusedIndicatorID = this.focusedIndicatorID === nodeID ? null : nodeID;
+            } else {
+                //click events just set ID if it is not already set
+                if (this.focusedIndicatorID !== nodeID) {
+                    this.focusedIndicatorID = nodeID;
+                }
+            }
         },
         /**
          * switch between edit and preview mode
@@ -673,7 +681,7 @@ export default {
             //restrict action to bounds of visual drag indicator tab
             const classList = event?.target?.classList || [];
             const dragLimitX = classList.contains('subindicator_heading') ? 30 : 24;
-            if (event?.offsetX > dragLimitX || event?.offsetY >= 48) {
+            if (event?.offsetX > dragLimitX || event?.offsetY >= 78) {
                 event.preventDefault();
             } else {
                 if(!this.previewMode && event?.dataTransfer) {
@@ -692,7 +700,7 @@ export default {
                         let text = document.querySelector(`#${event.target.id} .name`)?.textContent;
                         text = this.shortIndicatorNameStripped(text);
                         if (targetHasSublist) {
-                            text += ' (and all sub-questions)';
+                            text += ' (includes sub-questions)';
                         }
                         this.$refs.drag_drop_custom_display.textContent = text;
                         event.dataTransfer.setDragImage(elReplacementImg, 0, 0);

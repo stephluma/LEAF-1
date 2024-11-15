@@ -70,31 +70,33 @@ export default {
                 <div v-show="!previewMode"
                     :id="'form_editing_toolbar_' + indicatorID">
 
-                    <div style="display: grid; grid-template-columns: 1fr auto auto; grid-template-rows: repeat(2, 1fr)">
-                        <button type="button"
-                            :id="'edit_indicator_' + indicatorID"
-                            class="btn-general"
-                            :style="{ 'grid-area': depth === 0 ? '1' : '1 / 1 / 3 / 2', 'height': depth === 0 ? 'auto' : '100%' }"
-                            @click.exact="editQuestion(parseInt(indicatorID))"
-                            :title="'edit indicator ' + indicatorID">
-                            <span role="img" aria-hidden="true" alt="">✏️&nbsp;</span> {{ depth === 0 ? 'Edit Header' : 'Edit' }}
-                        </button>
-                        <button v-if="hasDevConsoleAccess" type="button"
-                            :id="'programmer_indicator_' + indicatorID" class="btn-general"
-                            @click="editAdvancedOptions(parseInt(indicatorID))">
-                            Programmer
-                        </button>
-                        <button v-if="conditionsAllowed" type="button" :id="'edit_conditions_' + indicatorID"
-                            class="btn-general"
-                            @click="openIfThenDialog(parseInt(indicatorID), formNode.name.trim())">
-                            Modify Logic
-                        </button>
-                        <button v-if="!isHeader" type="button" class="btn-general"
-                            title="add sub-question"
-                            aria-label="add sub-question"
-                            @click="newQuestion(indicatorID)">
-                            + Sub-question
-                        </button>
+                    <div style="min-height: 60px; display: grid; grid-template-columns: 1fr auto auto; grid-template-rows: repeat(2, 1fr)">
+                        <template v-if="focusedIndicatorID === formNode.indicatorID">
+                            <button type="button"
+                                :id="'edit_indicator_' + indicatorID"
+                                class="btn-general"
+                                :style="{ 'grid-area': depth === 0 ? '1' : '1 / 1 / 3 / 2', 'height': depth === 0 ? 'auto' : '100%' }"
+                                @click.exact="editQuestion(parseInt(indicatorID))"
+                                :title="'edit indicator ' + indicatorID">
+                                <span role="img" aria-hidden="true" alt="">✏️&nbsp;</span> {{ depth === 0 ? 'Edit Header' : 'Edit' }}
+                            </button>
+                            <button v-if="hasDevConsoleAccess" type="button"
+                                :id="'programmer_indicator_' + indicatorID" class="btn-general"
+                                @click="editAdvancedOptions(parseInt(indicatorID))">
+                                Programmer
+                            </button>
+                            <button v-if="conditionsAllowed" type="button" :id="'edit_conditions_' + indicatorID"
+                                class="btn-general"
+                                @click="openIfThenDialog(parseInt(indicatorID), formNode.name.trim())">
+                                Modify Logic
+                            </button>
+                            <button v-if="!isHeader" type="button" class="btn-general"
+                                title="add sub-question"
+                                aria-label="add sub-question"
+                                @click="newQuestion(indicatorID)">
+                                + Sub-question
+                            </button>
+                        </template>
                         <div style="margin-left: auto; grid-area: 1 / 3 / 2 / 4">
                             <span v-if="sensitive">
                                 <img :src="libsPath + 'dynicons/svg/eye_invisible.svg'" style="width: 16px; vertical-align: middle; margin: 0 4px 2px 0" alt="" class="sensitive-icon" title="This field is sensitive" />

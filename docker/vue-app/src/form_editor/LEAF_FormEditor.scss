@@ -520,12 +520,12 @@ table[class$="SelectorTable"] th {
                 left: 0;
                 top: 0;
                 flex-direction: column;
-                background-color: #f0f0f0;
 
                 div.drag_question_handle {
                     cursor: grab;
+                    background-color: #f0f0f0;
                     border-radius: 4px 0 0 0;
-                    height: 42px;
+                    height: 70px;
                     width: 100%;
                     left: 0;
                     top: 0;
@@ -539,23 +539,14 @@ table[class$="SelectorTable"] th {
                         justify-content: center;
                     }
                 }
-                .focus_indicator_button {
-                    margin-top: 2px;
-                    color: $base-navy;
-                    width: 100%;
-                    border: 1px solid transparent;
-                    border-top: 1px solid #d0d0d0;
-                    border-radius: 0;
-                    padding: 0 0 4px 0;
-                }
                 .icon_move {
                     @include flexcenter;
                     cursor: pointer;
                     width: 0;
                     height: 0;
                     padding: 0;
-                    background-color: transparent;
                     border: 9px solid transparent;
+                    background-color: white;
                     &.up {
                         margin-top: 0.375rem;
                         border-bottom: 18px solid $BG-DarkNavy;
@@ -593,6 +584,7 @@ table[class$="SelectorTable"] th {
                 margin-bottom: 1rem;
                 background-color: #d0d0d4;
                 box-shadow: 2px 2px 4px 1px rgba(0,0,25,0.3) inset;
+                outline: none;
                 & * {
                     display: none
                 }
@@ -624,7 +616,12 @@ table[class$="SelectorTable"] th {
         border-radius: 3px;
         margin-right: 0.4rem;
     }
-
+    li[id^="index_listing"] {
+        border-radius: 3px;
+        &:focus {
+            outline: 2px solid $LEAF_CSS_outline;
+        }
+    }
     div.printformblock {
         height:auto;
         position: relative;
@@ -656,7 +653,6 @@ table[class$="SelectorTable"] th {
                 padding-left: 0;
             }
             &:not(.form-header):not(.preview) {
-                margin-left: 0.25rem;
                 border: 1px solid #c1c1c1;
                 box-shadow: 1px 1px 2px 1px rgba(0,0,20,0.4);
                 transition: box-shadow 0.5s;
@@ -703,7 +699,7 @@ table[class$="SelectorTable"] th {
                 }
             }
             &:not(.preview) {
-                min-height: 60px;
+                min-height: 70px;
             }
             button:not(.icon_move) {
                 border: 1px solid $LtNavy;
@@ -728,7 +724,7 @@ table[class$="SelectorTable"] th {
         div[id^="form_editing_toolbar_"] {
             float: right;
             margin-left: 0.25rem;
-            padding: 0.25rem;
+            padding: 3px;
             border-radius: 3px;
             display: flex;
             flex-direction:column;

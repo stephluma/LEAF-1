@@ -20,7 +20,7 @@ export default {
         'clearListItem',
         'addToListTracker',
         'previewMode',
-        'toggleIndicatorFocus',
+        'setIndicatorFocus',
         'clickToMoveListItem',
         'focusedIndicatorID',
         'startDrag',
@@ -56,23 +56,18 @@ export default {
             return this.currentListLength > 1;
         }
     },
-    template:`<li :title="'indicatorID: '+ indicatorID" :class="depth === 0 ? 'section_heading' : 'subindicator_heading'">
+    template:`<li tabindex="0" :title="'indicatorID: '+ indicatorID" :class="depth === 0 ? 'section_heading' : 'subindicator_heading'"
+            @click.stop="setIndicatorFocus($event, indicatorID)"
+            @keyup.enter.stop="setIndicatorFocus($event, indicatorID)">
         <div class="printResponse" :class="{'form-header': depth === 0, preview: previewMode}" :id="printResponseID">
-            <!-- VISIBLE DRAG INDICATOR (event is on li itself) / CLICK UP DOWN options -->
 
+            <!-- VISIBLE DRAG INDICATOR (event is on li itself) / CLICK UP DOWN options -->
             <div v-show="!previewMode" class="move_question_container">
                 <div v-show="!previewMode" :id="'index_listing_' + indicatorID + '_button'"
                     :title="'drag to move indicatorID ' + indicatorID + '.'"
                     class="drag_question_handle">
                     <div role="img" aria-hidden="true" alt="" class="icon_drag" :title="'drag to move indicatorID ' + indicatorID + '.'">∷</div>
                 </div>
-                <button v-show="hasClickToMoveOptions" type="button"
-                    aria-label="Click to move options" class="focus_indicator_button"
-                    :aria-controls="'click_to_move_options_' + indicatorID"
-                    :aria-expanded="indicatorID === focusedIndicatorID"
-                    title="Click to move options"
-                    @click="toggleIndicatorFocus(indicatorID)">↕
-                </button>
                 <div v-show="indicatorID === focusedIndicatorID && hasClickToMoveOptions"
                     :id="'click_to_move_options_' + indicatorID" class="click_to_move_options">
                     <button type="button"
